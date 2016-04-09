@@ -1,0 +1,222 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+/*estilos para formularios*/
+#contenido{
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+
+}
+
+.tituloSeccion{
+    background-color: #00549B;
+    height: 30px;
+    width: auto;
+    padding-top: 10px;
+    color:white;
+    text-align: center;
+}
+
+.base{
+    background-color: #98CAE6;
+    padding-left: 80px;
+    padding-right: 60px;
+    padding-top: 20px;
+    padding-bottom: 20px
+}
+
+.campo{
+    margin-top: 5px;
+}
+.campo input[type="text"]{
+    background-color: #008AE7;
+    float: right;
+}
+
+.campo input[readonly]{
+    background-color: #0054D0;
+}
+.base input[type="button"]{
+    float: right;
+    margin-top: 2pt;
+}
+
+
+.campo input[type="file"]{
+    background-color: #008AE7;
+    float: right;
+
+}
+
+.checkcampo{
+    float: right;
+}
+
+.clear{
+    clear: both;
+}
+.campo textarea{
+    width: 95%
+}
+
+#contenido .base .campo input[type="text"]{
+    border:0;
+}
+
+#buscador.b2{
+    margin-left: 30px;
+    
+}
+
+#buscador{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+input[type="button"]{
+    background-color: #3385CB;
+    border: 0;
+    border-radius:5px; 
+    height: 2em;
+    color: #fff;
+}
+
+/*Area de retiro de equipo*/
+#buscador input[type="text"]{
+    height: 3ex;
+    border: 1px solid #00549B;
+    border-radius: 3px;
+}
+
+
+
+/*Area de administracion*/
+#tickets{
+    width: 45%;
+    float: left;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+.listaTickets{
+    width: 100%;
+    display: block;
+
+}
+
+#detallesTicket{
+    width: 45%;
+    float: right;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+.datosIzq{
+    float: left;
+    margin-bottom: 5px;
+}
+.datosIzq *{
+    display: block;
+    margin-bottom: 2pt
+}
+.datosDer{
+    float: right;
+    margin-bottom: 5px;
+}
+.datosDer * {
+    display: block;
+    margin-bottom: 2pt
+}
+
+#resultados{
+    float: left;
+    width: 30%;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+#resultados input{
+    border: 0;
+}
+
+
+
+@media all and (max-width:930px ) {
+    #contenido{
+        width: 80%;
+    }
+    #buscador{
+        margin-left: 10%;
+    }
+
+    /*Administrador*/
+    #tickets{
+        width: 80%;
+        float: none;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #detallesTicket{
+        width: 80%;
+        float: none;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    #resultados{
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 15px;
+        padding-top: 15px;
+        width: 65%;
+    }
+
+
+}
+
+@media all and (max-width: 600px) {
+    #contenido{
+        width: 90%;
+    }
+    .base {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #buscador{
+        width: 100%;
+        margin-left: 30px;
+    }
+    #resultados input{
+        float: none;
+        display: block;
+
+    }
+}
+
+@media all and (max-width: 415px) {
+    .base input{
+        float: none;
+    }
+
+    .base input[type="file"]{
+        float: none;
+    }
+    .tituloSeccion{
+        height: 3em
+    }
+
+    /*Administrador*/
+    #tickets{
+        width: 90%;
+    }
+    #detallesTicket{
+        width: 90%;
+    }
+}

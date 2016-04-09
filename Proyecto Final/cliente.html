@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/menu.css">
+        <link rel="stylesheet" href="css/estilos.css">
+        <title>Cliente</title>
+    </head>
+    <body>
+        <header>
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="logo">
+            </a>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+        <div class="clear"></div>
+        <strong class="identificacion">Bienvenido &ltCliente&gt</strong>
+        <div class="clear"></div>
+        
+        <section>
+            <div class="recuadro">
+                <p>Seguimiento de Servicio</p>
+            </div>
+            <div class="lineatiempo">
+                <input type="button" value="Asignando Tecnico" class="cuadrotiempo">
+                <input type="button" value="Hacia destino" class="cuadrotiempo">
+                <input type="button" value="Reparando" class="cuadrotiempo">
+                <input type="button" value="Entregado" class="cuadrotiempo">
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </section>
+        <div>
+            <article>
+                <form action="">
+                    <div class="campo">
+                        <label for="marca">Marca</label>
+                        <input type="text" name="marca" class="textcli">
+                    </div>
+                    <div class="campo">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" name="modelo" class="textcli">
+                    </div>
+                    <div class="campo">
+                        <label for="descripcion">Descripcion del problema</label>
+                        <textarea name="descripcion" class="textcli" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="campo">
+                        <label for="poliza">Adjuntar poliza</label>
+                        <input type="file" class="boton">
+                    </div>
+                    <div class="clear"></div>
+                    <input type="submit"  class="boton" value="Enviar">
+                </form>
+            </article>
+        </div>
+        <div id="piedepagina">
+            <p>Sed hendrerit vehicula dui, pharetra tristique tellus tincidunt et.mollis</p>
+        </div>
+    </body>
+</html>

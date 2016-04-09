@@ -1,0 +1,26 @@
+
+/*Estilos Menu*/
+nav{
+    float: right;
+    margin: 30px;
+}
+
+nav li{
+    float: left;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+nav a{
+    text-decoration: none;
+    color: ;
+}
+
+/*Contenido del encabezado*/
+header img{
+    float: left;
+    width: 200px;
+    height: 120px;
+
+}

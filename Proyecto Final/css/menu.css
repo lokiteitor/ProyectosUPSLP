@@ -1,0 +1,59 @@
+
+nav {
+    float: right;
+    border-top: 1px solid #0086F2;
+    border-bottom: 1px solid #0086F2;
+    padding-left: 10%;
+    width: auto;
+    padding-right: 10%;
+}
+
+nav li {
+    display: inline;
+    padding-left: 20px
+}
+
+nav li a{
+    color: #0086F2;
+    font-weight: bold;
+    text-decoration: none
+}
+
+nav li a:hover{
+    color: #0024F2;
+    font-weight: bold;
+    text-decoration: none
+}
+
+
+nav ul{
+    margin-right: 30px;
+    float: right;
+}
+
+/* estilos para el logo*/
+header img{
+    float: left;
+    height: 80px;
+}
+
+
+@media all and (max-width: 565px) {
+
+    nav{
+        margin-right: 0;
+
+    }
+
+}
+@media all and (max-width: 360px) {
+
+    nav{
+        width: 100%;
+        margin-right: 0;
+    }
+    nav li {
+        padding-left: 3px;
+    }
+
+}

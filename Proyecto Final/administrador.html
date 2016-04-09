@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/menu.css">
+        <link rel="stylesheet" href="css/estilos.css">
+        <title>Administrador</title>
+    </head>
+    <body>
+        <header>
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="logo">
+            </a>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+        <div class="clear"></div>
+        <strong class="identificacion">Bienvenido &ltAdmin&gt </strong>
+        <div class="clear"></div>
+
+        <div id="contenido">
+            <article>
+                
+                <div class="campoa">
+                    <label for="caso" class="tex1"> Lista de casos disponibles</label>
+
+                    <select name="caso" class="textcli2" size='4'>
+                        <option value="Caso 1">Caso 1</option>
+                        <option value="Caso 2">Caso 2</option>
+                        <option value="Caso 3">Caso 3</option>
+                        <option value="Caso 4">Caso 4</option>
+                    </select>
+                    
+                </div>
+                <div class="campob">
+                    <label for="modelo" class="tex1">Lista de tecnicos</label>
+
+                    <select name="tecnico" class="textcli2" size='9'>
+                        <option value="Tecnico 1">Tecnico 1</option>
+                        <option value="Tecnico 2">Tecnico 2</option>
+                        <option value="Tecnico 3">Tecnico 3</option>
+                        <option value="Tecnico 4">Tecnico 4</option>
+                        <option value="Tecnico 5">Tecnico 5</option>
+                        <option value="Tecnico 6">Tecnico 6</option>
+                        <option value="Tecnico 7">Tecnico 7</option>
+                        <option value="Tecnico 8">Tecnico 8</option>
+                        <option value="Tecnico 9">Tecnico 9</option>
+                     </select>
+
+
+
+
+                </div>
+                <div class="campoc">
+                    <input type="submit"  class="boton" value="Asignar">
+                </div>
+            </article>
+            
+        </div>
+        
+        
+        <div id="contenido2">
+            <div>
+                
+                <div class="ver">
+                    <label  class="tex1"> Detalles del caso</label>
+                    <div class="campo">
+                    <label class="detallesDesc" for="marca">Marca</label>
+                    <input class="inputDesc" type="text" name="marca" readonly>
+                    </div>   
+                    <div class="campo">
+   
+                    <label class="detallesDesc" for="modelo">Modelo</label>
+                    <input class="inputDesc" type="text" name="modelo" readonly>
+                    </div>
+
+                    <div class="campo">
+                    <label class="detallesDesc" for="descripcion">Descripcion del problema</label>
+                    <textarea  class="inputDesc" name="descripcion" class="textcli" cols="30" rows="10" readonly></textarea>
+                    </div>
+                    <div class="campo">
+
+                    <label class="detallesDesc" for="poliza">Ver poliza</label>
+                    <input  type="submit"  class="boton" value="Ver..">
+                    </div>
+                    <div class="clear"></div>  
+
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        
+
+        <div id="piedepagina">
+            <p>Sed hendrerit vehicula dui, pharetra tristique tellus tincidunt et.mollis</p>
+        </div>
+        
+    </body>
+</html>

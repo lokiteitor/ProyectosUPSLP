@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuario</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/estilos.css">
+        <link rel="stylesheet" href="css/menu.css" type="text/css">
+        <script src="js/lib/jquery-2.2.2.min.js" type="text/javascript"></script>
+        <script src="js/menu.js" type="text/javascript"></script>
+        <style media="screen">
+            form label
+            {
+                display: block;
+            }
+        </style>
+</head>
+<body>
+    <div id="nav">
+            <ul><a href="#" id="pull"><span class="icon-menu"></span> </a></ul>
+            <div id="menu">
+                <ul>
+                    <li><a href="usuario.html">Inicio</a></li>
+                    <li><a href="index.html">Cerrar Sesion</a></li>
+                </ul>
+            </div>
+        </div>
+    <div class="tituloPagina">
+            <strong>Usuario</strong>
+        </div>
+        <div id="header">
+            <a href="usuario.html">
+            <img src="img/logo.jpg" alt="logo" class="logo">
+            </a>
+        </div>
+        <div class="clear"></div>
+        <div id="tickets">
+            <div class="tituloSeccion">
+                Tickets de pedido
+            </div>
+            <div class="base">
+                <!-- Definir las listas con jquery -->
+            <form action="" name="ticketup">
+               <label for="usuario">usuario</label>
+                <input type="text" name='usuario'>
+        
+                <label for="mac">MAC</label>
+                <input type="text" name='mac'>
+        
+                <label for="presupuesto">Codigo Presuestal</label>
+                <input type="text" name="presupuesto">
+        
+                <label for="descripcion">Descripcion</label>
+               <textarea name="descripcion"  cols="30" rows="10"></textarea>
+                <input type="submit" value="Enviar">
+            </form>
+
+                <div class="clear"></div>
+
+            </div>
+        </div>
+</body>
+</html>

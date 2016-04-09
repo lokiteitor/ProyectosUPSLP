@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/menu.css" type="text/css">
+    <script src="js/lib/jquery-2.2.2.min.js" type="text/javascript"></script>
+    <script src="js/menu.js" type="text/javascript"></script>
+
+    <!-- scripts de funcioanalidad -->
+    <script src="js/common.js" type="text/javascript"></script>    
+    <script src="js/asignar.js" type="text/javascript"></script>
+
+    <title>Asignar Material</title>
+</head>
+<body>
+   <div id="nav">
+        <ul><a href="#" id="pull"><span class="icon-menu"></span> </a></ul>
+        <div id="menu">
+            <ul>
+                <li><a href="administrador.html">Inicio</a></li>
+                <li><a href="registrar.html">Registrar Equipo</a></li>
+                <li><a href="asignar.html">Asignar Equipo</a></li>
+                <li><a href="retirar.html">Retirar Equipo</a></li>
+                <li><a href="index.html">Cerrar Sesion</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="tituloPagina">
+        <strong>Asignar Equipo</strong>
+    </div>
+    <div id="header">
+        <a href="administrador.html">
+        <img src="img/logo.jpg" alt="logo" class="logo">
+        </a>
+    </div>
+    <div class="clear"></div>
+
+    <form action="">
+        <div id="buscador" class="b2">
+            <input type="button" value="Buscar">
+            <input type="text" value="ID del material">
+            
+        </div>
+    </form>
+
+    <div id="resultados" class="base">
+
+
+
+        <div class="campo">
+        <label for="id">ID</label>
+        <input type="text" name="id" readonly>
+        </div>
+
+        <div class="campo">        
+        <label for="lugar">Almacen</label>
+        <input type="text" name="lugar" readonly>
+        </div>
+
+        <div class="campo">
+        <label for="modelo">Modelo</label>
+        <input type="text" name="modelo" readonly>
+        </div>
+    </div>
+
+    <div id="detallesTicket">
+        <div class="tituloSeccion">
+            Detalles del ticket
+        </div>
+        
+        <div class="base">
+            <div class="datosIzq">
+                <var name='fecha'>Fecha</var>
+                <var name='hora'>Hora</var>
+                <var>Codigo Presupuestal</var>
+            </div>
+            <div class="datosDer">
+                <code>Usuario</code>
+                <code>MAC</code>
+                <code name='filial'>Empresa</code>
+            </div>
+            <div class="clear"></div>
+            <div class="campo">
+                <label for="descripcion">Descripcion</label>
+                <textarea name="descripcion" cols="30" rows="10" readonly >
+                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus quam non ipsum faucibus pharetra vel at neque. Praesent vulputate pretium turpis in fringilla. Donec feugiat rhoncus tempus. Suspendisse imperdiet metus non euismod dignissim. Aliquam sed dui elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In laoreet lobortis pellentesque. Integer fermentum mollis
+                </textarea>                    
+            </div>
+        <input type="button" name="asignar" Value="Asignar">
+            <div class="clear"></div>
+
+        </div>
+    </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,438 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+body{
+    font-family: 'Noto Sans', sans-serif;
+    background: #ECF8FF;
+    margin:30px;
+}
+
+.clear{
+    clear: both;
+}
+
+.identificacion{
+    color: #1A9ADC;
+    float: right;
+    margin-top: 15px;
+}
+
+.recuadro{
+    background-color:#AFDCFB;
+    color: #1A9ADC;
+    height: 1.5em;
+    width: 15em ;
+}
+
+.recuadro p{
+    font-weight: bold;
+    text-align: center;
+
+}
+
+.lineatiempo{
+    background-color: #0090F2;
+}
+
+.cuadrotiempo{
+    background-color: #0090F2;
+    border: 0;
+    float: left;
+    padding: 5px;
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+/* TODO : cambiar esto por una clase para usar en jquery*/
+.cuadrotiempo:hover {
+    box-shadow: 4px 4px 3px inset;
+    background-color: #0086F2;
+
+}
+
+article{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.campo{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    clear: both;
+}
+
+.campo label {
+    background-color: #AFDCFB;
+    width: 16em;
+    height: 2em;
+    display: block;
+    text-align: center;
+    color: #1A9ADC;
+    font-weight: bold;
+    float: left;
+    margin: 10px
+}
+
+.textcli{
+    float: right;
+    margin: 10px;
+    width:60%;
+}
+
+.boton{
+    float: right;
+    margin: 10px;
+    border: 1px solid #CFD6E6;
+    border-radius: 2px;
+    width: 7em;
+    height: 2em;
+    background-color: white;
+
+}
+
+
+/*area de login*/
+
+#login{
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    text-align: center;
+}
+#login *{
+    margin-bottom: 10px;
+}
+
+#login strong{
+    color: #008DDD;
+    font-size: 20pt;
+    margin-bottom: 20px;
+    display: block;
+}
+
+
+#login input[type="text"]{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 20em;
+    border: 1px solid #0086F2;
+    border-radius: 4px;
+    height: 2em;
+    color:  rgba(0, 0, 0, 0.38);
+}
+
+#login input[type="password"]{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 20em;
+    border: 1px solid #0086F2;
+    border-radius: 4px;
+    height: 2em;
+    color:  rgba(0, 0, 0, 0.38);
+}
+
+
+
+
+#login .filabotones a{
+    text-decoration: none;
+}
+
+.filabotones{
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
+}
+.filabotones input{
+    margin-left: 10px;
+    width: 8em;
+    background-color: #0086F2;
+    color: #fff;
+    border-radius: 3px;
+    border: 1px solid #ffffff;
+    height: 2em;
+}
+
+.filabotones input:hover{
+    background-color: blue;
+}
+
+/*estilos pie de pagina*/
+#piedepagina {
+    background-color: #ECF8FF;
+    border-top-color: #0090F2;
+    border-right-color: #0090F2;
+    border-bottom-color: #0090F2;
+    border-left-color: #0090F2;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: normal;
+    color: #0090F2;
+    margin: 5px;
+    text-align: center;
+}
+
+/* Estilos Armando*/
+.campoa{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    clear: both;
+    margin-right: auto;
+    width: 47%;
+    padding: 0px;
+    float: left;
+    margin-left: auto;
+    background-color: #AFDCFB;
+    height: 300px;
+    text-align: center;
+    
+}
+.tex1 {
+    background-color: #AFDCFB;
+    color: #0086F2;
+    text-align: center;
+    word-spacing: normal;
+    display: block;
+}
+
+.campob{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    clear: right;
+    margin-left: auto;
+    float: right;
+    width: 50%;
+    margin-right: auto;
+    background-color: #AFDCFB;
+    height: 300px;
+    text-align: center;
+}
+.ver {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    clear: right;
+    margin-left: auto;
+    float: none;
+    width: 95%;
+    margin-right: auto;
+    background-color: #AFDCFB;
+}
+
+.campoc {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    clear: right;
+    margin-left: auto;
+    float: right;
+    width: 50%;
+    margin-right: auto;
+    height: 35px;
+}
+
+
+#contenido {
+    width: 95%;
+    clear: both;
+    height: 350px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+#contenido2 {
+    width: 70%;
+    clear: both;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+
+.textcli2{
+    display: block;
+    margin: auto;
+    width: 80%;
+}
+
+
+.slid2{
+    margin: auto;
+    margin-left: 5px;    
+    float: right;
+    background-color: white; 
+    width: 45%;
+    height: 100%;
+}
+.text{
+    margin: auto;
+    float: left;
+    background-color: deepskyblue; 
+    width: 50%; 
+    height: 100%;
+    text-align: justify;
+    padding: 10px;    
+}
+.texto{
+    margin: auto;
+    margin-top: 10px;
+    background-color: darkturquoise;    
+    width: 100%;
+    padding: 10px;
+    text-align: justify;  
+    
+}
+.slid{
+    width: 70%;
+    margin: auto;
+    margin-top: 15px;    
+}
+
+#dos{
+    margin: auto;
+    margin-top: 10px;    
+    width: 70%;
+}
+
+.detallesDesc{
+    background-color: #AFDCFB;
+    width: 16em;
+    height: 2em;
+    display: block;
+    text-align: center;
+    color: #1A9ADC;
+    font-weight: bold;
+    float: left;
+    margin: 10px;
+    clear: both;
+}
+
+.inputDesc{
+    float: right;
+    width: 40%;
+    margin-right: 15px;
+    border: 1px solid #cfc7c7;
+    border-radius: 3px;
+}
+
+select{
+    border: 0
+
+}
+
+@media all and (max-width: 565px) {
+    body{
+        margin: 0
+    }
+    .identificacion{
+        margin-right: 30px
+    }
+    #login{
+        width: 80%
+    }    
+}
+
+@media all and (max-width: 1200px) {
+    .textcli{
+        width: 50%;
+    }
+    .cuadrotiempo{
+        padding-right: 5%;
+    }
+}
+
+@media all and (max-width: 960px) {
+
+    .campo label{
+        margin-left: 0;
+        width: 100%;
+    }
+    .textcli{
+        float: none;
+        margin: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .textcli2 {
+        float: none;
+        margin-top: 10px;
+        width: 100%;
+        height: 265px;
+        margin-right: 0;
+        margin-bottom: 0;
+        margin-left: 0;
+    }
+   .campo .detallesDesc{
+        width: 16em;
+    }
+    .cuadrotiempo{
+        padding-left: 5%
+    }
+    #contenido article{
+        width: 100%;
+    }
+    
+    #contenido2{
+        width: 100%;
+    }
+
+    .text{
+        float: none;
+        width: 100%;
+    }
+    .slid2{
+        display: none;
+    }
+
+}
+
+@media all and (max-width: 660px){
+    .cuadrotiempo{
+        padding-right: 0;
+        padding-left: 4%
+    }
+
+    /*Area de login y registro*/
+
+    #login input[type="text"]{
+        width: 100%;
+    }
+
+    #login input[type="password"]{
+        width: 100%;
+    }
+
+    .ver .campo .detallesDesc{
+        float: none;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .ver .campo .inputDesc{
+        float: none;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 80%;
+    }
+
+}
+
+@media all and (max-width: 430px) {
+    .cuadrotiempo{
+        padding-left: 0;
+        padding-right: 0;
+        float: none;
+        display: block;
+        width: 100%;
+    }
+    
+}
+

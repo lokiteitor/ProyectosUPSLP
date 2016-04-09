@@ -1,0 +1,214 @@
+*
+{
+	background-color: #E8EDEE;
+}
+#login
+{
+	margin-top: -10px;
+	padding-bottom: 100px;
+}
+
+.titulo-login
+{
+	margin: 54px 0px 10px !important;
+	color: #000 !important;
+	font-family: Arial,sans-serif;
+	font-weight: 300;
+	letter-spacing: 5px;
+	font-size: 2.5em;
+	text-transform: uppercase;
+	color: #000;
+}
+
+.p-descripcion
+{
+	max-width: 800px;
+	margin: 0px auto;
+	font-family: sans-serif;
+	font-weight: 200;
+	font-size: 1.4em;
+	line-height: 1.6em;
+	color: #000;
+}
+
+.p-descripcionUser
+{
+	max-width: 800px;
+	margin: 0px auto;
+	font-family: sans-serif;
+	font-weight: 200;
+	font-size: 1.4em;
+	line-height: 1.6em;
+	color: #000;
+	margin-bottom: 40px;
+}
+input
+{
+	width: 300px;
+	margin: 0px;
+	padding: 12px 55px 12px 20px;
+	height: 66px;
+	display: block;
+	background-color: #13191F;
+	border: medium none;
+	color: #FFF;
+	font-size: 1.2em;
+	font-family: "ProximaNovaSemibold","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 300;
+	outline: medium none;
+	transition: all 300ms ease 0s;
+	box-shadow: none;
+}
+
+input:hover
+{
+	transition: all 300ms ease 0s;
+	background: rgba(0,0,0,0.3);
+}
+input:focus
+{
+	transition: all 300ms ease 0s;
+	background: rgba(0,0,0,0.3);
+}
+
+.grupoDeOpciones:nth-child(2n) {
+    margin-left: 5px;
+}
+.grupoDeOpciones {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.buttons
+{
+	margin: 30px 0px 0px;
+}
+
+input[type="submit"]:hover {
+    padding: 10px 30px;
+    font-size: 1.2em;
+    transition: all 300ms ease 0s;
+    background-color: #1BBCB8;
+    color: #FFF;
+}
+
+.botonLinea.azulBonito {
+    border: 2px solid #1BBCB8;
+    color: #1BBCB8;
+}
+
+.botonLinea {
+	font-size: 1.2em;
+	background-color: rgba(0,0,0,0);
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+#login #botonLargo
+{
+	width: 200px;
+	margin: 0px;
+	padding: 12px 55px 12px 20px;
+	height: 66px;
+	display: block;
+	background-color: #1BBCB8;
+	border: medium none;
+	color: #FFF;
+	font-size: 1.2em;
+	font-family: "ProximaNovaSemibold","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 300;
+	outline: medium none;
+	transition: all 300ms ease 0s;
+	box-shadow: none;
+}
+#login #botonLargo:focus
+{
+	color: rgba(255,255,255,1);
+	background: #1BBAD0;
+	width: 300px;
+}
+
+.buttons #botonLogin
+{
+	width: 200px;
+	padding: 10px 20px;
+    font-size: 0.9em;
+    border: 3px solid #000;
+    color: #000;
+    font-family: "ProximaNovaBold","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: rgba(255,255,255,0.1);
+    transition: all 500ms ease 0s;
+}
+
+.buttons #botonLogin:hover
+{
+    background-color: #000;
+    font-size: 0.9em;
+    color: #FFF;
+}
+
+
+#colorLog
+{
+	color: #008000;
+	margin-top: 20px;
+	display: block;
+	float: left;
+	margin-left: -85px;
+}
+#muestraError
+{
+	color: #1BBCB8;
+}
+.cf
+{
+	margin-left: -300px;
+	float: right;
+	margin-top: 10px;
+}
+
+#parteColor
+{
+	color: #1BBCB8;
+}
+
+#seccionDatosUsuario
+{
+	color: #1BBCB8;
+	margin-top: 40px;
+	display: block;
+	float: left;
+	margin-left: -185px;
+}
+
+#h1Fixed
+{
+	color: #fff;
+	font-size: 3em;
+	letter-spacing: 1.4px;
+	margin-bottom: 18px;
+	margin-top: 100px;
+	font-weight: bold;
+}
+
+#h1FixedAbajo
+{
+	color: #fff;
+	font-size: 3em;
+	letter-spacing: 1.4px;
+	margin-bottom: 18px;
+	margin-left: 40px;
+	font-weight: bold;
+}
+#h1FixedExp
+{
+	color: rgba(0,255,0,1);
+	margin-bottom: 18px;
+	font-weight: bold;
+}
+.hidden
+{
+	display: none;
+}

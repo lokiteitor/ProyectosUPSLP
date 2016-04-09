@@ -1,0 +1,117 @@
+/*area de navegacion*/
+
+.logo{
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+#nav{
+    float:right;
+    background-color: #00549B;
+    color:white;
+    width: 6%;
+    height: 60px;
+    padding-left: 10px;
+}
+.tituloPagina{
+    text-align: center;
+    float: right;
+    background: #00549B;
+    height: 60px;
+    width: 40%;
+}
+.tituloPagina strong {
+    padding-top: 15px;
+    display: block;
+    color: #fff;
+}
+
+@media all and (max-width: 360px){
+    #nav{
+        float:right;
+        background-color: #00549B;
+        color:white;
+        width: 20%;
+        height: 60px;
+        padding-left: 10px;
+    }
+    .tituloPagina{
+        text-align: center;
+        float: right;
+        background: #00549B;
+        height: 60px;
+        width: 75%;
+    }
+
+}
+
+#menu {
+    float: right;
+    width: 300px;
+    margin-top: -21px;
+    display: none;
+}
+
+#menu ul li{
+    list-style-type: none;
+    background: #00549B;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px outset #fff;
+    position: relative;
+    z-index: 1;
+}
+
+#menu ul li:hover{
+    background: #000181;
+}
+
+
+#menu ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+
+#nav ul{
+    padding: 0
+}
+
+.clear{
+    clear: both;
+}
+
+/* iconos */
+
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../fonts/icomoon.eot?eoqk3v');
+    src:    url('../fonts/icomoon.eot?eoqk3v#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?eoqk3v') format('truetype'),
+        url('../fonts/icomoon.woff?eoqk3v') format('woff'),
+        url('../fonts/icomoon.svg?eoqk3v#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-menu:before {
+    content: "\e900";
+    font-size: 32px;
+    margin-left: 10px;
+    color: #fff;
+}
+

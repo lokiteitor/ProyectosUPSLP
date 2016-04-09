@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/estilos.css">
+        <link rel="stylesheet" href="css/menu.css" type="text/css">
+        <script src="js/lib/jquery-2.2.2.min.js" type="text/javascript"></script>
+        <script src="js/menu.js" type="text/javascript"></script>
+
+        <!-- scripts de funcioanalidad -->
+        <script src="js/registro.js" type="text/javascript"></script>
+
+
+        <title>Registrar equipo</title>
+    </head>
+    <body>
+        <div id="nav">
+            <ul><a href="#" id="pull"><span class="icon-menu"></span> </a></ul>
+            <div id="menu">
+                <ul>
+                    <li><a href="administrador.html">Inicio</a></li>
+                    <li><a href="registrar.html">Registrar Equipo</a></li>
+                    <li><a href="asignar.html">Asignar Equipo</a></li>
+                    <li><a href="retirar.html">Retirar Equipo</a></li>
+                    <li><a href="index.html">Cerrar Sesion</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="tituloPagina">
+            <strong>Registrar equipo</strong>
+        </div>
+        <div id="header">
+            <a href="administrador.html">
+            <img src="img/logo.jpg" alt="logo" class="logo">
+            </a>
+        </div>
+        <div class="clear"></div>
+        
+        <div id="contenido">
+            <div class="tituloSeccion">
+                <strong>Ingrese los datos del equipo para darlo de alta</strong>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="base">
+                    <div class="campo">
+                        <label for="identificador">Identificador</label>
+                        <input type="text" name="identificador" readonly>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="campo">
+                        <label for="nombre">Modelo Equipo</label>
+                        <input type="text" name="nombre">
+                    </div>
+                    <div class="clear"></div>
+                    <div class="campo">
+                        <label for="disponibilidad">Disponibilidad</label>
+                        <div class="checkcampo">
+                            activo:<input type="radio" name="disponibilidad" value="Activo">
+                            inactivo:<input type="radio" name="disponibilidad" value="Inactivo">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="campo">
+                        <label for="factura">Factura</label>
+                        <input type="file" name =factura>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="campo">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea name="descripcion" cols="50" rows="10"> </textarea>
+                    </div>
+                    <div class="clear"></div>
+                    <input type="submit" value="Guardar" onclick>
+                </div>
+            </form>
+            
+        </div>
+        <div id="footer">
+            
+        </div>
+        
+    </body>
+</html>
