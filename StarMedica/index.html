@@ -1,31 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/estilos.css">    
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- librerias (dependencias) -->
+    <script src="js/lib/jquery-2.2.2.min.js" type="text/javascript"></script>
+    <script src="js/lib/jquery.bxslider.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/lib/jquery.bxslider.css">
+    <!-- Mis scripts -->
+    <script src="js/menu.js" type="text/javascript"></script>
+    <script src="js/index.js" type="text/javascript"></script>
     <meta charset="UTF-8">
     <title>StarMedica</title>
-</head>
-<body>
-
-    <header>
-        <img src="img/logo.jpg" alt="logo">
-
-    </header>
-
-    <nav>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    $('.bxslider').bxSlider({
+      pause: 4000,
+      mode: 'fade',
+      controls: true,
+      pager: false,
+      infiniteLoop: true,
+      auto: true,
+      autoStart: true,
+      });
+    });
+    </script>
+  </head>
+  <body>
+    <div id="asbheader">
+      <header>
+        <a href="index.html"><img src="img/logo.jpg" alt="logo"></a>
+      </header>
+      <nav>
         <ul>
-            <li><a href="informacion.html">Informacion</a></li>
-            <li>
-                <ul>Registro</ul>
-                <ul><a href="registromedico.html">Registro como Medico</a></ul>
-                <ul><a href="registropaciente.html">Registro como paciente</a></ul>
-            </li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="ayuda.html">Ayuda</a></li>
+          <li>
+            <ul class="submenu"><a href="#" class="submenu">Informacion</a>
+            <ul><a href="#especialidades">Especialidades</a></ul>
+          </ul>
+        </li>
+        <li>
+          <ul class="submenu"><a href="#" class="submenu">Registro</a>
+          <ul><a href="registromedico.html">Registro como Medico</a></ul>
+          <ul><a href="registropaciente.html">Registro como paciente</a></ul>
         </ul>
-    </nav>
-
-
+      </li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="ayuda.html">Ayuda</a></li>
+    </ul>
+  </nav>
+</div>
+<div class="clear"></div>
+<section>
+  <div class="slider">
+    <ul class="bxslider">
+      <li><img src="img/pic1.jpg" /><div class="textslider"><p>Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Aenean vel nibh sapien. Mauris finibus metus arcu,
+      et ultricies dolor gravida non. In pulvinar est interdum tortor ornare</p></div></li>
+      <li><img src="img/pic2.jpg" /><div class="textslider"><p>Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Aenean vel nibh sapien. Mauris finibus metus arcu,
+      et ultricies dolor gravida non. In pulvinar est interdum tortor ornare</p></div></li>
+      <li><img src="img/pic3.jpg" /><div class="textslider"><p>Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Aenean vel nibh sapien. Mauris finibus metus arcu,
+      et ultricies dolor gravida non. In pulvinar est interdum tortor ornare</p></div></li>
+    </ul>
+  </div>
+</section>
+<article>
+  <ul class="info">
+    <div>
+      <img src="img/info1.jpg" alt="informacion">
+      <h3>Telemedicina</h3>
+      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel
+        nibh sapien. Mauris finibus metus arcu, et ultricies dolor gravida non.
+        In pulvinar est interdum tortor ornare, vel convallis ex viverra.
+        Proin tincidunt nisl eu velit vulputate posuere. Donec lacinia justo
+      quis ante dictum,</p>
+      <input type="button" value="Leer mas...">
+    </div>
+  </ul>
+  <ul class="info">
+    <div>
+      <img src="img/info2.jpg" alt="informacion">
+      <h3>Receta en Linea</h3>
+      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel
+        nibh sapien. Mauris finibus metus arcu, et ultricies dolor gravida non.
+        In pulvinar est interdum tortor ornare, vel convallis ex viverra.
+        Proin tincidunt nisl eu velit vulputate posuere. Donec lacinia justo
+      quis ante dictum,</p>
+      <input type="button" value="Leer mas...">
+    </div>
+  </ul>
+  <ul class="info">
+    <div>
+      <img src="img/info3.jpg" alt="informacion">
+      <h3>Medicos Especializados</h3>
+      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel
+        nibh sapien. Mauris finibus metus arcu, et ultricies dolor gravida non.
+        In pulvinar est interdum tortor ornare, vel convallis ex viverra.
+        Proin tincidunt nisl eu velit vulputate posuere. Donec lacinia justo
+      quis ante dictum,</p>
+      <input type="button" value="Leer mas...">
+    </div>
+    
+  </ul>
+  <div class="clear"></div>
+</article>
+<a href="" name="especialidades"></a>
+<div id="espBack">
+  <h2>Especialidades</h2>
+  <div class="especialidades">
+    <img src="img/esp4.jpg" alt="especialidad 1 ">
+    <h3>Cardiologia</h3>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet facilisis lectus, auctor faucibus mauris. Donec ullamcorper dolor a consectetur euismod. Aenean neque nulla, efficitur id leo nec, faucibus rutrum massa. Vestibulum fringilla dui eu enim placerat, non volutpat ligula elementum.</p>
+    <input type="button" value="Directorio Medico">
+    <div class="show"></div>
+  </div>
+  <div class="clear"></div>
+  <div class="especialidades ">
+    <img src="img/esp3.jpg" alt="especialidad 1 ">
+    <h3>Traumatología y Ortopedia</h3>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet facilisis lectus, auctor faucibus mauris. Donec ullamcorper dolor a consectetur euismod. Aenean neque nulla, efficitur id leo nec, faucibus rutrum massa. Vestibulum fringilla dui eu enim placerat, non volutpat ligula elementum.</p>
+    <input type="button" value="Directorio Medico">
+    <div class="show"></div>
+  </div>
+  <div class="clear"></div>
+  <div class="especialidades ">
+    <img src="img/esp2.jpg" alt="especialidad 1 ">
+    <h3>Ginecología y Obstetricia </h3>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet facilisis lectus, auctor faucibus mauris. Donec ullamcorper dolor a consectetur euismod. Aenean neque nulla, efficitur id leo nec, faucibus rutrum massa. Vestibulum fringilla dui eu enim placerat, non volutpat ligula elementum.</p>
+    <input type="button" value="Directorio Medico">
+    <div class="show"></div>
+  </div>
+  <div class="clear"></div>
+  <div class="especialidades ">
+    <img src="img/esp5.jpg" alt="especialidad 1 ">
+    <h3>Medicina Interna </h3>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet facilisis lectus, auctor faucibus mauris. Donec ullamcorper dolor a consectetur euismod. Aenean neque nulla, efficitur id leo nec, faucibus rutrum massa. Vestibulum fringilla dui eu enim placerat, non volutpat ligula elementum.</p>
+    <input type="button" value="Directorio Medico">
+    <div class="show"></div>
+  </div>
+  <div class="clear"></div>
+  <div class="especialidades ">
+    <img src="img/esp6.jpg" alt="especialidad 1 ">
+    <h3>Medicina General </h3>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet facilisis lectus, auctor faucibus mauris. Donec ullamcorper dolor a consectetur euismod. Aenean neque nulla, efficitur id leo nec, faucibus rutrum massa. Vestibulum fringilla dui eu enim placerat, non volutpat ligula elementum.</p>
+    <input type="button" value="Directorio Medico">
+    <div class="show"></div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="clear"></div>
+<footer>
+<address>Star Médica San Luis Potosí,Mariano Arista 735, Barrio de Tequisquiapan, San Luis Potosí, SLP. CP 78250</address>
+<div style="text-align:center">Icons made by <a href="http://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+</footer>
 </body>
 </html>

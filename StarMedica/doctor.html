@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- librerias (dependencias) -->
+    <script src="js/lib/jquery-2.2.2.min.js" type="text/javascript"></script>
+    <!-- Mis scripts -->
+    <script src="js/menu.js" type="text/javascript"></script>
+    <script src="js/doctor.js" type="text/javascript"></script>
+    <script src="https://www.150205.upslpweb.ga:1337/socket.io/socket.io.js"></script>
+    <meta charset="UTF-8">
+    <title>Consultorio Virtual</title>
+  </head>
+  <body>
+    <div id="asbheader">
+      <header>
+        <a href="index.html"><img src="img/logo.jpg" alt="logo"></a>
+      </header>
+      <nav>
+        <ul>
+          <li>
+            <ul class="submenu"><a href="#" class="submenu">Informacion</a>
+            <ul><a href="index.html#especialidades">Especialidades</a></ul>
+          </ul>
+        </li>
+      <li><a href="index.html">Logout</a></li>
+      <li><a href="ayuda.html">Ayuda</a></li>
+    </ul>
+  </nav>
+</div>
+<div class="clear"></div>
+<div id="backFormulario">
+  <div class="base" id="formulario">
+    <div class="tituloSeccion">
+      <strong>lista de espera</strong>
+    </div>
+    <div class="lista campo">
+      <select name="colaPacientes" size=4>
+        <option value="1">Paciente 1</option>
+        <option value="2">Paciente 2</option>
+        <option value="3">Paciente 3</option>
+        <option value="4">Paciente 4</option>
+      </select>
+    </div>
+    <div class="campo">
+      <input type="button" value="Atender">
+    </div>
+  </div>
+  <div id="streaming"></div>
+  <div class="clear"></div>
+  <div id="menuAction"></div>
+  <div id="historialMedico">
+    <!-- Insertar aqui el cuestionario de diagnostico -->
+  </div>
+</div>
+
+<footer>
+  <address>Star Médica San Luis Potosí,Mariano Arista 735, Barrio de Tequisquiapan, San Luis Potosí, SLP. CP 78250</address>
+</footer>
+</body>
+</html>

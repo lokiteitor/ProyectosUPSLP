@@ -1,0 +1,133 @@
+<link rel="stylesheet" href="css/lib/jquery.datetimepicker.css">
+<script src="js/lib/jquery.datetimepicker.full.min.js"></script>
+
+<script>
+  $('#datetimepicker').datetimepicker();
+</script>
+
+<div id="cuestionario">
+  <form action="" name="diagonostico">
+    <div class="baseFloat">
+      <div class="campo">
+        <label for="especialidad">Especialidad</label>
+        <select name="especialidad">
+          <option value="Cardiologia">Cardiologia</option>
+          <option value="Traumatología y Ortopedia">Traumatología y Ortopedia</option>
+          <option value="Ginecología y Obstetricia">Ginecología y Obstetricia</option>
+          <option value="Medicina Interna">Medicina Interna</option>
+          <option value="Medicina General">Medicina General</option>
+        </select>
+      </div>
+      <div class="campo">
+        <input id="datetimepicker" placeholder="Seleccione la fecha" type="text" >
+      </div>
+
+      <div class="tituloSeccion">
+        <strong>Cuestionario de diagnostico medico</strong>
+      </div>
+      <p class="instrucciones">Para encontrar si esta en riesgo de tener diabetes responda este cuestionario y marque con una cruz la respuesta que se adapte a usted</p>
+      <strong class="sino">Si No</strong>
+      <div class="campo">
+        <label for="question1">Cuenta con seguridad social</label>
+        <input type="radio" name="question1" value="si">
+        <input type="radio" name="question1" value="no">
+      </div>
+      <div class="campo">
+        <label for="tipo">Con que tipo de seguridad social cuental</label>
+        <input type="text" name="tipo" placeholder="Otro">
+        <input type="radio" name="tipo" value="ISSSTE">
+        <input type="radio" name="tipo" value="IMSS">
+      </div>
+      <div class="campo">
+        <label for="question2">De acuerdo a mi estatura mi peso es igual <br> o superior al anotado en la tabla</label>
+        <input type="radio" name="question2" value="si">
+        <input type="radio" name="question2" value="no">
+      </div>
+      <div class="campo">
+        <label for="question3">Normalmente no hago ejercicio o hago muy poco <br>
+        (<strong>Solo para personas con menos de 65 años</strong>)</label>
+        <input type="radio" name="question3" value="si">
+      </div>
+      <input type="radio" name="question3" value="no">
+      <div class="campo">
+        <label for="question4">Tengo entre 45 a 64 años de edad</label>
+        <input type="radio" name="question4" value="si">
+        <input type="radio" name="question4" value="no">
+      </div>
+      <div class="campo">
+        <label for="question5">Tengo 65 años de edad o mas</label>
+        <input type="radio" name="question5" value="si">
+        <input type="radio" name="question5" value="no">
+      </div>
+      <div class="campo">
+        <label for="question6">Algunos de mis hermanos tiene diabetes</label>
+        <input type="radio" name="question6" value="si">
+        <input type="radio" name="question6" value="no">
+      </div>
+      <div class="campo">
+        <label for="question7">Alguno de mis padres tiene diabetes</label>
+        <input type="radio" name="question7" value="si">
+        <input type="radio" name="question7" value="no">
+      </div>
+      <div class="campo">
+        <label for="question8">Alguno de mis hermanos tiene diabetes</label>
+        <input type="radio" name="question8" value="si">
+        <input type="radio" name="question8" value="no">
+      </div>
+      <div class="campo">
+        <label for="question9">Si usted es mujer y ha tenido bebes de mas <br> de cuatro kilos de peso al naces</label>
+        <input type="radio" name="question9" value="si">
+        <input type="radio" name="question9" value="no">
+      </div>
+      <div class="campo">
+        <div class="tituloSeccion">
+          <strong>Estilo de vida saludable</strong>
+        </div>
+        <p class="recomendaciones">Si en algunos aspectos, tu estilo de vida <strong> no es saludable</strong>, acude a tu medico
+        y al grupo de ayuda mutua (club de diabeticos o hipertensos) para hacer los cambios necesarios</p>
+      </div>
+      <div class="campo">
+        <label for="question10">Mi peso es adecuado</label>
+        <input type="radio" name="question10" value="si">
+        <input type="radio" name="question10" value="no">
+      </div>
+      <div class="campo">
+        <label for="question11">Diariamente consumo frutas y verduras</label>
+        <input type="radio" name="question11" value="si">
+        <input type="radio" name="question11" value="no">
+      </div>
+      <div class="campo">
+        <label for="question12">Hago ejercicio y/o realizo actividades fisicas diariamente</label>
+        <input type="radio" name="question12" value="si">
+        <input type="radio" name="question12" value="no">
+      </div>
+      <div class="campo">
+        <label for="question13">Evito consumir en lo posible grasas de origen animal</label>
+        <input type="radio" name="question13" value="si">
+        <input type="radio" name="question13" value="no">
+      </div>
+      <div class="campo">
+        <label for="question14">Consumo sal en baja cantidad</label>
+        <input type="radio" name="question14" value="si">
+        <input type="radio" name="question14" value="no">
+      </div>
+      <div class="campo">
+        <label for="question15">No fumo, ni me expongo al humo del tabaco</label>
+        <input type="radio" name="question15" value="si">
+        <input type="radio" name="question15" value="no">
+      </div>
+      <div class="campo">
+        <label for="question16">No consumo bebidas alcoholicas o lo hago con moderacion</label>
+        <input type="radio" name="question16" value="si">
+        <input type="radio" name="question16" value="no">
+      </div>
+      <div class="campo">
+        <textarea name="malestar" id="malestar" rows="10" placeholder="Agregue sus malestares"></textarea>
+      </div>
+      <div class="campo">
+        <input type="button" value="enviar" onclick="sendForm()">
+      </div>
+    </div>
+  </div>
+</form>
+</div>

@@ -1,20 +1,62 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans|Oxygen);
+
+body{
+    font-family: 'Noto Sans', sans-serif;
+}
+
+#background {
+    background-color: #F0F0F0;
+}
+#abs{
+    width: 80%;
+    margin: auto;
+}
+
+#asbheader{
+    background-color: #FFF;
+    width: 80%;
+    margin: auto;
+}
+#asbheader + div[class="clear"]{
+    border-bottom: 5px solid #0F4182;
+
+}
+
 
 /*Estilos Menu*/
 nav{
     float: right;
-    margin: 30px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
 }
 
 nav li{
     float: left;
     text-align: center;
-    margin-left: 20px;
-    margin-right: 20px;
+    padding: 20px;
+}
+nav li:hover{
+    background-color: #EEE;
 }
 
 nav a{
     text-decoration: none;
-    color: ;
+    color:#0A3A7A ;
+}
+nav a:hover{
+    color:#5B90C9;
+}
+
+.submenu ul{
+    display: none;
+    color:#0A3A7A ;
+    padding: 10px 20px 10px 20px;
+
+}
+
+.submenu:hover{
+    color:#5B90C9;
 }
 
 /*Contenido del encabezado*/
@@ -23,4 +65,682 @@ header img{
     width: 200px;
     height: 120px;
 
+}
+
+/* Contenido informativo index*/
+article{
+    width: 100%;
+    margin: auto;
+    background-color: #3498DB;
+    padding-top: 10px;
+    padding-bottom:20px;
+}
+
+.info div{
+    width: 25%;
+    float: left;
+    margin: 30px;
+    background-color: #FFF;
+    box-shadow: 0px 5px 10px 0px #000;
+    margin-top: 10px;
+    padding-bottom: 15px;
+
+}
+
+.info *{
+    margin-top:20px;
+}
+
+.info h3{
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 18px;
+    color: #0A3A7A;
+}
+
+.info img{
+    width: 160px;
+    height: 160px;
+    margin: auto;
+    border-radius: 65px;
+    display: block;
+}
+.info img:hover{
+    border: 5px solid #2ABB9B;
+    opacity: .7;
+}
+
+.info p{
+    text-align: center;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 16px;
+    margin: auto;
+    width: 90%;
+   
+}
+
+.info input{
+    background-color: #ececec;
+    border: 1px #F2F1EF solid;
+    width: 8em;
+    margin: auto;
+    display: block;
+    margin-top: 20px;
+}
+.info input:hover{
+    border: 2px solid #2ABB9B;
+}
+
+
+.info a{
+        text-decoration: none;
+}
+
+#espBack h2{
+    width: 70%;
+    margin: auto;
+    font-size: 24px;
+    font-weight: bold;
+    color:#2ABB9B;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+}
+
+#espBack .clear{
+    margin: auto;
+    width: 50%;
+    border-bottom: 1px solid #5F5F5F;
+    margin-bottom: 20px;
+    height: 5px
+}
+
+.especialidades{
+    width: 80%;
+    margin : auto;
+}
+.especialidades img{
+    float: left;
+    border: 2px solid #3497DA;
+    height: 260px;
+    width: 260px;
+}
+
+
+.especialidades p{
+    width: 60%;
+    float: right;
+    text-align: justify;
+
+}
+
+.especialidades h3{
+    width: 20%;
+    margin: auto auto 20px;
+    font-size: 20px;
+    font-style: italic;
+    color: #3497D9;    
+
+}
+
+.especialidades + .clear{
+    padding-top: 20px;
+}
+
+.especialidades input{
+    margin: 10px auto auto;
+    width: 12em;
+    display: block;
+    clear: both;
+    background-color: #dedede;
+    border: 1px #F2F1EF solid;
+}
+
+.especialidades input:hover{
+    border: 2px solid #2ABB9B;
+}
+
+.show .directorio{
+    width: 20%;
+    margin: auto;
+}
+
+.show .directorio li{
+    line-height: 1.5;
+    color: #3497DA;
+    list-style-type: square;
+}
+
+.show .directorio a{
+    color: #3497DA;
+    text-decoration: none;
+}
+
+.infodoctor img{
+    width: 180px;
+    height: 180px;
+
+}
+.infodoctor{
+    width: 200%;
+}
+.infodoctor address{
+    float: right;
+    width: 13em;
+}
+
+.info .infoServicio{
+    position: absolute;
+    width: 60%;
+    margin: auto;
+
+}
+
+.info .infoServicio .exit{
+    width: 30px;
+    height: 30px;
+    margin:0;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.infoServicio h2{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    color: #3498DB;
+    font-size: 24px;
+}
+.infoServicio p{
+    margin-top: 40px;
+    text-align: justify ;
+}
+
+/*Formualarios de registro y login*/
+.clear{
+    clear: both;
+}
+
+#backFormulario{
+    background-color: #5B8FC2;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+#formulario{
+    width: 40%;
+    margin: auto;
+    background-color: #DADFE1;
+    margin-top: 30px;
+    padding-bottom: 10px;
+
+}
+
+.tituloSeccion{
+    color:#114575;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #19B5FE;
+    width: 60%;
+    margin: auto;
+
+}
+.campo{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#formulario input{
+    border: 1px solid #BDC3C7;
+    text-align: center;
+}
+
+#formulario .inputFormulario:focus{
+    border: 3px solid #19B5FE;
+}
+
+#formulario .inputFormulario{
+    width: 60%;
+    height: 2em;
+    border-radius: 5px;
+}
+
+#formulario input[type="submit"]{
+    width: 12em;
+    height: 2em;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    background-color: #5B8FC2;
+}
+
+#formulario label{
+    color: #114575;
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+/*Cuestionario*/
+#cuestionario{
+    background-color: #5491CE;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.baseFloat{
+    width: 60%;
+    margin: auto;
+    background-color: #DADFE1;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+}
+
+.baseFloat label{
+    float: left;
+    text-align: left;
+}
+
+.baseFloat input[type="radio"]{
+    float: right;
+}
+
+.baseFloat.encuesta label{
+    float: none;
+    text-align: left;
+}
+
+.baseFloat.encuesta li{
+    list-style-type: none;
+    clear: both;
+    width: 60%;
+    margin: auto;
+}
+.baseFloat.encuesta input[tyoe="radio"]{
+    float: right;
+}
+.baseFloat.encuesta samp{
+    float: left;
+}
+.baseFloat.encuesta .campo{
+    margin-top: 15px;
+}
+
+.baseFloat.encuesta textarea{
+    width: 100%;
+    height: 12em;
+}
+
+#cuestionario .campo{
+    clear: both;
+}
+.instrucciones{
+    clear: both;
+    width: 60%;
+    margin: auto;
+    font-weight: bold;
+}
+.recomendaciones{
+    clear: both;
+    width: 90%;
+    margin: auto;
+    text-align: justify;
+}
+.sino{
+    float: right;
+    margin-right: 10%
+}
+
+p strong{
+    font-weight: bold;
+}
+
+#malestar{
+    width: 100%;
+    margin: auto;
+}
+
+/*Pie de pagina*/
+footer{
+    background-color: #0F4182;
+    width: 100%;
+    height: 8em;
+    margin-top: 20px;
+}
+footer address{
+    color: #FFF;
+    text-align: center;
+    padding-top: 25px;
+}
+
+/*Propiedades comunes de clientes y doctores*/
+.mensajeBienvenida{
+    float: right;
+    background-color: #5B8FC2;
+    width: 20%;
+    height: 30px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 10%;
+}
+
+#workarea{
+    background-color: #4183D7;
+}
+#workarea video{
+    width: 320px;
+    height: 280px;
+    margin-left: 10%;
+    border: 5px solid #3A539B;
+    background-color: #07216C;
+}
+#clientWorkSpace{
+    background-color: #5491CE;
+}
+
+/*Propiedades del area de trabajo del paciente*/
+#individualMenu{
+    float: right;
+    width: 20%;
+
+}
+
+#individualMenu li{
+    display:block;
+    height: 20px;
+    background-color: #0F4182;
+    list-style-type: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+}
+
+#individualMenu li a{
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+
+}
+#individualMenu li:hover{
+    background-color: #74B4DD;
+    color: #0F4182;
+}
+
+.status{
+    background-color: #2A86B1;;
+    padding-top:15px;
+    padding-bottom: 15px;
+    width: 25%;
+    margin: auto;
+    text-align: center;
+    float: right;
+
+
+}
+
+.status .espera{
+    color: #00079B;
+    font-size: 28px;
+
+}
+
+#detallesCita{
+    float: right;
+    margin: auto;
+    width: 60%;
+    background-color: #89C4F4;
+    padding-bottom: 15px;
+}
+
+#detallesCita label{
+    float: left;
+}
+#detallesCita input{
+    float: right;
+}
+
+#detallesCita .campo{
+    clear: both;
+}
+
+#receta textarea{
+    width: 90%;
+    margin: auto;
+    display: block;
+    height: 30em;
+}
+#receta{
+    z-index: 100;
+    border: 1px solid blue
+}
+
+#receta .little input{
+    width: 3em;
+    float: left;
+}
+
+#receta .little{
+    width: 60%;
+}
+/*Propiedades del streaming*/
+#Emisor{
+    display: none;
+}
+
+#workarea{
+    width: 80%;
+    float: left;
+}
+
+#workarea #frame{
+    width: 320px;
+    height: 280px;
+    margin-left: 10%;
+    border: 5px solid #3A539B;
+    background-color: #07216C;
+}
+
+
+/*Medias querys*/
+@media all and (max-width: 960px) {
+    /*seccion informacion*/
+    .info div{
+        margin: auto;
+        float: none;
+        width: 90%;
+        margin-top: 20px;
+    }
+    #formulario{
+        width: 80%;
+    }
+    .base{
+        width: 80%;
+    }
+}
+
+@media all and (max-width: 600px) {
+    .textslider{
+        display: none;
+    }
+    #formulario .inputFormulario{
+        width: 100%;
+    }
+    .especialidades p{
+        width: 90%;
+    }
+    .especialidades .show .directorio{
+        width: 90%;
+    }
+    article .info .infoServicio{
+        width: 90%;
+    }
+    #workarea video{
+        width: 100%;
+        margin-left: auto;
+    }
+    #receta{
+        width: 80%;
+    }
+    #emergente .baseFloat{
+        width: 90%;
+    }
+header img{
+	width:120px;
+}
+}
+
+@media all and (max-width: 360px) {
+    #formulario{
+        width: 100%;
+    }
+    #receta{
+        width: 100%;
+    }
+    #detallesCita input{
+        float: none;
+    }
+    #emergente .baseFloat{
+        width: 100%
+    }
+}
+
+@media all and (min-width: 960px) {
+    article{
+        padding-left: 6%;
+    }
+}
+
+@media all and (max-width: 865px){
+    .especialidades img{
+        float: none;
+        margin: auto;
+        display: block;
+    }
+    .especialidades p{
+        float: none;
+        margin: auto;
+    }
+    .show .directorio{
+        width: 50%
+    }
+    .especialidades .infodoctor img{
+        display: inline;
+    }
+    .especialidades .infodoctor address{
+        float: none;
+    }
+    .info .infoServicio{
+        width: 70%;
+    }
+    #historialMedico .baseFloat{
+        width: 90%;
+    }
+    #workarea{
+        width: 95%;
+    }
+    #individualMenu{
+        margin: auto;
+        width: 100%;
+        margin-left: 10px;
+        float: none;
+    }
+    #detallesCita{
+        width: 100%;
+    }
+}
+
+
+/*Menu hamburguesa*/
+
+@media all and (max-width: 520px){
+    nav{
+    float:right;
+    background-color: #62AFF0;
+    color:white;
+    width: 25%;
+    height: 60px;
+    padding-left: 10px;
+    border-radius: 10px;
+    margin-right:10px;
+    }
+
+    #menu {
+        float: right;
+        width: 300px;
+        margin-top: -21px;
+        display: none;
+    }
+
+    #menu ul li{
+        list-style-type: none;
+        background: #00549B;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 1px outset #fff;
+        position: relative;
+        z-index: 1;
+    }
+
+    #menu ul li:hover{
+        background: #000181;
+    }
+
+
+    #menu ul li a{
+        color: #fff;
+        text-decoration: none;
+    }
+
+    nav ul{
+        padding: 0;
+        margin-top: 20px;
+    }
+    nav li{
+        float: none;
+    }
+    
+}
+
+
+
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../fonts/icomoon.eot?eoqk3v');
+    src:    url('../fonts/icomoon.eot?eoqk3v#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?eoqk3v') format('truetype'),
+        url('../fonts/icomoon.woff?eoqk3v') format('woff'),
+        url('../fonts/icomoon.svg?eoqk3v#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-menu:before {
+    content: "\e900";
+    font-size: 32px;
+    margin-left: 10px;
+    color: #fff;
 }
