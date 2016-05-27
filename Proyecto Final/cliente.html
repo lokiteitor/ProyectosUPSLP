@@ -1,68 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/menu.css">
-        <link rel="stylesheet" href="css/estilos.css">
         <title>Cliente</title>
+        <!-- Dependencias -->
+        <script src="js/lib/jquery-2.2.2.min.js"></script>
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- Personalizacion -->
+        <link rel="stylesheet" href="css/bootestilo.css">
+        <!-- Slider -->
+        <link href="css/lib/jquery.bxslider.css" rel="stylesheet">
+        <script src="js/lib/jquery.bxslider.min.js"></script>
+        <!-- Paquete de iconos de terceros -->
+        <link rel="stylesheet" type="text/css" href="css/icons/font/flaticon.css">
+        <!-- Scripts personales -->
+        <script src="js/ajax.js"></script>
+        <script src="js/cliente.js"></script>
+
     </head>
     <body>
-        <header>
-            <a href="index.html">
-                <img src="img/logo.jpg" alt="logo">
-            </a>
-        </header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="registro.html">Registro</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </nav>
-        <div class="clear"></div>
-        <strong class="identificacion">Bienvenido &ltCliente&gt</strong>
-        <div class="clear"></div>
+        <div id="navapp">
+            <img src="img/logo.jpg" class="img-responsive">
+            <div class="   col-lg-12">
+                <div class="nombreArea">
+                    <strong>Nombre</strong>
+                    <br>
+                    <strong>Apellido</strong>
+                </div>
+                <div class="links">
+                    <ul  class="list-unstyled">
+                        <li>
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <a href="#">Seguimiento</a>
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-earphone"></span>
+                            <a href="#"> Levantar Ticket</a>
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            <a href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href=""><input type="button" value="Contacto" class="btn btn-info"></a>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="  col-md-4 "></div>
+            <div class="  col-md-8 ">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Detalles</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Costo</th>
+                            <th>Estado</th>
+                            <th>Hablar con el tecnico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </td>
+                            <td>
+                                Marca    
+                            </td>
+                            <td>
+                                Modelo
+                            </td>
+                            <td>
+                                $1000
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-info btn-block" value="Estado">
+                            </td>
+                            <td>
+                                <button type="button" name="chat-button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
         
-        <section>
-            <div class="recuadro">
-                <p>Seguimiento de Servicio</p>
+        <div id="chat">
+            <div id="info-chat">
+                <strong>Tecnico: Nombre</strong>
             </div>
-            <div class="lineatiempo">
-                <input type="button" value="Asignando Tecnico" class="cuadrotiempo">
-                <input type="button" value="Hacia destino" class="cuadrotiempo">
-                <input type="button" value="Reparando" class="cuadrotiempo">
-                <input type="button" value="Entregado" class="cuadrotiempo">
-                <div class="clear"></div>
+            <div id="mensajes">
+                
             </div>
-            <div class="clear"></div>
-        </section>
-        <div>
-            <article>
-                <form action="">
-                    <div class="campo">
-                        <label for="marca">Marca</label>
-                        <input type="text" name="marca" class="textcli">
-                    </div>
-                    <div class="campo">
-                        <label for="modelo">Modelo</label>
-                        <input type="text" name="modelo" class="textcli">
-                    </div>
-                    <div class="campo">
-                        <label for="descripcion">Descripcion del problema</label>
-                        <textarea name="descripcion" class="textcli" cols="30" rows="10"></textarea>
-                    </div>
-                    <div class="campo">
-                        <label for="poliza">Adjuntar poliza</label>
-                        <input type="file" class="boton">
-                    </div>
-                    <div class="clear"></div>
-                    <input type="submit"  class="boton" value="Enviar">
-                </form>
-            </article>
+            <div id="entradaMsj">
+                <input type="text" name="mensaje" id="inputMensaje" class="form-control"  required placeholder="Escriba un mensaje">
+            </div>
         </div>
-        <div id="piedepagina">
-            <p>Sed hendrerit vehicula dui, pharetra tristique tellus tincidunt et.mollis</p>
-        </div>
+        
     </body>
 </html>

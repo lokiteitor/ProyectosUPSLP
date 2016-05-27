@@ -1,45 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/menu.css">
-        <link rel="stylesheet" href="css/estilos.css">
-        
-        <script src="js/lib/jquery-2.2.2.min.js" type="text/javascript"></script>
-        <script src="js/efects.js" type="text/javascript"></script>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <!-- Dependencias -->
+    <script src="js/lib/jquery-2.2.2.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Personalizacion -->
+    <link rel="stylesheet" href="css/bootestilo.css">
+    <!-- Slider -->
+    <link href="css/lib/jquery.bxslider.css" rel="stylesheet">
+    <script src="js/lib/jquery.bxslider.min.js"></script>
+    <!-- Paquete de iconos de terceros -->
+    <link rel="stylesheet" type="text/css" href="css/icons/font/flaticon.css"> 
+    <!-- Scripts personales -->
+    <script src="js/ajax.js"></script>    
+    <script>
+    // cargar las secciones comunes
 
-        <title>Login</title>
-    </head>
-    <body>
-        <header>
-            <a href="index.html">
-                <img src="img/logo.jpg" alt="logo">
-            </a>
-        </header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="registro.html">Registrarse</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </nav>
-        <div class="clear"></div>
-        <div id="login">
-            <strong>Registro</strong>
-            <form action="">
-                <input type="text" name="nombre" value="Nombre">
-                <input type="text" name="direccion" value="Direccion">
-                <input type="text" name="telefono" value="Telefono">
-                <input type="text" name="correo" value="Correo electronico">
-                <input type="text" name="pass" value="Contraseña">
-                <div class="filabotones">
-                    <input type="button" value="Registrarse">
-                </div>
-            </form>
+    jQuery(document).ready(function($) {
+      cargarElemento("nav","#HereNav");
+      cargarElemento("footer","#HereFooter");
+
+    });
+    </script>
+
+</head>
+<body>
+    <div id="HereNav"></div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="  col-md-4 "></div>
+            <div class="  col-md-4 ">
+                <form action="#" class="form-horizontal">
+                    <img src="img/user-icon.png" class="img-responsive img-circle">
+                    <h3 class="text-center">Registro</h3>
+                    <div class="input-group">
+                        <span class="input-group-addon">@</span>
+                        <input type="text" class="form-control" placeholder="correo@electronico.com">
+                    </div>
+                    <div class="input-group">
+                        <span class="flaticon-lock input-group-addon "></span>
+                        <input type="password" class="form-control" placeholder="Contraseña">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-home"></span>
+                        <input type="text" class="form-control" placeholder="Domicilio">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-phone"></span>
+                        <input type="text" class="form-control" placeholder="Telefono">
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Registrate">
+                </form>
+            </div>
+            <div class="  col-md-4 "></div>
         </div>
-        <div id="piedepagina">
-            <p>Sed hendrerit vehicula dui, pharetra tristique tellus tincidunt et.mollis</p>
-        </div>
-    </body>
+    </div>
+
+    <div id="HereFooter"></div>
+</body>
 </html>

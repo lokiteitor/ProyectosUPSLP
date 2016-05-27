@@ -1,0 +1,40 @@
+Blog sitio - otra pagina 
+--blog cambiar nombre de "pagina web" a "ir a sitio"
+
+**Pagina de inicio
+--Imagen con sentido
+--Solo una galeria              ---ready--
+--El diseño del inicio es muy pobre
+--Debe tener una impresion empresarial
+
+** pie de pagina
+--"Este es un proyecto academico para la Universidad Politecnica de San Luis Potosi"
+
+**En los formularios 
+--reemplazar "Correo electronico" por "Correo@electronico.com"         ---ready--
+-- Aviso de que ya se realizo  la accion
+--dar estilo a boton seleccionar
+
+**en las secciones
+--cambiar menu quitar "registro","login" ingresar "login"
+
+**administrador
+--generar tickets aleatorios
+--cambiar "Lista de casos disponibles" por "Lista de tickets de servicios"
+--reporte de servicios
+--registrar tecnicos
+
+
+**cliente
+--generar codigo de servicio
+--en marca utilizar un select(lista predefinida)
+
+
+**tecnico
+--puede modificar el estado del servicio
+--chat
+--generar reporte(2)
+--solicitud de refacciones
+
+
+

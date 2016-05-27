@@ -1,0 +1,104 @@
+.navbar-header a img{
+    width: 45%;   
+}
+
+footer{
+    background-color: #001E45;
+    padding:20;
+}
+
+footer ul{
+    margin: auto;
+    width: 20%;
+}
+
+footer strong{
+    color: #BABBBF;
+}
+
+
+/*Login.html*/
+form{
+    margin-top: 20%;
+}
+form img{
+    margin: auto;
+}
+form .input-group{
+    margin-bottom: 10px;
+}
+form .btn.btn-success{
+    margin: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/*Area de cliente*/
+#navapp{
+    background-color: #00193A;
+    width: 20%;
+    height: 100%;
+    position: fixed;
+}
+
+#navapp strong{
+    color: #EEE;
+}
+
+.nombreArea{
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 10%;  
+}
+.links{
+    width: 55%;
+    margin: auto;
+}
+.links li{
+    margin-top: 20%;
+}
+.links li span{
+    color: rgb(8, 169, 174);
+}
+
+#navapp input{
+    display: block;
+    margin: auto;
+    margin-top: 80%;
+}
+
+/*Chat*/
+#chat{
+    width: 20%;
+    height: 30%;
+    position: fixed;
+}
+
+#info-chat{
+    background-color: rgb(16, 63, 126);
+    color: white;
+    width: 100%;
+    height: 2em;
+    text-align: center;
+
+}
+#mensajes{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+#entradaMsj input{
+    border-radius: 0;
+}
+
+@media all and (max-width: 1000px) {
+
+    footer ul{
+        width: 100%;
+    }
+}
+@media all and (max-width: 800px) {
+    .navbar-header a img{
+        display: none;
+    }
+}
