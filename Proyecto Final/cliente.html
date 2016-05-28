@@ -19,10 +19,36 @@
         <!-- Scripts personales -->
         <script src="js/ajax.js"></script>
         <script src="js/cliente.js"></script>
-
     </head>
     <body>
-        <div id="navapp">
+        <nav class="hidden-md hidden-lg navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                        <a href="index.html"><img src="img/logo.jpg" alt=""></a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#" name="seguimiento">Seguimiento</a></li>
+                            <li><a href="#" name="ticket">Levantar Ticket</a></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="hidden-md hidden-lg">
+            <br>
+            <br>
+            <br>
+        </div>
+        <div id="navapp" class="visible-md-block visible-lg-block">
             <a href="index.html"><img src="img/logo.jpg" class="img-responsive"></a>
             <div class="   col-lg-12">
                 <div class="nombreArea">
@@ -49,10 +75,9 @@
                 <a href=""><input type="button" value="Contacto" class="btn btn-info"></a>
             </div>
         </div>
-
         <div class="container" id="contenido">
             <div class="  col-md-4 "></div>
-            <div class="  col-md-8 ">
+            <div class="  col-md-8 table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -65,28 +90,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                            </td>
-                            <td>
-                                Marca    
-                            </td>
-                            <td>
-                                Modelo
-                            </td>
-                            <td>
-                                $1000
-                            </td>
-                            <td>
-                                <input type="button" class="btn btn-info btn-block" value="Estado">
-                            </td>
-                            <td>
-                                <button type="button" name="chat-button" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span></button>
-                            </td>
-
-                        </tr>
-
                     </tbody>
                 </table>
             </div>

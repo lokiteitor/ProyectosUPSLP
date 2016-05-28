@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
     for(var i = 0;i<=cantidadReportes;i++){
         if (i % 2 == 0) {
             // si ya no cabe en alguna columna crearla
-            $("#reportes").append('<div class="row"><div class="col-lg-3"></div></div>');
+            $("#reportes").append('<div class="row"><div class="col-lg-3 col-md-3"></div></div>');
 
         };
         // puede que exitan varias columnas por lo que debemos averiguar

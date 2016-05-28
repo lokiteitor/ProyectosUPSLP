@@ -17,15 +17,35 @@
         <script src="js/ajax.js"></script>
         <script src="js/tecn.js"></script>
         <style>
-            body{
-                background-color: #d6dade;
-            }
+        body{
+            background-color: #d6dade;
+        }
         </style>
-
-
     </head>
     <body>
-        <div id="navapp">
+        <nav class="hidden-md hidden-lg navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                        <a href="index.html"><img src="img/logo.jpg" alt=""></a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#" name="reporte">Reportes</a></li>
+                            <li><a href="#" name="task">Tareas</a></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="navapp" class="visible-md-block visible-lg-block">
             <a href="index.html"><img src="img/logo.jpg" class="img-responsive"></a>
             <div class="   col-lg-12">
                 <div class="nombreArea">
@@ -50,7 +70,7 @@
             </div>
         </div>
         <div class="container-fluid" id="cards">
-            <!-- Aqui van los reportes -->            
+            <!-- Aqui van los reportes -->
         </div>
         <div id="chat">
             <div id="info-chat">
@@ -63,6 +83,5 @@
                 <input type="text" name="mensaje" id="inputMensaje" class="form-control"  required placeholder="Escriba un mensaje">
             </div>
         </div>
-
-    </body>    
+    </body>
 </html>

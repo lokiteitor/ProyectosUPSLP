@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
     for(var i = 0;i<=cantidadReportes;i++){
         if (i % 2 == 0) {
             // si ya no cabe en alguna columna crearla
-            $("#cards").append('<div class="row"><div class="col-lg-3"></div></div>');
+            $("#cards").append('<div class="row"><div class="col-lg-3 col-md-3"></div></div>');
 
         };
         // puede que exitan varias columnas por lo que debemos averiguar
@@ -48,6 +48,11 @@ jQuery(document).ready(function($) {
         showReport();
         setTimeout(function  () {
         $('<div class="form-group"><label for="folio">Seleccionar Ticket</label><select multiple class="form-control"></select></div>').insertAfter('#reporte #head');    
+        str = "<option>"
+        for(var i=0;i<Math.random()*20;i++){
+
+            $(str.concat("Folio: ",parseInt(Math.random() * 1024),"</option>")).appendTo('select');
+        }
         console.log('ok')
         },400);
         
