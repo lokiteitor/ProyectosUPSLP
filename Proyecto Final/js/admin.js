@@ -32,11 +32,30 @@ jQuery(document).ready(function($) {
             });
         });
     },400);
-    $('a[name="reporte"]').click(function() {
+    $('a[name="reporte"]').click(function(event) {
+        event.preventDefault();
         if (backup) {
             $("#showreport").remove();
             $(backup).appendTo('body');
         };
+    });
+    $('a[name=asignar]').click(function(event) {
+        event.preventDefault();
+        backup = $("#reportes").detach();
+        $('<div id="showreport"></div>').appendTo('body');
+
+        $('#showreport').load("html/reporte.html #asignaciones" );
+
+        var nombre;
+        var tareas;
+        setTimeout(function () {
+            for(var i = 1;i<= Math.random() * 5 +1;i++ ){
+                th = "<tr><th>Tecnico "
+                $("#asignaciones tbody").append(th.concat(i,"</th>","<th>",parseInt(Math.random() * 20 +1),"</th>","</tr>"))
+                nombre = "Tecnico" + i;
+                console.log(i);
+            }
+        },200)
     });
 
 });
@@ -46,6 +65,4 @@ function showReport () {
     setTimeout(function  () {
         $("#showreport").load("html/reporte.html #detalle");    
     },200);
-    
-
 }
