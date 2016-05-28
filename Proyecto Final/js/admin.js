@@ -3,7 +3,8 @@ jQuery(document).ready(function($) {
     var cantidadReportes = parseInt(Math.random() * 5) +1;
     var cols;
     var consulta;
-
+    var reporte;
+    var backup;
 
     for(var i = 0;i<=cantidadReportes;i++){
         if (i % 2 == 0) {
@@ -15,21 +16,36 @@ jQuery(document).ready(function($) {
         // donde colocarla
         cols = parseInt(i/2);
         consulta = $("#reportes .row");
-        $('<div class=" det col-lg-3"><form class="minireport"><img src="img/user-icon.png" class="img-responsive img-circle"><h4 class="text-center">Folio</h4><strong name="nombre">Nombre Cliente</strong><br><strong name="marca">Marca-Modelo</strong><p name="descripcion">Descripcion</p><button name ="go" type="button" class="btn btn-info btn-block">Detalles</button></form></div>').appendTo(consulta[cols]);
+        reporte = $('<div></div>');
+        $(reporte).load("html/reporte.html #minireport");
+        $(reporte).insertAfter($(consulta[cols]).find('.col-lg-3'));
     }
 
-    $('.minireport button[name="go"]').each(function(index, el) {
-        console.log(el);
-        $(el).click(function(event) {
-            event.preventDefault();
-            $("#reportes").empty();
-            console.log("click");
-            showReport();
+    setTimeout(function (){
+        $('.minireport button[name="go"]').each(function(index, el) {
+            console.log(el);
+            $(el).click(function(event) {
+                event.preventDefault();
+                backup = $("#reportes").detach();
+                console.log("click");
+                showReport();
+            });
         });
+    },400);
+    $('a[name="reporte"]').click(function() {
+        if (backup) {
+            $("#showreport").remove();
+            $(backup).appendTo('body');
+        };
     });
 
 });
 
 function showReport () {
-    $("#reportes").load("html/reporte.html");
+    $('<div id="showreport"></div>').appendTo('body');
+    setTimeout(function  () {
+        $("#showreport").load("html/reporte.html #detalle");    
+    },200);
+    
+
 }

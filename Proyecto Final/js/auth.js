@@ -2,7 +2,7 @@
 function validarLogin (event) {
      if ($("input[name=correo]").val() == 'admin@electro.com' && 
         $("input[name=password]").val() == 'admin123'){
-
+        console.log("ok")
         window.location="administrador.html"
      }
      else if($("input[name=correo]").val() == "user@electro.com" &&
@@ -16,10 +16,6 @@ function validarLogin (event) {
 
 		window.location = "tecnico.html";
 	}
-
-	
-
-
      else{ 
 	alert("Usuario/contraseña incorrectos");
      }

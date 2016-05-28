@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="css/icons/font/flaticon.css"> 
     <!-- Scripts personales -->
     <script src="js/ajax.js"></script>    
+    <script src="js/auth.js"></script>    
     <script>
     // cargar las secciones comunes
 
@@ -36,16 +37,16 @@
         <div class="row">
             <div class="  col-md-4 "></div>
             <div class="  col-md-4 ">
-                <form action="#" class="form-horizontal">
+                <form action="#" class="form-horizontal" name="login">
                     <img src="img/user-icon.png" class="img-responsive img-circle">
                     <h3 class="text-center">Login</h3>
                     <div class="input-group">
                         <span class="input-group-addon">@</span>
-                        <input type="text" class="form-control" placeholder="correo@electronico.com">
+                        <input name="correo" type="text" class="form-control" placeholder="correo@electronico.com">
                     </div>
                     <div class="input-group">
                         <span class="flaticon-lock input-group-addon "></span>
-                        <input type="password" class="form-control" placeholder="Contraseña">
+                        <input type="password" name="password" class="form-control" placeholder="Contraseña">
                     </div>
                     <p class="text-center">No tienes cuenta aun <a href="registro.html">Registrate</a></p>
                     <input type="submit" class="btn btn-success" value="Entrar">

@@ -127,3 +127,7 @@ form .btn.btn-success{
 .minireport.col-lg-9 img{
     float: right;
 }
+
+.minireport var{
+    float: right;
+}

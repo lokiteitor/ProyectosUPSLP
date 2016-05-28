@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <title>Tecnico</title>
+        <!-- Dependencias -->
+        <script src="js/lib/jquery-2.2.2.min.js"></script>
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- Personalizacion -->
+        <link rel="stylesheet" href="css/bootestilo.css">
+        <!-- Paquete de iconos de terceros -->
+        <link rel="stylesheet" type="text/css" href="css/icons/font/flaticon.css">
+        <!-- Scripts personales -->
+        <script src="js/ajax.js"></script>
+        <script src="js/tecn.js"></script>
+        <style>
+            body{
+                background-color: #d6dade;
+            }
+        </style>
+
+
+    </head>
+    <body>
+        <div id="navapp">
+            <a href="index.html"><img src="img/logo.jpg" class="img-responsive"></a>
+            <div class="   col-lg-12">
+                <div class="nombreArea">
+                    <strong>Tec. Nombre</strong>
+                </div>
+                <div class="links">
+                    <ul  class="list-unstyled">
+                        <li>
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <a href="#" name="reporte">Reportes</a>
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                            <a href="#" name="task">Tareas</a>
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            <a href="login.html">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="cards">
+            <!-- Aqui van los reportes -->            
+        </div>
+        <div id="chat">
+            <div id="info-chat">
+                <strong>Tecnico: Nombre</strong>
+            </div>
+            <div id="mensajes">
+                
+            </div>
+            <div id="entradaMsj">
+                <input type="text" name="mensaje" id="inputMensaje" class="form-control"  required placeholder="Escriba un mensaje">
+            </div>
+        </div>
+
+    </body>    
+</html>
