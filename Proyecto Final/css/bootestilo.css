@@ -1,3 +1,4 @@
+
 .navbar-header a img{
     width: 45%;   
 }
@@ -101,4 +102,24 @@ form .btn.btn-success{
     .navbar-header a img{
         display: none;
     }
+}
+
+/*Administrador*/
+.minireport .btn-info{
+    background-color: #00193A;
+    color: #31b0d5;
+    display: block;
+    margin: auto;   
+}
+
+.minireport h4{
+    color: #31b0d5;
+}
+.minireport p{
+    color: rgb(117, 117, 122);
+}
+.minireport{
+    background-color: white;
+    padding: 5%;
+
 }
