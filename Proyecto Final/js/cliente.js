@@ -21,6 +21,7 @@ function posicionarChat () {
 }
 
 jQuery(document).ready(function($) {
+        var backup;
 
         $("#chat").css('display', 'none');
 
@@ -31,5 +32,19 @@ jQuery(document).ready(function($) {
             $(window).resize(function(event) {
                 posicionarChat();
             });
+        });
+
+        $('a[name="ticket"]').click(function(event) {
+            event.preventDefault();
+            if (!backup) { 
+                backup = $("#contenido").detach();
+            }
+            $('<div class="container" id="contenido"></div>').appendTo('body');
+            $("#contenido").load("html/ticket.html");
+        });
+        $('a[name="seguimiento"]').click(function(event) {
+            event.preventDefault();
+            $('#contenido').empty();
+            backup.appendTo('body');
         });
 });
