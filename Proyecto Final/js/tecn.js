@@ -88,6 +88,13 @@ function posicionarChat () {
         "left": widthChat,
     });
     console.log( top + " " + widthChat);
+    setTimeout(function  () {
+        
+        $("#info-chat a").click(function(event) {
+            event.preventDefault();
+            $("#chat").slideUp('400');
+        });
+    }, 400)
 }
 
 function enlazarChat () {

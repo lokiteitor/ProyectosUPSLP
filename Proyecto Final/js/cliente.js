@@ -17,8 +17,16 @@ function posicionarChat () {
         "left": widthChat,
     });
     $("#inputMensaje").focus();
-    console.log( top + " " + widthChat);
 
+    setTimeout(function  () {
+        
+        $("#info-chat a").click(function(event) {
+            event.preventDefault();
+            $("#chat").slideUp('400');
+        });
+    }, 400)
+
+    console.log( top + " " + widthChat);
 }
 
 jQuery(document).ready(function($) {
@@ -58,7 +66,7 @@ jQuery(document).ready(function($) {
                 posicionarChat();
                 $("#chat").slideDown(400);
                 $(window).resize(function(event) {
-                    posicionarChat();
+                posicionarChat();
             });
         });
         });

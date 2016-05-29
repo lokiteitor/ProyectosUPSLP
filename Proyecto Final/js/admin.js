@@ -5,6 +5,7 @@ jQuery(document).ready(function($) {
     var consulta;
     var reporte;
     var backup;
+    var currentFolio;
 
     for(var i = 0;i<=cantidadReportes;i++){
         if (i % 2 == 0) {
@@ -22,13 +23,16 @@ jQuery(document).ready(function($) {
     }
 
     setTimeout(function (){
+        $(".minireport h4").each(function(index, el) {
+            $(el).text("Folio: " +parseInt(Math.random()*5000+1));
+        })
         $('.minireport button[name="go"]').each(function(index, el) {
             console.log(el);
             $(el).click(function(event) {
                 event.preventDefault();
+                foo = $(el).parents('form').find('h4').text();
                 backup = $("#reportes").detach();
-                console.log("click");
-                showReport();
+                showReport(foo);
             });
         });
     },400);
@@ -60,9 +64,13 @@ jQuery(document).ready(function($) {
 
 });
 
-function showReport () {
+function showReport (folio) {
+    console.log(folio);
     $('<div id="showreport"></div>').appendTo('body');
     setTimeout(function  () {
-        $("#showreport").load("html/reporte.html #detalle");    
-    },200);
+        $("#showreport").load("html/reporte.html #detalle",function  () {
+            $("#showreport h4").text(folio);        
+        });
+    },400);
+    
 }

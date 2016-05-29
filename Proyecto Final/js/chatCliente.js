@@ -34,7 +34,7 @@ $(function() {
 
   // Sets the client's username
   function setUsername () {
-    if (window.location.pathname == "/cliente.html") {
+    if (window.location.pathname == "/proyecto_final/cliente.html") {
       username = "user@electro.com: ";
     }
     else{
