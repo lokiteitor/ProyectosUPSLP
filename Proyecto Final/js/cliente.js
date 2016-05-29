@@ -41,6 +41,13 @@ jQuery(document).ready(function($) {
             }
             $('<div class="container" id="contenido"></div>').appendTo('body');
             $("#contenido").load("html/ticket.html");
+
+            setTimeout(function  () {
+                $('form[name="ticket"]').submit(function(event) {
+                    alert("Ticket Enviado Correctamente")
+                });
+            }, 400)
+
         });
         $('a[name="seguimiento"]').click(function(event) {
             event.preventDefault();

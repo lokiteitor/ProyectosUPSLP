@@ -47,14 +47,17 @@ jQuery(document).ready(function($) {
         backup = $("#cards").detach();
         showReport();
         setTimeout(function  () {
-        $('<div class="form-group"><label for="folio">Seleccionar Ticket</label><select multiple class="form-control"></select></div>').insertAfter('#reporte #head');    
-        str = "<option>"
-        for(var i=0;i<Math.random()*20;i++){
+            $('<div class="form-group"><label for="folio">Seleccionar Ticket</label><select multiple required class="form-control"></select></div>').insertAfter('#reporte #head');    
+            str = "<option>"
+            for(var i=0;i<Math.random()*20;i++){
 
-            $(str.concat("Folio: ",parseInt(Math.random() * 1024),"</option>")).appendTo('select');
-        }
-        console.log('ok')
+                $(str.concat("Folio: ",parseInt(Math.random() * 1024),"</option>")).appendTo('select');
+            }
+
         },400);
+        $('form[name="reporte"').submit(function(event) {
+            alert("Reporte Creado Correctamente");
+        });
         
     });
 });
@@ -66,6 +69,11 @@ function showReport () {
     setTimeout(function  () {
         $("#showcard").load("html/cards.html #reporte");    
     },200);
+    setTimeout(function  () {
+        $('form[name="reporte"]').submit(function() {
+            alert("Reporte Modificado Correctamente")
+        });
+    }, 400);
     $("#chat").css('display', 'none');
     
 }

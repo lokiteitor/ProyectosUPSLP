@@ -41,6 +41,7 @@ jQuery(document).ready(function($) {
         if (backup) {
             $("#showreport").remove();
             $(backup).appendTo('body');
+
         };
     });
     $('a[name=asignar]').click(function(event) {
@@ -69,8 +70,12 @@ function showReport (folio) {
     $('<div id="showreport"></div>').appendTo('body');
     setTimeout(function  () {
         $("#showreport").load("html/reporte.html #detalle",function  () {
-            $("#showreport h4").text(folio);        
+            $("#showreport h4").text(folio); 
+            $('#detalle button').click(function(event) {
+                alert("Asignacion Completa");
+            });       
         });
+
     },400);
-    
+
 }
