@@ -16,6 +16,9 @@
         <!-- Scripts personales -->
         <script src="js/ajax.js"></script>
         <script src="js/tecn.js"></script>
+        <!-- Funciones de chat -->
+        <script src="https://www.150205.upslpweb.ga:1337/socket.io/socket.io.js"></script>
+        <script src="js/chatCliente.js"></script>
         <style>
         body{
             background-color: #d6dade;
@@ -72,16 +75,21 @@
         <div class="container-fluid" id="cards">
             <!-- Aqui van los reportes -->
         </div>
-        <div id="chat">
+        <div id="chat" class="chat page">
             <div id="info-chat">
                 <strong>Tecnico: Nombre</strong>
+                <a href="#" name="closechat"><span style="float:right;color:white;" class="glyphicon glyphicon-remove"></span></a>
+
             </div>
             <div id="mensajes">
-                
+                <div class="chatArea">
+                    <ul class="messages"></ul>
+                </div>
             </div>
             <div id="entradaMsj">
                 <input type="text" name="mensaje" id="inputMensaje" class="form-control"  required placeholder="Escriba un mensaje">
             </div>
         </div>
+        
     </body>
 </html>

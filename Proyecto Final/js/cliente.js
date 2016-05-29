@@ -16,6 +16,7 @@ function posicionarChat () {
         "top": top,
         "left": widthChat,
     });
+    $("#inputMensaje").focus();
     console.log( top + " " + widthChat);
 
 }
