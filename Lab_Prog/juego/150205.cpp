@@ -14,6 +14,28 @@
 #pragma comment( lib, "winmm" )
 using namespace std;
 
+/**
+* @def HEIGHT
+* @brief Alto del mapa
+*/
+
+/**
+* @def WIDTH
+* @brief Ancho del mapa
+*/
+/**
+* @def ESPACIO_DATOS
+* @brief espacio entre la impresion de datos
+*/
+/**
+* @def RUTA_LETREROS
+* @brief Archivo donde se almacena los letros ASCII
+*/
+/**
+* @def RUTA_PUNTAJE
+* @brief Archivo sin formato que almacena los puntajes de juego
+*/
+
 #ifndef HEIGHT
 #define HEIGHT 40
 #endif
@@ -41,7 +63,12 @@ using namespace std;
 *   Viernes 2:00-4:00
 */
 
-//coordenadas
+/**
+* @brief estructura que almacena posiciones de una casilla
+* @param int x, posicion en x
+* @param int y, posicion en y
+* @param int numero, valor actual de la casilla
+*/
 typedef struct
 {
     int x;
@@ -49,7 +76,12 @@ typedef struct
     int numero;
 }coordenada;
 
-// puntajes
+/**
+* @brief estructura que almacena el nombre y puntaje del jugador
+* @param char nombre[30] , nombre del jugador
+* @param int puntaje, cantidad de movimientos 
+* @param int modo, modo de juego ,1 descendente, 2 horizontal, 3 caracol
+*/
 typedef struct
 {
     char nombre[30];
@@ -62,7 +94,6 @@ typedef struct
 // funciones generales
 void gotoxy(int,int);
 void init(void);
-bool validarDigitos(char *entrada);
 bool validarCaracter(char *entrada);
 void imprimirSeparador(void);
 bool bienvenida(void);
@@ -85,15 +116,17 @@ void imprimirDesdeArchivo(int Nmensaje);
 // funciones de manipulacion de datos
 coordenada validarCasilla(char);
 void moverCasilla(coordenada *posicion);
-void cheatCode(int modo,int arreglo[3][3]);
+void cheatCode(int modo,int posiciones[3][3]);
 void agregaPuntacion(puntaje jugador);
 void leerPuntaje(void);
 void organizarPuntaje(puntaje registro[5]);
 void Play(void);
 
-// representacion matrizial de casillas llenas
+
+/**
+* @brief matriz con las posiciones del mapa
+*/
 int posiciones[3][3];
-// lista con los arreglos
 
 int main()
 {
@@ -102,7 +135,12 @@ int main()
         Play();
     return 0;
 }
-
+/**
+* @brief Inicializa la configuracion de la terminal CMD de windows ademas
+* de la semilla rand y la matriz de posiciones
+* @param void
+* @return void
+*/
 void init(){
 
     system("color 1D ");
@@ -116,7 +154,13 @@ void init(){
             posiciones[i][j] = 0;
     }
 }
-
+/**
+* @brief Registra el modo de juego y llama al loop de juego y a la validacion
+* de casillas. Punto de inicio del juego
+* @param void
+* @return void
+* @see loop,validarPosicionFinal
+*/
 void Play(){
         puntaje jugador;
         system("cls");
@@ -143,6 +187,16 @@ void Play(){
         validarPosicionFinal(jugador);
 
 }
+/**
+* @brief gestiona toda lo logica central del juego
+*
+* llama a las funciones llenarMapa y dibujarMapa luego imprime las coordenadas
+* e inicia la posicion de vacio maneja el ciclo principal del juego el cual captura en cualquier 
+* momento las instrucciones del usuario y aplicar la logica adecuada. Coloca las
+* intercambia las posiciones de origen a vacio
+* @param puntaje* jugador, estructura que controla los datos del jugador
+* @return void
+*/
 
 void loop(puntaje* jugador){
     
@@ -209,9 +263,13 @@ void loop(puntaje* jugador){
         }
     }
 }
-
-
-
+/**
+* @brief imprime los mensaje de bienvenida solicita al usuario si desea continuar
+* en el juego
+* @param void
+* @return void
+* @see playSound,gotoxy,imprimirSeparador
+*/
 bool bienvenida(void){
     playSound(2);
 
@@ -248,6 +306,12 @@ bool bienvenida(void){
     gotoxy(10,16);
     return rtrn;
 }
+/**
+* @brief Registra y valida el nombre ingresado por el usuario
+* @param puntaje* jugador, estructura que almacena los datos del jugador
+* @return void
+* @see validarCaracter
+*/
 
 void ingresarDatos(puntaje* jugador){
     do
@@ -265,8 +329,12 @@ void ingresarDatos(puntaje* jugador){
         }
     } while (true);
 }
-
-// definicion de gotoxy
+/**
+* @brief coloca el cursor de impresion en lo coordenadas indicadas
+* @param int x. posicion en X
+* @param int y. posicion en y
+* @return void 
+*/
  #include <windows.h>
  void gotoxy(int x,int y){
       HANDLE hcon;
@@ -276,13 +344,26 @@ void ingresarDatos(puntaje* jugador){
       dwPos.Y= y;
       SetConsoleCursorPosition(hcon,dwPos);
  }
- // definicion para cambiar colores
+
+/**
+* @brief colorea la salida estandar en una gama de 255 colores
+* @param int color, entero del 0 al 255 que indica un combinacion de color 
+* @return void
+*/
  void setColors(int color){
     HANDLE hConsole;
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, color);
 }
-//Reproductor de sonidos
+
+/**
+* @brief reproduce el sonido especificado
+*
+* El sonido puede ser 1 para el tono de cambio de casilla o 2 para el tema de 
+* entrada
+* @param int sonido, seleccion de sonido a reproducir
+* @return void
+*/
 void playSound(int sonido){
     // reproduce sonidos de forma asincrona
     switch(sonido){
@@ -295,29 +376,12 @@ void playSound(int sonido){
     }
 }
 
-
-
- // funcion para validar digitos
-bool validarDigitos(char *entrada){
-    // verifica que todos sean numeros
-    // 1 si esta bien
-    // 0 si esta mal
-    int i = 0;
-    int rt = true;
-
-    for ( i = 0; i < strlen(entrada); ++i)
-    {
-        if (!isdigit(entrada[i]))
-        {
-
-            rt = false;
-            break;
-        }
-    }
-    return rt;
-}
-
- // funcion para validar caracteres
+/**
+* @brief Valida que la cadena de caracteres pasado como parametros no contenga 
+* espacios ni numeros
+* @param char* entrada, puntero o arreglo de la cadena a validar
+* @return bool rt, devuelve true si la cadena es valida, false en caso contratario
+*/
 bool validarCaracter(char *entrada){
     // verifica que todos sean caracteres
     // 1 si esta bien
@@ -340,6 +404,11 @@ bool validarCaracter(char *entrada){
     return rt;
 }
 
+/**
+* @brief imprime una linea de caracteres #
+* @param void
+* @return void
+*/
 void imprimirSeparador(){
     int i;
     printf("\n");
@@ -350,6 +419,12 @@ void imprimirSeparador(){
     printf("\n");
 }
 
+/**
+* @brief llena la matriz pasada como argumento en una cuadricula de 3 columnas 
+* por 3 filas y las guarda en memoria
+* @param char mapa [HEIGHT][WIDTH+1], matriz que representa el mapa de juego
+* @return void
+*/
 void llenarMapa(char mapa [HEIGHT][WIDTH+1]){
     // llena el marco inmutable(cuadricula)
 
@@ -381,6 +456,11 @@ void llenarMapa(char mapa [HEIGHT][WIDTH+1]){
     }
 }
 
+/**
+* @brief dibuja en pantalla una matriz de caracteres previamente llena
+* @param char mapa [HEIGHT][WIDTH+1], matriz de caracteres a imprimir
+* @return void
+*/
 void dibujarMapa(char mapa[HEIGHT][WIDTH+1]){
     int i,j;
     for ( i = 0; i < HEIGHT; ++i)
@@ -402,6 +482,11 @@ void dibujarMapa(char mapa[HEIGHT][WIDTH+1]){
     setColors(28);
 }
 
+/**
+* @brief genera numeros aleatorios entre 1 y 8 sin que ninguno se repita
+* @param int numeros[], registro de numeros para evitar duplicados
+* @return int numero, numero aleatorio no repetido dentro de numeros[]
+*/
 int generarNumero(int numeros[]){
     int numero;
     bool flag = false;
@@ -424,7 +509,12 @@ int generarNumero(int numeros[]){
     return numero;
 }
 
-
+/**
+* @brief coloca el numero pasado como argumento en alguna posicion libre dentro
+* del mapa, guarda estos los datos dentro de un estructura coordenada
+* @param int numero, numero a colocar dentro del mapa
+* @return coordenada, retorna una estructura con los datos de posiciona hacia donde mover
+*/
 coordenada generarPosicion(int numero){
     // regresa una coordenada libre
     coordenada posicion;
@@ -456,6 +546,12 @@ coordenada generarPosicion(int numero){
     return posicion;
 }
 
+/**
+* @brief genera una posicion aleatoria para la casilla vacia la almacena
+* en la matriz posiciones
+* @param void
+* @return void
+*/
 void generarVacio(void){
     // genera la posicion en la que  se encuetra la casilla vacia
     int x = (rand() % 3) + 1;
@@ -463,8 +559,13 @@ void generarVacio(void){
     posiciones[y][x] = 9;
 }
 
+/**
+* @brief imprime el numero al que pertenece la estructura coordenada en el mapa
+* si rewrite es true sobrescribe los valores
+* @param coordenada* cord, puntero a la estructura coordenada del numero a escribir
+* @param bool rewrite, bandera que permite la sobrescritura
+*/
 void colocarNumero(coordenada *cord,bool rewrite){
-
     // colocar el numero en la posicion indicada
     int posY;
     int posX;
@@ -493,6 +594,11 @@ void colocarNumero(coordenada *cord,bool rewrite){
     }
 }
 
+/**
+* @brief imprime las coordenadas del tablero
+* @param void
+* @return void
+*/
 void imprimirCoordenadas(){
     for (int i = 1; i <= 3; ++i)
     {
@@ -507,6 +613,11 @@ void imprimirCoordenadas(){
     }
 }
 
+/**
+* @brief obtiene una estructura coordenada con los datos de la casilla vacia
+* @param void
+* @return void
+*/
 coordenada obtenerPosicionVacia(void){
     coordenada vacio;
     for (int i = 0; i < 3; ++i)
@@ -524,6 +635,12 @@ coordenada obtenerPosicionVacia(void){
     return vacio;
 }
 
+/**
+* @brief imprime los datos del jugador y la configuracion actual del juego 
+* @param puntaje jugador , estructura con los datos del jugador a imprimir
+* @param coordenada vacio , estructura con los datos de la casilla vacia
+* @return void
+*/
 void imprimirDatos(puntaje jugador,coordenada vacio){
     gotoxy(40 + ESPACIO_DATOS,10);
     printf("Jugador:\n");
@@ -564,6 +681,17 @@ void imprimirDatos(puntaje jugador,coordenada vacio){
     gotoxy(10,45);
     printf("Al terminar presione ESC\n");
 }
+
+/**
+* @brief valida la tecla ingresada y regresa un coordenada con los datos 
+* de la casilla a mover 
+*
+* regresa coordenada.numero = 100 si termino el juego
+* coordenada.numero = 100 si se ejecuto el truco
+* coordenada.numero = 10 si la casilla no es valida
+* @param char sigMov, caracter de la tecla pulsada
+* @return coordenada , estructura con los datos de la casilla que se puede mover
+*/
 
 // cambiar la posicion de una casilla
 coordenada validarCasilla(char sigMov){
@@ -622,7 +750,12 @@ coordenada validarCasilla(char sigMov){
     return newpos;
 }
 
-
+/**
+* @brief mueve la casilla indicada en la estructura a la proxima posicion vacia 
+* si es valido
+* @param coordenada* posicion , puntero a estructura con los datos de la casilla a mover
+* @return void
+*/
 void moverCasilla(coordenada *posicion){
     coordenada vacio = obtenerPosicionVacia();
 
@@ -643,7 +776,16 @@ void moverCasilla(coordenada *posicion){
     }
 }
 
-void cheatCode(int modo,int arreglo[3][3]){
+/**
+* @brief Funcion especial que permite ordenar el arreglo de posiciones de acuerdo 
+* a la forma especificada en modo
+* @param int modo, indica el modo de juego
+* @param int posiciones[3][3] arreglo donde se registran los posiciones actuales 
+* de las casillas
+* @return void
+*/
+
+void cheatCode(int modo,int posiciones[3][3]){
     // ordena el array pasado como argumento
     // cambia las posiciones para ganar la partida de acuerdo al tipo de juegp
     int valor;
@@ -656,7 +798,7 @@ void cheatCode(int modo,int arreglo[3][3]){
     {
         for (int j = 0; j < 3; ++j)
         {
-            arreglo[i][j] = valor;
+            posiciones[i][j] = valor;
             if (modo == 1 )
                 valor++;
             if(modo == 2)
@@ -664,13 +806,13 @@ void cheatCode(int modo,int arreglo[3][3]){
             if (modo == 3)
             {
                 if (i == 0)
-                    arreglo[i][j] = j+1;
+                    posiciones[i][j] = j+1;
                 else if (i == 2)
-                    arreglo[i][j] = 7-j;
+                    posiciones[i][j] = 7-j;
                 else{
-                    arreglo[i][0] = 8;
-                    arreglo[i][2] = 4;
-                    arreglo[i][1] = 0;
+                    posiciones[i][0] = 8;
+                    posiciones[i][2] = 4;
+                    posiciones[i][1] = 0;
                 }
             }
             if (valor == 9)
@@ -679,6 +821,14 @@ void cheatCode(int modo,int arreglo[3][3]){
     }
 }
 
+/**
+* @brief Al final del juego valida si las posiciones de las casillas estan 
+* correctamente posicionadas de acuerdo al modo de juego 
+*
+* evalua las posiciones del mapa actual un arreglo ordenado de acuerdo al modo
+* @param puntaje jugador, estructura principal para obtener modo y puntaje
+* @return void
+*/
 void validarPosicionFinal(puntaje jugador){
     // al finalizar el juego revisa dependiendo del modo de juego si la jugada
     // fue exitosa o no
@@ -733,6 +883,12 @@ void validarPosicionFinal(puntaje jugador){
     }
 }
 
+/**
+* @brief imprime el mensaje ascii pasado como parametro (1-2) que aparecen al
+* final del juego almacenadosen RUTA_LETREROS
+* @param int Nmensajes numero del mensaje a imprimir puede ser 1 ganador 2 perdedor
+* @return void
+*/
 void imprimirDesdeArchivo(int Nmensaje){
     FILE *archivo;
     archivo = fopen(RUTA_LETREROS,"r");
@@ -764,6 +920,13 @@ void imprimirDesdeArchivo(int Nmensaje){
     fclose(archivo);
 }
 
+/**
+* @brief registro una puntacion de usuario en el archivo RUTA_PUNTAJE
+* @param puntaje jugador, estructura principal del jugador que almacena los datos 
+* del jugador
+* @return void
+*/
+
 void agregaPuntacion(puntaje jugador){
     FILE *archivo;
     archivo = fopen(RUTA_PUNTAJE,"a");
@@ -772,8 +935,14 @@ void agregaPuntacion(puntaje jugador){
         fwrite(&jugador,sizeof(puntaje),1,archivo);
         fclose(archivo);
     }
-
 }
+
+/**
+* @brief llamada de sistema que permite mostrar en pantalla los mejores 5 
+* puntajes
+* @param void
+* @return void
+*/
 void leerPuntaje(void){
     setColors(155);
     puntaje registro[5];
@@ -786,6 +955,12 @@ void leerPuntaje(void){
     setColors(157);
 }
 
+/**
+* @brief lee los puntajes guardados en RUTA_PUNTAJE luego obtiene los 5 mejores
+* los cuales guarda en el arreglo pasado como argumento
+* @param puntaje registro[5], arreglo en que se guardan los 5 mejores puntajes
+* @return void
+*/
 void organizarPuntaje(puntaje registro[5]){
     // solo devuelve los 5 primeros lugares
     FILE *archivo;
@@ -813,7 +988,7 @@ void organizarPuntaje(puntaje registro[5]){
         }
 
     }
-    // ahora que tenemos todos los registros los organizamos
+    // ahora que tenemos todos los registros los organizamos 
     // ignorar los ceros
     for (int i = 0; i < cont; ++i)
     {
