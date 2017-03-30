@@ -1,37 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mx.edu.upslp.guarderia;
 
 import java.util.Date;
+import mx.edu.upslp.guarderia.datos.Grupo;
 
 /**
  *
- * @author lokiteitor
+ * @author David Delgado Hernandez 150205@upslp.edu.mx
+ */
+
+/**
+ * 
+ * Clase que representa un infante, almacena sus datos y registra entrada y salida
  */
 public class Infante {
-    
+    // la siguientes variables son privadas siguiendo el concepto de encapsulacion
     private int id;
     private Date date; 
     private String salida;
     private String entrada;
     private final int idPadre;
-    private final String grupo;
+    private final Grupo grupo;
     private final String nombre;
     private boolean adentro;
     private boolean asistio;
-    private String telefono;
+    private int telefono;
     private final String nombrePadre;
     private int years;
     private int meses;
     private int sexo;
     
-
-    public Infante(int id, int idPadre, String grupo,String nombre,String telefono,
+    /**
+     * Constructor de un objeto infante
+     * @param id id del infante
+     * @param idPadre id del padre
+     * @param grupo grupo al que pertenece
+     * @param nombre nombre del infante
+     * @param telefono telefono de su casa
+     * @param nombrePadre nombre del padre
+     * @param years edad en años 
+     * @param meses edad en meses
+     * @param sexo  sexo del infante
+     */
+    public Infante(int id, int idPadre, Grupo grupo,String nombre,int telefono,
         String nombrePadre,int years,int meses,int sexo) {
-        // @todo revisar que los datos sean unicos
         this.id = id;
         this.idPadre = idPadre;
         this.grupo = grupo;
@@ -45,6 +56,10 @@ public class Infante {
         date = new Date();                
     }
     
+    /**
+     * Registra la entrada de un infante
+     * @return boolean - true si la entrada tuvo exito
+     */
     public boolean registrarEntrada(){
         boolean response = false;
         // crear un registro de entrada        
@@ -52,6 +67,7 @@ public class Infante {
             System.out.println("El alumno ya registro su entrada");
         }
         else{
+            // cambiar el estado del alumno
             this.setAdentro(true);
             this.setAsistio(true);
             this.setEntrada(getDate().toLocaleString());
@@ -60,6 +76,10 @@ public class Infante {
         return response;
     }
     
+    /**
+     * Registra la salida del alumno
+     * @return boolean - true si el registro tuvo exito
+     */
     public boolean registrarSalida(){
         boolean response = false;
         // crear registro de salida
@@ -74,6 +94,25 @@ public class Infante {
         
         return response;
     }
+    
+    /**
+     * Metodo estatico para poder asignar un infante a un grupo antes de crear el
+     * objeto, devuelve null si el infante no se pudo ubicar
+     * @param edad edad en años del infante
+     * @return elemento de enumeracion Grupo 
+     */
+    public static Grupo ubicarGrupo(int edad){
+        Grupo grp = null;
+        
+        for (Grupo grupo : Grupo.values()) {
+            if (edad == grupo.getMin_edad()) {
+                grp = grupo;
+            }
+        }
+        
+        return grp;
+    }
+    
     
     /**
      * @return the id
@@ -127,7 +166,7 @@ public class Infante {
     /**
      * @return the grupo
      */
-    public String getGrupo() {
+    public Grupo getGrupo() {
         return grupo;
     }
 
@@ -183,14 +222,14 @@ public class Infante {
     /**
      * @return the telefono
      */
-    public String getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
     /**
      * @param telefono the telefono to set
      */
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 

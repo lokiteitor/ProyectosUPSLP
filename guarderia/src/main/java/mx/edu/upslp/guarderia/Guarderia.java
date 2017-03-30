@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mx.edu.upslp.guarderia;
 
 import mx.edu.upslp.guarderia.datos.Registro;
-import mx.edu.upslp.guarderia.datos.Reporte;
 
 /**
  *
- * @author lokiteitor
+ * @author David Delgado Hernandez 150205@upslp.edu.mx
+ * Programacion III
+ * Grupo C
  */
 public class Guarderia {
 
@@ -18,18 +14,17 @@ public class Guarderia {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+
         boolean exit = false;
         Menu menu = new Menu();
         Registro registro = new Registro("dat");
-            Reporte reporte = new Reporte(registro.getLista());
-        int opc;
-        // instancias de objetos propios
+        int opc;       
 
-        
+        // imprimir el mensaje de bienvenida
         menu.bienvenida();
         
         do {
+            // optener la opcion indicada por el usuario
             opc = menu.menuPrincipal();
 
             switch(opc){
@@ -46,14 +41,16 @@ public class Guarderia {
                     menu.registrarSalida(registro.getLista());
                     break;
                 case 4:
-                    System.out.println("Informes");                    
+                    System.out.println("Informes");
+                    menu.crearCorte(menu.mostrarCorte(), registro.getLista());                    
                     break;
                 case 5:
+                    // generar el archivo de reporte
+                    menu.escribirReporte(registro.getLista());
                     System.out.println("Bye");            
+                    exit = true;
             }
-            if (opc == 5) {
-                exit = true;
-            }                       
+            // repetir el menu hasta que el usuario decida    
         } while (!exit);
         
         
