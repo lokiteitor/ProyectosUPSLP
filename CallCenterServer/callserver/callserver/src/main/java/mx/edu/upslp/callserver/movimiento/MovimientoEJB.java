@@ -1,0 +1,169 @@
+/*
+ * The MIT License
+ *
+ * Copyright 2017 David Delgado Hernandez 150205@upslp.edu.mx.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+package mx.edu.upslp.callserver.movimiento;
+
+import java.io.Serializable;
+import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author David Delgado Hernandez
+ * Entity Bean que representa la tabla Movimiento en la bade de datos
+ */
+@Entity
+@Table(name="MOVIMIENTO")
+public class MovimientoEJB implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="ID_MOVIMIENTO")
+    private Long idMovimiento;
+    @Column(name="ID_INCIDENCIA")
+    private Long idIncidencia;
+    @Column(name="ID_USUARIO")
+    private Long idUsuario;
+    @Column(name="TIPO")
+    private String Tipo;
+    @Column(name="created_at")
+    private Date created_at;
+    @Column(name="updated_at")
+    private Date updated_at;
+
+    /**
+     * @return the idMovimiento
+     */
+    public Long getIdMovimiento() {
+        return idMovimiento;
+    }
+
+    /**
+     * @param idMovimiento the idMovimiento to set
+     */
+    public void setIdMovimiento(Long idMovimiento) {
+        this.idMovimiento = idMovimiento;
+    }
+
+    /**
+     * @return the idIncidencia
+     */
+    public Long getIdIncidencia() {
+        return idIncidencia;
+    }
+
+    /**
+     * @param idIncidencia the idIncidencia to set
+     */
+    public void setIdIncidencia(Long idIncidencia) {
+        this.idIncidencia = idIncidencia;
+    }
+
+    /**
+     * @return the idUsuario
+     */
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    /**
+     * @param idUsuario the idUsuario to set
+     */
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    /**
+     * @return the Tipo
+     */
+    public String getTipo() {
+        return Tipo;
+    }
+
+    /**
+     * @param Tipo the Tipo to set
+     */
+    public void setTipo(String Tipo) {
+        this.Tipo = Tipo;
+    }
+
+    /**
+     * @return the created_at
+     */
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    /**
+     * @param created_at the created_at to set
+     */
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    /**
+     * @return the updated_at
+     */
+    public Date getUpdated_at() {
+        return updated_at;
+    }
+
+    /**
+     * @param updated_at the updated_at to set
+     */
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
+    }
+             
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idMovimiento!= null ? idMovimiento.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof MovimientoEJB)) {
+            return false;
+        }
+        MovimientoEJB other = (MovimientoEJB) object;
+        if ((this.idMovimiento == null && other.idMovimiento != null) || 
+                (this.idMovimiento != null && !this.idMovimiento.equals(other.idMovimiento))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "mx.edu.upslp.callserver.movimiento.MovimientoEJB[ id=" + idMovimiento + " ]";
+    }
+    
+}
