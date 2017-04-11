@@ -5,17 +5,46 @@
  */
 package mx.edu.upslp.callcenterclient.gui;
 
+import com.toedter.calendar.JCalendar;
+import java.awt.event.KeyListener;
+import java.util.Date;
+import javax.swing.BoxLayout;
+import javax.swing.text.View;
+import mx.edu.upslp.callcenterclient.validaciones.Validador;
+
 /**
  *
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 public class administradorFrame extends javax.swing.JFrame {
-
+    private Validador validador = new Validador();
+    private JCalendar calendario = new JCalendar();
     /**
      * Creates new form administradorFrame
      */
     public administradorFrame() {
         initComponents();
+        // agregar el calendario a pantalla
+        calendario.setEnabled(true);
+        calendario.setVisible(true);
+        calendarPanel.setLayout(new BoxLayout(calendarPanel, View.Y_AXIS));
+        calendarPanel.add(calendario);
+        
+        // crear su manejador de eventos
+        
+        calendario.setMaxSelectableDate(new Date());
+                
+        
+        
+        this.setResizable(false);
+        this.setTitle("Asistencia de Quejas y sugerencias");
+        this.setLocationRelativeTo(null);
+        
+        // ocultar letros de warning de la primera tab
+        wnombreLabel.setVisible(false);
+        wapellidoLabel.setVisible(false);
+        wnacionalidadLabel.setVisible(false);
+        
     }
 
     /**
@@ -38,9 +67,13 @@ public class administradorFrame extends javax.swing.JFrame {
         turnoCombo = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         nacionalidadLabel = new javax.swing.JLabel();
-        nacionalidadCombo = new javax.swing.JComboBox<>();
         enviarButton = new javax.swing.JButton();
         accesoCombo = new javax.swing.JComboBox<>();
+        wnombreLabel = new javax.swing.JLabel();
+        wapellidoLabel = new javax.swing.JLabel();
+        nacionalidadField = new javax.swing.JTextField();
+        wnacionalidadLabel = new javax.swing.JLabel();
+        calendarPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         reportesTable = new javax.swing.JTable();
@@ -53,29 +86,67 @@ public class administradorFrame extends javax.swing.JFrame {
 
         nombreLabel.setText("Nombre");
 
-        nombreField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreFieldActionPerformed(evt);
+        nombreField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreFieldKeyTyped(evt);
             }
         });
 
         apellidoLabel.setText("Apellido");
 
+        apellidoField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellidoFieldKeyTyped(evt);
+            }
+        });
+
         fechaLabel.setText("Fecha de Nacimiento");
 
         turnoLabel.setText("Turno");
 
-        turnoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        turnoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"MATUTINO","VESPERTINO","NOCTURNO"}));
 
         jLabel5.setText("Nivel de Acceso");
 
         nacionalidadLabel.setText("Nacionalidad");
 
-        nacionalidadCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         enviarButton.setText("Enviar");
+        enviarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarButtonActionPerformed(evt);
+            }
+        });
 
-        accesoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        accesoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"GESTOR","ADMINISTRADOR"}));
+
+        wnombreLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wnombreLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wnombreLabel.setText("*Nombre Invalido");
+
+        wapellidoLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wapellidoLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wapellidoLabel.setText("* Apellido Invalido");
+
+        nacionalidadField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nacionalidadFieldKeyTyped(evt);
+            }
+        });
+
+        wnacionalidadLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wnacionalidadLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wnacionalidadLabel.setText("* Nacionalidad Invalida");
+
+        javax.swing.GroupLayout calendarPanelLayout = new javax.swing.GroupLayout(calendarPanel);
+        calendarPanel.setLayout(calendarPanelLayout);
+        calendarPanelLayout.setHorizontalGroup(
+            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        calendarPanelLayout.setVerticalGroup(
+            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout altasPanelLayout = new javax.swing.GroupLayout(altasPanel);
         altasPanel.setLayout(altasPanelLayout);
@@ -84,23 +155,27 @@ public class administradorFrame extends javax.swing.JFrame {
             .addGroup(altasPanelLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(wapellidoLabel)
                     .addComponent(enviarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(altasPanelLayout.createSequentialGroup()
                         .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(wnombreLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nombreLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nombreField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(apellidoLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(apellidoField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fechaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                            .addComponent(fechaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nacionalidadCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(wnacionalidadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nacionalidadField)
                             .addComponent(turnoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(turnoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(nacionalidadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(accesoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(473, Short.MAX_VALUE))
         );
         altasPanelLayout.setVerticalGroup(
             altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +188,9 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(turnoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
+                .addComponent(wnombreLabel)
+                .addGap(2, 2, 2)
                 .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(apellidoLabel)
                     .addComponent(jLabel5))
@@ -121,13 +198,21 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(apellidoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(accesoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(wapellidoLabel)
+                .addGap(1, 1, 1)
                 .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fechaLabel)
                     .addComponent(nacionalidadLabel))
                 .addGap(18, 18, 18)
-                .addComponent(nacionalidadCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(altasPanelLayout.createSequentialGroup()
+                        .addComponent(nacionalidadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(wnacionalidadLabel)
+                        .addGap(0, 76, Short.MAX_VALUE))
+                    .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enviarButton)
                 .addGap(100, 100, 100))
         );
@@ -170,7 +255,7 @@ public class administradorFrame extends javax.swing.JFrame {
                         .addComponent(anteriorButton)
                         .addGap(18, 18, 18)
                         .addComponent(siguienteButton)))
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(672, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +277,7 @@ public class administradorFrame extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 718, Short.MAX_VALUE)
+            .addGap(0, 1131, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,16 +299,48 @@ public class administradorFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Reportes, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+                .addComponent(Reportes)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nombreFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreFieldActionPerformed
+    private void nombreFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreFieldKeyTyped
+        if (validador.isAlphaSpace(nombreField.getText())) {
+           wnombreLabel.setVisible(false);
+        }else{
+           wnombreLabel.setVisible(true);
+        }
+    }//GEN-LAST:event_nombreFieldKeyTyped
+
+    private void apellidoFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoFieldKeyTyped
+        if (validador.isAlphaSpace(apellidoField.getText())) {
+           wapellidoLabel.setVisible(false);
+        }else{
+           wapellidoLabel.setVisible(true);
+        } 
+    }//GEN-LAST:event_apellidoFieldKeyTyped
+
+    private void nacionalidadFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nacionalidadFieldKeyTyped
+        if (validador.isAlpha(nacionalidadField.getText())) {
+            wnacionalidadLabel.setVisible(false);
+        }
+        else{
+            wnacionalidadLabel.setVisible(true);
+        }
+    }//GEN-LAST:event_nacionalidadFieldKeyTyped
+
+    private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
+        
+        // validar los datos
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_enviarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,6 +384,7 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JButton anteriorButton;
     private javax.swing.JTextField apellidoField;
     private javax.swing.JLabel apellidoLabel;
+    private javax.swing.JPanel calendarPanel;
     private javax.swing.JButton enviarButton;
     private javax.swing.JLabel fechaLabel;
     private javax.swing.JLabel jLabel5;
@@ -274,7 +392,7 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel listaLabel;
-    private javax.swing.JComboBox<String> nacionalidadCombo;
+    private javax.swing.JTextField nacionalidadField;
     private javax.swing.JLabel nacionalidadLabel;
     private javax.swing.JTextField nombreField;
     private javax.swing.JLabel nombreLabel;
@@ -282,5 +400,8 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JButton siguienteButton;
     private javax.swing.JComboBox<String> turnoCombo;
     private javax.swing.JLabel turnoLabel;
+    private javax.swing.JLabel wapellidoLabel;
+    private javax.swing.JLabel wnacionalidadLabel;
+    private javax.swing.JLabel wnombreLabel;
     // End of variables declaration//GEN-END:variables
 }
