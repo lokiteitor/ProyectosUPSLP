@@ -9,11 +9,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 import mx.edu.upslp.callserver.usuario.remote.UsuarioSessionBeanRemote;
 
 /**
@@ -21,7 +19,7 @@ import mx.edu.upslp.callserver.usuario.remote.UsuarioSessionBeanRemote;
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 public class LoginFrame extends javax.swing.JFrame {
-
+    private UsuarioEJB miUsuario;
     /**
      * Creates new form LoginFrame
      */
@@ -144,14 +142,15 @@ public class LoginFrame extends javax.swing.JFrame {
             InitialContext ctx = new InitialContext(props);
             // cargamos el Session Bean UsuarioEJB intefece
             UsuarioSessionBeanRemote usuarioBean = (UsuarioSessionBeanRemote) ctx.lookup("mx.edu.upslp.callserver.usuario.remote.UsuarioSessionBeanRemote");
-
             flag = usuarioBean.login(usuarioField.getText(), passwordField.getText());
             if (flag) {
+                // obtener el usuario
+                miUsuario = usuarioBean.obtenerUsuario(usuarioField.getText());
                 if (usuarioBean.isAdmin(usuarioField.getText())) {
                     // lanzar ventana de administracion
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
-                            new administradorFrame().setVisible(true);
+                            new administradorFrame(miUsuario).setVisible(true);
                         }
                     });
                 }
@@ -159,7 +158,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     // lanzar ventana de gestor
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
-                            new gestorFrame().setVisible(true);
+                            new gestorFrame(miUsuario).setVisible(true);
                         }
                     });
                 }
