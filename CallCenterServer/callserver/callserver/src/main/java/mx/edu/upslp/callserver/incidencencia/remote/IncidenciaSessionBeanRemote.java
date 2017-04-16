@@ -21,33 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package mx.edu.upslp.callserver.usuario.remote;
+package mx.edu.upslp.callserver.incidencencia.remote;
 
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Remote;
-import mx.edu.upslp.callserver.usuario.UsuarioEJB;
-
+import mx.edu.upslp.callserver.incidencencia.IncidenciaEJB;
 
 /**
  *
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 @Remote
-public interface UsuarioSessionBeanRemote {
+public interface IncidenciaSessionBeanRemote {
 
-    UsuarioEJB registrarUsuario(String nombre, String apellido, Date fechaNacimiento, String nacionalidad, String turno, boolean administrador);
+    IncidenciaEJB registrarIncidencia(HashMap<String,Object> datos);
 
-    boolean login(String username, String password);
+    List listarIncidencias(int page,Long idUsuario);
 
-    boolean isAdmin(String username);
+    void actualizarIncidencia(IncidenciaEJB objetivo);
 
-    List<UsuarioEJB> getAllUsers();
-
-    void actualizarDatosEntidad(UsuarioEJB usuario);
-
-    boolean removerUsuario(Long id);
-
-    UsuarioEJB obtenerUsuario(String username);
-           
+    boolean removerIncidencia(Long id);
+    
 }

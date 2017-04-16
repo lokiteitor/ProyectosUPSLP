@@ -48,18 +48,80 @@ public class IncidenciaEJB implements Serializable {
     private Long idIncidencia;
     @Column(name="TIPO")
     private String tipo;
-    @Column(name="ID_CLIENTE")
-    private Long idCliente;
     @Column(name="IMPORTANCIA")
     private String importancia;
     @Column(name="DESCRIPCION")
     private String descripcion;
     @Column(name="ID_USUARIO")
     private Long idUsuario;
+    @Column(name="NOMBRE")
+    private String nombreCliente;
+    @Column(name="DIRECCION")
+    private String direccion;
+    @Column(name="EDAD")
+    private int edad;
+    @Column(name="TELEFONO")
+    private String telefono;
     @Column(name="created_at")
     private Date created_at;
     @Column(name="updated_at")
     private Date updated_at;
+
+    /**
+     * @return the nombreCliente
+     */
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    /**
+     * @param nombreCliente the nombreCliente to set
+     */
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    /**
+     * @return the direccion
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * @param direccion the direccion to set
+     */
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    /**
+     * @return the edad
+     */
+    public int getEdad() {
+        return edad;
+    }
+
+    /**
+     * @param edad the edad to set
+     */
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
     /**
      * @return the idIncidencia
@@ -88,21 +150,6 @@ public class IncidenciaEJB implements Serializable {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
-    /**
-     * @return the idCliente
-     */
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    /**
-     * @param idCliente the idCliente to set
-     */
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
-
     /**
      * @return the importancia
      */
