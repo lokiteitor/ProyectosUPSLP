@@ -42,10 +42,14 @@ import javax.persistence.Table;
 @Table(name="INCIDENCIA")
 public class IncidenciaEJB implements Serializable {
 
+    private static final long serialVersionUID = 1L;    
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID_INCIDENCIA")
     private Long idIncidencia;
+    @Column(name = "ID_CLIENTE")
+    private String idCliente;
     @Column(name="TIPO")
     private String tipo;
     @Column(name="IMPORTANCIA")
@@ -54,73 +58,27 @@ public class IncidenciaEJB implements Serializable {
     private String descripcion;
     @Column(name="ID_USUARIO")
     private Long idUsuario;
-    @Column(name="NOMBRE")
-    private String nombreCliente;
-    @Column(name="DIRECCION")
-    private String direccion;
-    @Column(name="EDAD")
-    private int edad;
-    @Column(name="TELEFONO")
-    private String telefono;
+    @Column(name="FECHA")
+    private Date fecha;
     @Column(name="created_at")
     private Date created_at;
     @Column(name="updated_at")
     private Date updated_at;
 
-    /**
-     * @return the nombreCliente
-     */
-    public String getNombreCliente() {
-        return nombreCliente;
+    public String getIdCliente() {
+        return idCliente;
     }
 
-    /**
-     * @param nombreCliente the nombreCliente to set
-     */
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
+    }    
+    
+    public Date getFecha() {
+        return fecha;
     }
 
-    /**
-     * @return the direccion
-     */
-    public String getDireccion() {
-        return direccion;
-    }
-
-    /**
-     * @param direccion the direccion to set
-     */
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    /**
-     * @return the edad
-     */
-    public int getEdad() {
-        return edad;
-    }
-
-    /**
-     * @param edad the edad to set
-     */
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    /**
-     * @return the telefono
-     */
-    public String getTelefono() {
-        return telefono;
-    }
-
-    /**
-     * @param telefono the telefono to set
-     */
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     /**
