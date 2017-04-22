@@ -23,6 +23,7 @@
  */
 package mx.edu.upslp.callserver.usuario.remote;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.Stateless;
@@ -48,39 +49,75 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
      * Crear un nuevo usuario
      * @param nombre - Nombre del usuario
      * @param apellido - Apellido del usuario
-     * @param fechaNacimiento Fecha de nacimiento
+     * @param nacimiento - fecha de nacimiento
      * @param nacionalidad nacionalidad del usuario
      * @param turno turno en el que trabaja
      * @param administrador true si el usuario es administrador
      * @return  Entity Bean con los datos del usuario
      */
     @Override
-    public UsuarioEJB registrarUsuario(String nombre, String apellido, java.util.Date nacimiento, String nacionalidad, String turno, boolean administrador) {
+    public UsuarioEJB registrarUsuario(HashMap<String,Object> datos) {
         UsuarioEJB usuario = new UsuarioEJB();
         java.util.Date now = new java.util.Date();
+        boolean integrity = true;
         //@todo aqui van las validaciones llamando a otro bean
+        String [] keys = new String[] {
+            "nombre","apellido","nacimiento","username","password",
+            "nacionalidad","turno","administrador"
+        };
         
-        usuario.setNombre(nombre);
-        usuario.setApellido(apellido);
-        usuario.setNacionalidad(nacionalidad);
-        usuario.setTurno(turno);
-        usuario.setAdministrador(administrador);
+        // revisar que se proporcionan todas las llaves
         
-        // @ todo validar o crear Date de fecha        
-        usuario.setFechaNacimiento(new java.sql.Date(nacimiento.getDate(), nacimiento.getMonth(), nacimiento.getYear()));
+        for (String key : keys) {
+            if (!datos.containsKey(key)) {
+                integrity = false;
+            }
+        }
         
-        //@todo crear y asignar password y username
-        usuario.setUsername(generarUsername(nombre));
-        usuario.setPassword(generarPassword(nombre, apellido));
+        // revisar que el usuario no exista
+        String sql = "SELECT CORREO FROM USUARIO WHERE CORREO=?";
         
-        usuario.setUpdatedAt(new java.sql.Date(now.getYear(), now.getMonth(), now.getDay()));
-        usuario.setCreatedAt(new java.sql.Date(now.getYear(), now.getMonth(), now.getDay()));
-        // guardar los datos en la base de datos
-        manager.persist(usuario);
+        Query query = manager.createNativeQuery(sql,UsuarioEJB.class);
+        query.setParameter(1, datos.get("correo").toString());
         
+        if (!(query.getResultList().isEmpty())) {
+            integrity = false;
+        }
+        
+        // se reviso que se tienen todos los datos ahora se revisa la integridad
+        // de los mismos datos
+
+        if (integrity) {
+            if (integridadDatos(datos)) {
+                usuario.setIdUsuario(datos.get("correo").toString());
+                usuario.setNombre(datos.get("nombre").toString());
+                usuario.setApellido(datos.get("apellido").toString());
+                usuario.setNacionalidad(datos.get("nacionalidad").toString());
+                usuario.setTurno(datos.get("turno").toString());
+                usuario.setAdministrador(
+                        Boolean.valueOf(datos.get("administrador").toString()));
+
+                // @ todo validar o crear Date de fecha        
+                java.util.Date nacimiento = (java.util.Date) datos.get("nacimiento");
+                usuario.setFechaNacimiento(new java.sql.Date(nacimiento.getDate(),
+                        nacimiento.getMonth(), nacimiento.getYear()));
+
+                //@todo crear y asignar password y username
+                usuario.setUsername(generarUsername(datos.get("nombre").toString()));
+                usuario.setPassword(generarPassword(datos.get("nombre").toString(),
+                        datos.get("nombre").toString()));
+
+                usuario.setUpdatedAt(new java.sql.Date(now.getYear(), now.getMonth(), now.getDay()));
+                usuario.setCreatedAt(new java.sql.Date(now.getYear(), now.getMonth(), now.getDay()));                
+                
+                manager.persist(usuario);
+            }
+        }
+                
         return usuario;
     }
-        
+    
+    
     /**
      * Genera el username compuesto por un numero una letra y un caracter especial
      * @return username generado
@@ -197,7 +234,7 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
     }
 
     @Override
-    public boolean removerUsuario(Long id) {
+    public boolean removerUsuario(String id) {
         boolean response = true;
         UsuarioEJB objetivo = manager.find(UsuarioEJB.class, id);
         
@@ -221,6 +258,54 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         usuario = (UsuarioEJB) query.getSingleResult();
                 
         return usuario;
+    }
+
+    @Override
+    public boolean integridadDatos(HashMap<String,Object> datos) {
+        boolean integridad = true;
+        
+        if (!(datos.get("nombre") instanceof String)) {
+            integridad = false;
+        }
+        
+        //@todo validar que se trate de un correo
+        if (!(datos.get("correo") instanceof String)) {
+            integridad = false;
+        }
+        
+        if (!(datos.get("apellido") instanceof String)) {
+            integridad = false;
+        }
+        
+        if (!(datos.get("nacimiento") instanceof java.util.Date)) {
+            integridad = false;
+        }
+        
+        if (!(datos.get("username") instanceof String)) {
+            integridad = false;
+        }
+        
+        if (!(datos.get("password") instanceof String)) {
+            integridad = false;
+        }
+        
+        if (!(datos.get("nacionalidad") instanceof String)) {
+            integridad = false;
+        }
+        
+        if (datos.get("turno") instanceof String) {
+            if (!datos.get("turno").equals("MATUTINO") && 
+                    !datos.get("turno").equals("VESPERTINO") &&
+                    !datos.get("turno").equals("NOCTURNO")) {
+                integridad = false;
+            }
+        }
+        
+        if (!(datos.get("administrador") instanceof Boolean)) {
+            integridad = false;
+        }
+        
+        return integridad;
     }
     
 }
