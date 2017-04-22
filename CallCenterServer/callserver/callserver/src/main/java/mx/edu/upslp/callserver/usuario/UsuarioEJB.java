@@ -44,13 +44,13 @@ import javax.persistence.Table;
 @Table(name="USUARIO")
 public class UsuarioEJB implements Serializable {
 
+    private static final long serialVersionUID = 1L;    
     // marcar este campo como id
     // le decimos que el campo es auto_increment
     // asociamos el nombre de la columna
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="ID_USUARIO")
-    private Long idUsuario;
+    @Column(name="CORREO")
+    private String idUsuario;
     @Column(name="NOMBRE")
     private String nombre;
     @Column(name="APELLIDO")
@@ -72,20 +72,15 @@ public class UsuarioEJB implements Serializable {
     @Column(name="updated_at")
     private Date updatedAt;   
 
-    /**
-     * @return the idUsuario
-     */
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    /**
-     * @param idUsuario the idUsuario to set
-     */
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
+    
     /**
      * @return the nombre
      */
