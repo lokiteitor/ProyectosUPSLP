@@ -30,6 +30,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import mx.edu.upslp.callserver.cliente.ClienteEJB;
 import mx.edu.upslp.callserver.incidencencia.IncidenciaEJB;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
@@ -50,7 +51,7 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
         Date now = new Date();
         
         String[] keys = new String[] {"tipo","importancia","descripcion","nombre",
-            "direccion","edad","telefono","idusuario"
+            "direccion","edad","telefono","idusuario","fecha","correo"
         };
         
         for (String key : keys) {
@@ -58,22 +59,41 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
                 integrity = false;
             }
         }
+
+        
+        
+         
+        
         // se reviso que se tienen todos los datos ahora se revisa la integridad
         // de los mismos datos
         if (integrity) {
             if (integridadDatos(datos)) {
 
+        
+                // revisar si el usuario existe de no ser asi crear su registro
+
+                ClienteEJB cliente = manager.find(ClienteEJB.class, datos.get("correo").toString());
+
+                if (cliente == null) {
+                    java.util.Date edad = (java.util.Date)datos.get("edad");
+                    cliente.setEdad(new java.sql.Date(edad.getYear(), edad.getMonth(), edad.getDay()));                    
+                    cliente.setCorreo(datos.get("correo").toString());
+                    cliente.setNombreCliente(datos.get("nombre").toString());
+                    cliente.setDireccion(datos.get("direccion").toString());                   
+                    cliente.setTelefono(datos.get("telefono").toString());            
+                    incidencia.setCreated_at(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));
+                    incidencia.setUpdated_at(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));                    
+                }
+
                 // validados guardar los datos
 
                 incidencia.setTipo(datos.get("tipo").toString());
                 incidencia.setImportancia(datos.get("importancia").toString());
-                incidencia.setDescripcion(datos.get("descripcion").toString());
-                incidencia.setNombreCliente(datos.get("nombre").toString());
-                incidencia.setDireccion(datos.get("direccion").toString());
-                incidencia.setEdad((int)datos.get("edad"));
-                incidencia.setTelefono(datos.get("telefono").toString());      
+                incidencia.setDescripcion(datos.get("descripcion").toString());    
                 incidencia.setIdUsuario(Long.valueOf(datos.get("idusuario").toString()));
-                
+                incidencia.setIdCliente(cliente.getCorreo());                
+                java.util.Date fecha = (java.util.Date)datos.get("fecha");
+                incidencia.setFecha(new java.sql.Date(fecha.getYear(), fecha.getMonth(), fecha.getDay()));
                 incidencia.setCreated_at(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));
                 incidencia.setUpdated_at(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));
                 
@@ -101,8 +121,8 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
         }
 
         if (datos.get("importancia") instanceof String) {
-            if (datos.get("importancia").toString().equals("EN ESPERA") &&
-                    datos.get("importancia").toString().equals("URGENTE")) {
+            if (!datos.get("importancia").toString().equals("EN ESPERA") &&
+                    !datos.get("importancia").toString().equals("URGENTE")) {
                 integrity = false;
             }
             
@@ -136,6 +156,14 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
                 integrity = false;
             }
         }else{
+            integrity = false;
+        }
+        
+        if (!((datos.get("fecha")) instanceof java.util.Date)) {
+            integrity = false;
+        }
+        
+        if (!(datos.get("correo") instanceof String)) {
             integrity = false;
         }
                        
@@ -178,7 +206,7 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
             manager.remove(objetivo);
         }
         
-        return false;
+        return response;
     }
     
     
