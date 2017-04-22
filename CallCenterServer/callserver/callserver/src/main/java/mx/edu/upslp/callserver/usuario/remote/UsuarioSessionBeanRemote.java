@@ -24,6 +24,7 @@
 package mx.edu.upslp.callserver.usuario.remote;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Remote;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
@@ -36,7 +37,7 @@ import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 @Remote
 public interface UsuarioSessionBeanRemote {
 
-    UsuarioEJB registrarUsuario(String nombre, String apellido, Date fechaNacimiento, String nacionalidad, String turno, boolean administrador);
+    UsuarioEJB registrarUsuario(HashMap<String,Object> datos);
 
     boolean login(String username, String password);
 
@@ -46,8 +47,10 @@ public interface UsuarioSessionBeanRemote {
 
     void actualizarDatosEntidad(UsuarioEJB usuario);
 
-    boolean removerUsuario(Long id);
+    boolean removerUsuario(String id);
 
     UsuarioEJB obtenerUsuario(String username);
+
+    boolean integridadDatos(HashMap<String,Object> datos);
            
 }
