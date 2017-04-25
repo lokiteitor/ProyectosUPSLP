@@ -28,12 +28,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import mx.edu.upslp.callserver.incidencencia.IncidenciaEJB;
+import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 import mx.edu.upslp.callserver.incidencencia.remote.IncidenciaSessionBeanRemote;
 
 /**
@@ -45,11 +46,14 @@ public class Incidencia {
     private String tipo;
     private String importancia;
     private String descripcion;
-    private Long idUsuario;
+    private String idUsuario;
     private String nombreCliente;
     private String direccion;
-    private Integer edad;
+    private Date edad;
     private String telefono;
+    private Date fecha;
+    private String correo;
+    private String apellido;
     
     private Properties props = new Properties();
     private InitialContext ctx;
@@ -82,33 +86,28 @@ public class Incidencia {
         }       
     }    
     
-    public IncidenciaEJB registrarIncidencia(){
+    public boolean registrarIncidencia(){
         // crear el mapa
         HashMap<String,Object> datos = new HashMap<String,Object>();
-        IncidenciaEJB incidencia;
         // llenar los datos
         datos.put("tipo", tipo);
         datos.put("importancia", importancia);
         datos.put("descripcion", descripcion);
         datos.put("idusuario", idUsuario);
         datos.put("nombre", nombreCliente);
+        datos.put("apellido",apellido);
         datos.put("direccion", direccion);
         datos.put("edad", edad);
         datos.put("telefono", telefono);
+        datos.put("fecha", fecha);
+        datos.put("correo", correo);
         
         // guardar los datos en el servidor
-        try{
-            incidencia = remoteIncidencia.registrarIncidencia(datos);
-        }catch(Exception e){
-            System.out.println("Error al llamar al servidor");
-            System.out.println(e.getMessage());
-            incidencia = null;
-        }
-        
-        return incidencia;
+
+        return remoteIncidencia.registrarIncidencia(datos);
     }
     
-    private void getModelRaw(int page,Long id){
+    private void getModelRaw(int page,String id){
         try{
             // pedir los datos al server
             allRegistros = remoteIncidencia.listarIncidencias(page, id);
@@ -116,7 +115,7 @@ public class Incidencia {
             // crea la matriz para el modelo
             for (IncidenciaEJB incidencia : allRegistros) {
                 idIncidencias.add(incidencia.getIdIncidencia());
-                clientes.add(incidencia.getNombreCliente());
+                clientes.add(incidencia.getCliente().getNombreCliente());
                 niveles.add(incidencia.getImportancia());
                 tipos.add(incidencia.getTipo());
             }            
@@ -138,7 +137,7 @@ public class Incidencia {
         return datos;
     }
     
-    public Object[][] obtenerDatos(int page,Long idUsuario){
+    public Object[][] obtenerDatos(int page,String idUsuario){
 
         idIncidencias.clear();
         clientes.clear();
@@ -155,10 +154,11 @@ public class Incidencia {
         if (allRegistros != null && allRegistros.size() >= indx) {
             response = allRegistros.get(indx);
         }        
+
         return response;
     }
     
-    public void actualizarIncidencia(IncidenciaEJB objetivo,int page,Long idUsuario){
+    public void actualizarIncidencia(IncidenciaEJB objetivo,int page,String idUsuario){
         try{
             remoteIncidencia.actualizarIncidencia(objetivo);
             obtenerDatos(page,idUsuario);
@@ -174,13 +174,30 @@ public class Incidencia {
         try{
             response = remoteIncidencia.removerIncidencia(id);
         }catch(Exception e){
-            System.out.println("Error al remover el usuario");
+            System.out.println("Error al remover la incidencia");
             System.out.println(e.getMessage());
             response = false;
         }
         return response;
     }
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    
     /**
      * @return the tipo
      */
@@ -226,14 +243,14 @@ public class Incidencia {
     /**
      * @return the idUsuario
      */
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
     /**
      * @param idUsuario the idUsuario to set
      */
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -268,14 +285,14 @@ public class Incidencia {
     /**
      * @return the edad
      */
-    public Integer getEdad() {
+    public Date getEdad() {
         return edad;
     }
 
     /**
      * @param edad the edad to set
      */
-    public void setEdad(Integer edad) {
+    public void setEdad(Date edad) {
         this.edad = edad;
     }
 
@@ -291,6 +308,20 @@ public class Incidencia {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    /**
+     * @return the correo
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * @param correo the correo to set
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
     
 

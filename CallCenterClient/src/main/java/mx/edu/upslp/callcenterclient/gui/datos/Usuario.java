@@ -29,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import javax.naming.InitialContext;
@@ -50,7 +51,18 @@ public class Usuario {
     private ArrayList<String> nombres = new ArrayList<String>();
     private ArrayList<String> apellidos = new ArrayList<String>();
     private Object[][] datos;
+    private UsuarioEJB usuario;
     
+    // datos utilizados para crear al usuario
+    private String correo;
+    private String nombre;
+    private String apellido;
+    private Date fechaNacimiento;
+    private String username;
+    private String password;
+    private String nacionalidad;
+    private String turno;
+    private Boolean administrador;
 
     /**
      * Atraves del constructor se conectar con el servidor
@@ -82,16 +94,30 @@ public class Usuario {
      * @param administrador 
      * @return 
      */
-    public UsuarioEJB registro(String nombre,String apellido,Date fechaNacimiento,String nacionalidad,String turno,boolean administrador){
+    public UsuarioEJB registro(){
         // utilizar el session bean para registra el usuario
-        UsuarioEJB usuario = null;
+        // crear el hashmap
+        HashMap<String,Object> datos = new HashMap<String,Object>();
+        // llenar los datos
+        datos.put("correo",correo);
+        datos.put("nombre", nombre);
+        datos.put("apellido", apellido);
+        datos.put("nacimiento", fechaNacimiento);
+        datos.put("nacionalidad", nacionalidad);
+        datos.put("turno", turno);
+        datos.put("administrador", administrador);        
+        
+        
         try{
-            usuario = remoteUsuario.registrarUsuario(nombre, apellido, fechaNacimiento, nacionalidad, turno, administrador);
+            this.usuario = remoteUsuario.registrarUsuario(datos);
+            this.username = usuario.getUsername();
+            this.password = usuario.getPassword();
         }catch(Exception e){
             System.out.println("Error al llamar al servidor");
             System.out.println(e.getMessage());
+            usuario = null;
         }        
-        return usuario;
+        return this.usuario;
     }      
     
     
@@ -155,7 +181,7 @@ public class Usuario {
         }
     }
     
-    public boolean removerUsuario(Long id){
+    public boolean removerUsuario(String id){
         boolean response;
         try{
             response = remoteUsuario.removerUsuario(id);
@@ -165,6 +191,128 @@ public class Usuario {
             response = false;
         }
         return response;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    
+    
+    /**
+     * @return the correo
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * @param correo the correo to set
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    /**
+     * @return the apellido
+     */
+    public String getApellido() {
+        return apellido;
+    }
+
+    /**
+     * @param apellido the apellido to set
+     */
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    /**
+     * @return the fechaNacimiento
+     */
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    /**
+     * @param fechaNacimiento the fechaNacimiento to set
+     */
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the nacionalidad
+     */
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    /**
+     * @param nacionalidad the nacionalidad to set
+     */
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    /**
+     * @return the turno
+     */
+    public String getTurno() {
+        return turno;
+    }
+
+    /**
+     * @param turno the turno to set
+     */
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    /**
+     * @return the administrador
+     */
+    public Boolean getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     * @param administrador the administrador to set
+     */
+    public void setAdministrador(Boolean administrador) {
+        this.administrador = administrador;
     }
     
 }

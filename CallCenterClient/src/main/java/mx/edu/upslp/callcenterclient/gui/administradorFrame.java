@@ -61,6 +61,7 @@ public class administradorFrame extends javax.swing.JFrame {
         wnombreLabel.setVisible(false);
         wapellidoLabel.setVisible(false);
         wnacionalidadLabel.setVisible(false);
+        wcorreoLabel.setVisible(false);
         
     }
 
@@ -92,6 +93,9 @@ public class administradorFrame extends javax.swing.JFrame {
         nacionalidadField = new javax.swing.JTextField();
         wnacionalidadLabel = new javax.swing.JLabel();
         calendarPanel = new javax.swing.JPanel();
+        correoLabel = new javax.swing.JLabel();
+        correoField = new javax.swing.JTextField();
+        wcorreoLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         reportesTable = new javax.swing.JTable();
@@ -143,17 +147,17 @@ public class administradorFrame extends javax.swing.JFrame {
 
         nombreLabel.setText("Nombre");
 
-        nombreField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                nombreFieldKeyTyped(evt);
+        nombreField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nombreFieldFocusLost(evt);
             }
         });
 
         apellidoLabel.setText("Apellido");
 
-        apellidoField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                apellidoFieldKeyTyped(evt);
+        apellidoField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                apellidoFieldFocusLost(evt);
             }
         });
 
@@ -184,9 +188,9 @@ public class administradorFrame extends javax.swing.JFrame {
         wapellidoLabel.setForeground(new java.awt.Color(255, 0, 0));
         wapellidoLabel.setText("* Apellido Invalido");
 
-        nacionalidadField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                nacionalidadFieldKeyTyped(evt);
+        nacionalidadField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nacionalidadFieldFocusLost(evt);
             }
         });
 
@@ -204,6 +208,18 @@ public class administradorFrame extends javax.swing.JFrame {
             calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        correoLabel.setText("Correo");
+
+        correoField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                correoFieldFocusLost(evt);
+            }
+        });
+
+        wcorreoLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wcorreoLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wcorreoLabel.setText("* Correo Invalido");
 
         javax.swing.GroupLayout altasPanelLayout = new javax.swing.GroupLayout(altasPanel);
         altasPanel.setLayout(altasPanelLayout);
@@ -231,7 +247,10 @@ public class administradorFrame extends javax.swing.JFrame {
                             .addComponent(turnoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(nacionalidadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(accesoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(accesoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(correoLabel)
+                            .addComponent(correoField)
+                            .addComponent(wcorreoLabel))))
                 .addContainerGap(485, Short.MAX_VALUE))
         );
         altasPanelLayout.setVerticalGroup(
@@ -267,7 +286,13 @@ public class administradorFrame extends javax.swing.JFrame {
                         .addComponent(nacionalidadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(wnacionalidadLabel)
-                        .addGap(0, 88, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(correoLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(wcorreoLabel)
+                        .addGap(0, 13, Short.MAX_VALUE))
                     .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enviarButton)
@@ -565,52 +590,39 @@ public class administradorFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nombreFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreFieldKeyTyped
-        if (validador.isAlphaSpace(nombreField.getText())) {
-           wnombreLabel.setVisible(false);
-        }else{
-           wnombreLabel.setVisible(true);
-        }
-    }//GEN-LAST:event_nombreFieldKeyTyped
-
-    private void apellidoFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoFieldKeyTyped
-        if (validador.isAlphaSpace(apellidoField.getText())) {
-           wapellidoLabel.setVisible(false);
-        }else{
-           wapellidoLabel.setVisible(true);
-        } 
-    }//GEN-LAST:event_apellidoFieldKeyTyped
-
-    private void nacionalidadFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nacionalidadFieldKeyTyped
-        if (validador.isAlpha(nacionalidadField.getText())) {
-            wnacionalidadLabel.setVisible(false);
-        }
-        else{
-            wnacionalidadLabel.setVisible(true);
-        }
-    }//GEN-LAST:event_nacionalidadFieldKeyTyped
-
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
         boolean valid = true;
         boolean administrador;
         Date fecha;
         Usuario usuario = new Usuario();
-        UsuarioEJB registro;
         // validar los datos
         if (!validador.isAlphaSpace(nombreField.getText()) || nombreField.getText().length() == 0) {
             valid = false;
-            wnombreLabel.setVisible(true);
+            wnombreLabel.setVisible(true);            
+        }else{
+            usuario.setNombre(nombreField.getText());
         }
         
         if (!validador.isAlphaSpace(apellidoField.getText()) || apellidoField.getText().length() == 0) {
             valid = false;
-            wapellidoLabel.setVisible(true);
+            wapellidoLabel.setVisible(true);            
+        }else{
+            usuario.setApellido(apellidoField.getText());
         }
         
         if (!validador.isAlpha(nacionalidadField.getText()) || nacionalidadField.getText().length() == 0) {
             valid = false;
-            wnacionalidadLabel.setVisible(true);
-        } 
+            wnacionalidadLabel.setVisible(true);            
+        }else{
+            usuario.setNacionalidad(nacionalidadField.getText());
+        }
+        
+        if (!validador.isEmail(correoField.getText())) {
+            wcorreoLabel.setVisible(true);
+            valid = false;
+        }else{
+            usuario.setCorreo(correoField.getText());            
+        }
         
         if (valid) {
             // las demas validaciones pasaron
@@ -618,28 +630,35 @@ public class administradorFrame extends javax.swing.JFrame {
                     calendario.getMonthChooser().getMonth(),
                     calendario.getDayChooser().getDay()
             );
+            
+            usuario.setFechaNacimiento(fecha);
+            
             if (accesoCombo.getSelectedIndex() == 0) {
                 administrador = false;
             }
             else{
                 administrador = true;
             }                        
-            registro = usuario.registro(nombreField.getText(),
-                    apellidoField.getText(),
-                    fecha,
-                    nacionalidadField.getText(),
-                    turnoCombo.getSelectedItem().toString(),
-                    administrador
-                    );        
+            usuario.setAdministrador(Boolean.valueOf(administrador));
             
-            if (registro == null) {
+            if (turnoCombo.getSelectedIndex() == 0) {
+                usuario.setTurno("MATUTINO");
+            }else if (turnoCombo.getSelectedIndex() == 1) {
+                usuario.setTurno("VESPERTINO");
+            }else{
+                usuario.setTurno("NOCTURNO");
+            }
+            
+            if (usuario.registro() == null) {
                 JOptionPane.showMessageDialog(null, "Error al crear el usuario revisa los datos por favor");
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuario creado con exito\nUsername: " +
-                        registro.getUsername() + 
-                        "\nPassword: " + registro.getPassword());
+                        usuario.getUsername() + 
+                        "\nPassword: " + usuario.getPassword());
             }            
+        }else{
+            JOptionPane.showMessageDialog(this, "Los datos ingresados son invalidos");
         }
                 
     }//GEN-LAST:event_enviarButtonActionPerformed
@@ -695,7 +714,7 @@ public class administradorFrame extends javax.swing.JFrame {
         // eliminar el usuario
         if (usuariosTable.getSelectedRow() != -1 ) {
             // obtener el id del usuario 
-            Long id = usuarioManager.obtenerDatosUsuario(usuariosTable.getSelectedRow()).getIdUsuario();
+            String id = usuarioManager.obtenerDatosUsuario(usuariosTable.getSelectedRow()).getIdUsuario();
             // remover        
             int resp = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar este usuario?");
             
@@ -712,6 +731,43 @@ public class administradorFrame extends javax.swing.JFrame {
         }       
     }//GEN-LAST:event_usuariosDeleteButtonActionPerformed
 
+    private void correoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_correoFieldFocusLost
+        // validar el correo
+        if (validador.isEmail(correoField.getText())) {
+            wcorreoLabel.setVisible(false);
+        }else{
+            wcorreoLabel.setVisible(true);
+        }
+    }//GEN-LAST:event_correoFieldFocusLost
+
+    private void nombreFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFieldFocusLost
+        // TODO add your handling code here:
+        if (validador.isAlphaSpace(nombreField.getText())) {
+           wnombreLabel.setVisible(false);
+        }else{
+           wnombreLabel.setVisible(true);
+        }        
+    }//GEN-LAST:event_nombreFieldFocusLost
+
+    private void apellidoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apellidoFieldFocusLost
+        // TODO add your handling code here:
+        if (validador.isAlphaSpace(apellidoField.getText())) {
+           wapellidoLabel.setVisible(false);
+        }else{
+           wapellidoLabel.setVisible(true);
+        }         
+    }//GEN-LAST:event_apellidoFieldFocusLost
+
+    private void nacionalidadFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nacionalidadFieldFocusLost
+        // TODO add your handling code here:
+        if (validador.isAlpha(nacionalidadField.getText())) {
+            wnacionalidadLabel.setVisible(false);
+        }
+        else{
+            wnacionalidadLabel.setVisible(true);
+        }        
+    }//GEN-LAST:event_nacionalidadFieldFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> accesoCombo;
@@ -721,6 +777,8 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JTextField apellidoField;
     private javax.swing.JLabel apellidoLabel;
     private javax.swing.JPanel calendarPanel;
+    private javax.swing.JTextField correoField;
+    private javax.swing.JLabel correoLabel;
     private javax.swing.JButton enviarButton;
     private javax.swing.JLabel fechaLabel;
     private javax.swing.JLabel jLabel5;
@@ -767,6 +825,7 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JTextField usuariosTurnoField;
     private javax.swing.JLabel usuariosTurnoLabel;
     private javax.swing.JLabel wapellidoLabel;
+    private javax.swing.JLabel wcorreoLabel;
     private javax.swing.JLabel wnacionalidadLabel;
     private javax.swing.JLabel wnombreLabel;
     // End of variables declaration//GEN-END:variables

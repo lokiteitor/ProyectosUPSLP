@@ -91,5 +91,14 @@ public class Validador {
         return response;
     }
     
+    public boolean isEmail(String objetivo){
+        boolean response = true;
+        if (!objetivo.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$")) {
+            response = false;
+        }
+        
+        return response;
+    }
+    
     
 }
