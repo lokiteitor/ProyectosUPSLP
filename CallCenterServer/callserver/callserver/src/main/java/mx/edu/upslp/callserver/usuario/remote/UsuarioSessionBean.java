@@ -62,26 +62,28 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         boolean integrity = true;
         //@todo aqui van las validaciones llamando a otro bean
         String [] keys = new String[] {
-            "nombre","apellido","nacimiento","username","password",
-            "nacionalidad","turno","administrador"
+            "nombre","apellido","nacimiento",
+            "nacionalidad","turno","administrador","correo"
         };
         
         // revisar que se proporcionan todas las llaves
         
         for (String key : keys) {
             if (!datos.containsKey(key)) {
-                integrity = false;
+                integrity = false;                
             }
         }
         
         // revisar que el usuario no exista
-        String sql = "SELECT CORREO FROM USUARIO WHERE CORREO=?";
-        
-        Query query = manager.createNativeQuery(sql,UsuarioEJB.class);
-        query.setParameter(1, datos.get("correo").toString());
-        
-        if (!(query.getResultList().isEmpty())) {
-            integrity = false;
+        if (integrity) {
+            String sql = "SELECT CORREO FROM USUARIO WHERE CORREO=?";
+
+            Query query = manager.createNativeQuery(sql,UsuarioEJB.class);
+            query.setParameter(1, datos.get("correo").toString());
+
+            if (!(query.getResultList().isEmpty())) {
+                integrity = false;
+            }            
         }
         
         // se reviso que se tienen todos los datos ahora se revisa la integridad
@@ -111,7 +113,11 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
                 usuario.setCreatedAt(new java.sql.Date(now.getYear(), now.getMonth(), now.getDay()));                
                 
                 manager.persist(usuario);
+            }else{               
+                usuario = null;
             }
+        }else{
+            usuario = null;
         }
                 
         return usuario;
@@ -126,7 +132,7 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         String username = "";
         Random random = new Random();
         boolean flag = true;
-        String sql = "SELECT ID_USUARIO,USERNAME FROM USUARIO WHERE USERNAME=?";
+        String sql = "SELECT CORREO,USERNAME FROM USUARIO WHERE USERNAME=?";
         Query query;
         List<UsuarioEJB> resultados;
         
@@ -174,7 +180,7 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         
         UsuarioEJB resultado;
         // utilizando ejbQL para consultas a la base de datos
-        String ejbQL = "SELECT ID_USUARIO,USERNAME,PASSWORD FROM USUARIO WHERE USERNAME=?";                
+        String ejbQL = "SELECT CORREO,USERNAME,PASSWORD FROM USUARIO WHERE USERNAME=?";                
         Query query = manager.createNativeQuery(ejbQL,UsuarioEJB.class);
         // escapamos los parametros para evitar SQL injection
         query.setParameter(1,username );
@@ -202,7 +208,7 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         boolean isAdmin = false;
         UsuarioEJB resultado;
         
-        String sql = "SELECT ID_USUARIO,ADMINISTRADOR FROM USUARIO WHERE USERNAME=?";
+        String sql = "SELECT CORREO,ADMINISTRADOR FROM USUARIO WHERE USERNAME=?";
         Query query = manager.createNativeQuery(sql,UsuarioEJB.class);
         
         query.setParameter(1, username);
@@ -267,7 +273,6 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         if (!(datos.get("nombre") instanceof String)) {
             integridad = false;
         }
-        
         //@todo validar que se trate de un correo
         if (!(datos.get("correo") instanceof String)) {
             integridad = false;
@@ -280,19 +285,11 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         if (!(datos.get("nacimiento") instanceof java.util.Date)) {
             integridad = false;
         }
-        
-        if (!(datos.get("username") instanceof String)) {
-            integridad = false;
-        }
-        
-        if (!(datos.get("password") instanceof String)) {
-            integridad = false;
-        }
+ 
         
         if (!(datos.get("nacionalidad") instanceof String)) {
             integridad = false;
         }
-        
         if (datos.get("turno") instanceof String) {
             if (!datos.get("turno").equals("MATUTINO") && 
                     !datos.get("turno").equals("VESPERTINO") &&

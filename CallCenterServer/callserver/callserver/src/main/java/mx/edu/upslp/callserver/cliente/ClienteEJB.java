@@ -26,16 +26,19 @@ package mx.edu.upslp.callserver.cliente;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 
 /**
  *
  * @author David Delgado Hernandez 150205@upslp.edu.mx Programacion III Miercoles Horario: 2:00 - 4:00
  */
+@Table(name = "CLIENTE")
 @Entity
 public class ClienteEJB implements Serializable {
 
@@ -58,7 +61,18 @@ public class ClienteEJB implements Serializable {
     @Column(name="updated_at")
     private Date updated_at;
     
+    @OneToMany(mappedBy = "cliente")
+    private Set<IncidenciaEJB> incidencias;
 
+    public Set<IncidenciaEJB> getIncidencias() {
+        return incidencias;
+    }
+
+    public void setIncidencias(Set<IncidenciaEJB> incidencias) {
+        this.incidencias = incidencias;
+    }
+    
+    
 
     @Override
     public int hashCode() {

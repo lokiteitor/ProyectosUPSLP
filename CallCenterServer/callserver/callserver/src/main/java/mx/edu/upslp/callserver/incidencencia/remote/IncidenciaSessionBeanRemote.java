@@ -26,7 +26,7 @@ package mx.edu.upslp.callserver.incidencencia.remote;
 import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Remote;
-import mx.edu.upslp.callserver.incidencencia.IncidenciaEJB;
+import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 
 /**
  *
@@ -35,9 +35,9 @@ import mx.edu.upslp.callserver.incidencencia.IncidenciaEJB;
 @Remote
 public interface IncidenciaSessionBeanRemote {
 
-    IncidenciaEJB registrarIncidencia(HashMap<String,Object> datos);
+    boolean registrarIncidencia(HashMap<String,Object> datos);
 
-    List listarIncidencias(int page,Long idUsuario);
+    List listarIncidencias(int page,String idUsuario);
 
     void actualizarIncidencia(IncidenciaEJB objetivo);
 
