@@ -25,10 +25,13 @@ package mx.edu.upslp.callserver.usuario;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 
 /**
  *
@@ -46,30 +49,36 @@ public class UsuarioEJB implements Serializable {
     // marcar este campo como id
     // le decimos que el campo es auto_increment
     // asociamos el nombre de la columna
-    @Id
-    @Column(name="CORREO")
     private String idUsuario;
-    @Column(name="NOMBRE")
     private String nombre;
-    @Column(name="APELLIDO")
     private String apellido;
-    @Column(name="FECHA_NACIMIENTO")
     private Date  fechaNacimiento;
-    @Column(name="USERNAME")
     private String username;
-    @Column(name="PASSWORD")
     private String password;
-    @Column(name="NACIONALIDAD")
     private String nacionalidad;
-    @Column(name="TURNO")
     private String turno;
-    @Column(name="ADMINISTRADOR")
     private boolean administrador;
-    @Column(name="created_at")
     private Date createdAt;
-    @Column(name="updated_at")
     private Date updatedAt;   
 
+    private Collection<IncidenciaEJB> incidencias;
+
+    
+    
+    @OneToMany(targetEntity = IncidenciaEJB.class,mappedBy = "idUsuario")
+    public Collection<IncidenciaEJB> getIncidencias() {
+        return incidencias;
+    }
+
+    public void setIncidencias(Collection<IncidenciaEJB> incidencias) {
+        this.incidencias = incidencias;
+    }
+    
+    
+    
+    
+    @Id
+    @Column(name="CORREO")
     public String getIdUsuario() {
         return idUsuario;
     }
@@ -82,6 +91,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the nombre
      */
+    @Column(name="NOMBRE")
     public String getNombre() {
         return nombre;
     }
@@ -96,6 +106,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the apellido
      */
+    @Column(name="APELLIDO")
     public String getApellido() {
         return apellido;
     }
@@ -110,6 +121,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the fechaNacimiento
      */
+    @Column(name="FECHA_NACIMIENTO")
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -124,6 +136,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the username
      */
+    @Column(name="USERNAME")
     public String getUsername() {
         return username;
     }
@@ -138,6 +151,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the password
      */
+    @Column(name="PASSWORD")
     public String getPassword() {
         return password;
     }
@@ -152,6 +166,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the nacionalidad
      */
+    @Column(name="NACIONALIDAD")
     public String getNacionalidad() {
         return nacionalidad;
     }
@@ -166,6 +181,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the turno
      */
+    @Column(name="TURNO")
     public String getTurno() {
         return turno;
     }
@@ -180,6 +196,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the administrador
      */
+    @Column(name="ADMINISTRADOR")    
     public boolean isAdministrador() {
         return administrador;
     }
@@ -194,6 +211,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the createdAt
      */
+    @Column(name="created_at")
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -208,6 +226,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the updatedAt
      */
+    @Column(name="updated_at")
     public Date getUpdatedAt() {
         return updatedAt;
     }

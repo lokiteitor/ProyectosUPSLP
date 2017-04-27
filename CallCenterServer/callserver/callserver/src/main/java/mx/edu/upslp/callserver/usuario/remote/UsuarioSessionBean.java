@@ -46,21 +46,17 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
     private EntityManager manager;
 
     /**
-     * Crear un nuevo usuario
-     * @param nombre - Nombre del usuario
-     * @param apellido - Apellido del usuario
-     * @param nacimiento - fecha de nacimiento
-     * @param nacionalidad nacionalidad del usuario
-     * @param turno turno en el que trabaja
-     * @param administrador true si el usuario es administrador
-     * @return  Entity Bean con los datos del usuario
+     * registra al usuario tomando los datos del hashmap del parametro
+     * @param datos HashMap con los datos a registrar
+     * @return Entity Bean del usuario registrado, null si registro fallo
      */
     @Override
     public UsuarioEJB registrarUsuario(HashMap<String,Object> datos) {
         UsuarioEJB usuario = new UsuarioEJB();
         java.util.Date now = new java.util.Date();
         boolean integrity = true;
-        //@todo aqui van las validaciones llamando a otro bean
+        
+        // estos son los datos que debe contener el hashmap
         String [] keys = new String[] {
             "nombre","apellido","nacimiento",
             "nacionalidad","turno","administrador","correo"
@@ -77,7 +73,7 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         // revisar que el usuario no exista
         if (integrity) {
             String sql = "SELECT CORREO FROM USUARIO WHERE CORREO=?";
-
+            // vincular los parametros y revisar si los resultados son vacios
             Query query = manager.createNativeQuery(sql,UsuarioEJB.class);
             query.setParameter(1, datos.get("correo").toString());
 
@@ -91,6 +87,7 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
 
         if (integrity) {
             if (integridadDatos(datos)) {
+                // vincular los datos del usuario
                 usuario.setIdUsuario(datos.get("correo").toString());
                 usuario.setNombre(datos.get("nombre").toString());
                 usuario.setApellido(datos.get("apellido").toString());
@@ -99,19 +96,19 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
                 usuario.setAdministrador(
                         Boolean.valueOf(datos.get("administrador").toString()));
 
-                // @ todo validar o crear Date de fecha        
+                
                 java.util.Date nacimiento = (java.util.Date) datos.get("nacimiento");
                 usuario.setFechaNacimiento(new java.sql.Date(nacimiento.getDate(),
                         nacimiento.getMonth(), nacimiento.getYear()));
 
-                //@todo crear y asignar password y username
+                // generar los password y usernames y guardarlos en la db
                 usuario.setUsername(generarUsername(datos.get("nombre").toString()));
                 usuario.setPassword(generarPassword(datos.get("nombre").toString(),
                         datos.get("nombre").toString()));
 
                 usuario.setUpdatedAt(new java.sql.Date(now.getYear(), now.getMonth(), now.getDay()));
                 usuario.setCreatedAt(new java.sql.Date(now.getYear(), now.getMonth(), now.getDay()));                
-                
+                // guardar el usuario
                 manager.persist(usuario);
             }else{               
                 usuario = null;
@@ -158,6 +155,12 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         return username;
     }
     
+    /**
+     * Generar el password del usuario
+     * @param nombre nombre del usuario
+     * @param apellido apellido del usuario
+     * @return el password generado
+     */
     private String generarPassword(String nombre,String apellido){
         // @todo encriptar contraseña
         Random random = new Random();
@@ -169,7 +172,7 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
     
     
     /**
-     * Verifica si el usuario es valido
+     * Verifica si el usuario es valido(existe y coinciden sus credenciales)
      * @param username nombre del usuario
      * @param password password del usuario
      * @return  retorna true si el usuario existe en los registros y los datos coinciden
@@ -207,12 +210,12 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
     public boolean isAdmin(String username) {        
         boolean isAdmin = false;
         UsuarioEJB resultado;
-        
+        // busca al usuario
         String sql = "SELECT CORREO,ADMINISTRADOR FROM USUARIO WHERE USERNAME=?";
         Query query = manager.createNativeQuery(sql,UsuarioEJB.class);
         
         query.setParameter(1, username);
-        
+        // se espera que se obtenga solo un resultado
         resultado = (UsuarioEJB) query.getSingleResult();
         
         if (resultado.isAdministrador()) {
@@ -232,9 +235,13 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
     public List<UsuarioEJB> getAllUsers() {
         return manager.createNativeQuery("SELECT * FROM USUARIO",UsuarioEJB.class).getResultList();
     }
-
+    /**
+     * Actualiza los datos de la entidad 
+     * @param usuario Entity Bean UsuarioEJB con los datos almacenados
+     */
     @Override
     public void actualizarDatosEntidad(UsuarioEJB usuario) {
+        // retomar la conexion
         UsuarioEJB entity = manager.merge(usuario);
         manager.persist(entity);               
     }
@@ -304,5 +311,6 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         
         return integridad;
     }
+
     
 }

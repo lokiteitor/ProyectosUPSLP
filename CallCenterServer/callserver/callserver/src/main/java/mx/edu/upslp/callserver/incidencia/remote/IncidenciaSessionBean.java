@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package mx.edu.upslp.callserver.incidencencia.remote;
+package mx.edu.upslp.callserver.incidencia.remote;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -40,9 +40,14 @@ import mx.edu.upslp.callserver.usuario.UsuarioEJB;
  */
 @Stateless
 public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
+
     @PersistenceContext(unitName = "mx.edu.upslp_callserver_ejb_1.0PU")
     private EntityManager manager;    
-
+    /**
+     * este metodo se puede invocar para registrar una incidencia   
+     * @param datos hashmap con los datos de la incidencia a registrar
+     * @return boolean - retorna true si la incidencia se registro correctamente
+     */
     @Override
     public boolean registrarIncidencia(HashMap<String,Object> datos) {
         boolean integrity = true;
@@ -53,6 +58,7 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
         
         boolean success = false;
         
+        // estas son las llaves que deben de existir en el hashmap
         String[] keys = new String[] {"tipo","importancia","descripcion","nombre",
             "direccion","edad","telefono","idusuario","fecha","correo","apellido"
         };
@@ -74,24 +80,24 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
 
                 if (cliente == null) {
                     cliente = new ClienteEJB();
-                    cliente.setCreated_at(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));
-                }                    
+                    cliente.setCreatedAt(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));
+                }       
+                // guarda los datos del cliente o los actualiza
                 java.util.Date edad = (java.util.Date)datos.get("edad");
                 cliente.setEdad(new java.sql.Date(edad.getYear(), edad.getMonth(), edad.getDay()));                    
                 cliente.setCorreo(datos.get("correo").toString());
-                cliente.setNombreCliente(datos.get("nombre").toString());
+                cliente.setNombre(datos.get("nombre").toString());
                 cliente.setApellido(datos.get("apellido").toString());
                 cliente.setDireccion(datos.get("direccion").toString());                   
                 cliente.setTelefono(datos.get("telefono").toString());                            
-                cliente.setUpdated_at(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));                    
-                
+                cliente.setUpdatedAt(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));                    
                 manager.persist(cliente);                    
 
-                // validados guardar los datos
-
+                // registrar los datos de la incidencia
                 incidencia.setTipo(datos.get("tipo").toString());
                 incidencia.setImportancia(datos.get("importancia").toString());
                 incidencia.setDescripcion(datos.get("descripcion").toString());    
+                // guardar la relacion con el usuario
                 UsuarioEJB usuario = manager.find(UsuarioEJB.class, datos.get("idusuario").toString());
                 incidencia.setIdUsuario(usuario);
                 incidencia.setCliente(cliente);
@@ -117,7 +123,13 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
         return success;
     }
     
+    /**
+     * revisa la integridad de los datos, que sean validos
+     * @param datos el hashmap con los datos a validars
+     * @return boolean - true si los datos son integros
+     */
     private boolean integridadDatos(HashMap<String,Object> datos){
+        // revisa que los datos sean del tipo necesario
         boolean integrity = true;
         if (datos.get("tipo") instanceof String) {
             if (datos.get("tipo").toString().equals("QUEJAS")  && datos.get("tipo").toString().equals("SUGERENCIA")) {
@@ -182,11 +194,19 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
         return integrity;
        }
 
+    /**
+     * Retorna una lista las incidencias paginadas de 10 en 10
+     * @param page pagina a mostrar
+     * @param idUsuario id del usuario cuyas incidencias a listar
+     * @return List - colleccion Lista con los registros de incidencias
+     */
     @Override
-    public List listarIncidencias(int page,String idUsuario) {
+    public List<IncidenciaEJB> listarIncidencias(int page,String idUsuario) {
+        
         List<IncidenciaEJB> resultados;
         String sql = "SELECT * FROM INCIDENCIA WHERE ID_USUARIO=? LIMIT ?,? ";
-        
+        // escapa los parametros de la consulta
+        // devolver las consultas encapsuladas en IncidenciaEJB
         Query query = manager.createNativeQuery(sql, IncidenciaEJB.class);
         query.setParameter(2,(page-1)*10 );
         query.setParameter(3, (page)*10);
@@ -194,24 +214,35 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
         query.setParameter(1, idUsuario);
         
         // obtener los resultados
-        
         resultados = query.getResultList();
-
+                       
         return resultados;     
     }
-
+    
+    /**
+     * actualiza la entidad del parametro
+     * @param objetivo instancia de la entidad IncidenciaEJB a actualizar
+     */
     @Override
     public void actualizarIncidencia(IncidenciaEJB objetivo) {
-        
+        // retomar la conexion para la entidad
         IncidenciaEJB entity = manager.merge(objetivo);
+        //@todo validar si es necesario
+        // guardar los datos
         manager.persist(entity);
     }
 
+    /**
+     * remover la incidencia en base al ID de la incidencia
+     * @param id id de la incidencia
+     * @return retorna true si se removio con exito
+     */
     @Override
     public boolean removerIncidencia(Long id) {
         boolean response = true;
+        // buscar el registro
         IncidenciaEJB objetivo = manager.find(IncidenciaEJB.class, id);
-        
+        // remover
         if (objetivo == null) {
             response = false;
         }else{
@@ -220,6 +251,7 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
         
         return response;
     }
+
     
     
 }

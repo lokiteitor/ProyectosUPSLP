@@ -33,6 +33,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import mx.edu.upslp.callserver.cliente.ClienteEJB;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
@@ -41,35 +42,56 @@ import mx.edu.upslp.callserver.usuario.UsuarioEJB;
  * @author David Delgado Hernandez 150205@upslp.edu.mx Programacion III Miercoles Horario: 2:00 - 4:00
  */
 @Entity
+@Table(name = "INCIDENCIA")
 public class IncidenciaEJB implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="ID_INCIDENCIA")
     private Long idIncidencia;
     
-    @ManyToOne
-    @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "CORREO")
-    private ClienteEJB cliente;
-    @Column(name="TIPO")
     private String tipo;
-    @Column(name="IMPORTANCIA")
     private String importancia;
-    @Column(name="DESCRIPCION")
     private String descripcion;
-    @ManyToOne
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "CORREO")
-    private UsuarioEJB idUsuario;
-    @Column(name="FECHA")
+
     private Date fecha;
-    @Column(name="created_at")
     private Date created_at;
-    @Column(name="updated_at")
     private Date updated_at;    
     
-   
+    private  ClienteEJB cliente;   
+    
+    private  UsuarioEJB idUsuario;
+    
+    /**
+     * @return the idUsuario
+     */
+    @ManyToOne(targetEntity = UsuarioEJB.class)
+    @JoinColumn(name = "ID_USUARIO",referencedColumnName = "CORREO")
+    public UsuarioEJB getIdUsuario() {
+        return idUsuario;
+    }
+
+    /**
+     * @param idUsuario the idUsuario to set
+     */
+    public void setIdUsuario(UsuarioEJB idUsuario) {
+        this.idUsuario = idUsuario;
+    }    
+
+    /**
+     * @return the cliente
+     */
+    @ManyToOne(targetEntity = ClienteEJB.class)
+    @JoinColumn(name = "ID_CLIENTE",referencedColumnName = "CORREO")
+    public ClienteEJB getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteEJB cliente) {
+        this.cliente = cliente;
+    }    
 
     @Override
     public int hashCode() {
@@ -99,6 +121,9 @@ public class IncidenciaEJB implements Serializable {
     /**
      * @return the idIncidencia
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID_INCIDENCIA")
     public Long getIdIncidencia() {
         return idIncidencia;
     }
@@ -110,23 +135,12 @@ public class IncidenciaEJB implements Serializable {
         this.idIncidencia = idIncidencia;
     }
 
-    /**
-     * @return the cliente
-     */
-    public ClienteEJB getCliente() {
-        return cliente;
-    }
 
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(ClienteEJB cliente) {
-        this.cliente = cliente;
-    }
 
     /**
      * @return the tipo
      */
+    @Column(name="TIPO")
     public String getTipo() {
         return tipo;
     }
@@ -141,6 +155,7 @@ public class IncidenciaEJB implements Serializable {
     /**
      * @return the importancia
      */
+    @Column(name="IMPORTANCIA")
     public String getImportancia() {
         return importancia;
     }
@@ -155,6 +170,7 @@ public class IncidenciaEJB implements Serializable {
     /**
      * @return the descripcion
      */
+    @Column(name="DESCRIPCION")
     public String getDescripcion() {
         return descripcion;
     }
@@ -166,23 +182,12 @@ public class IncidenciaEJB implements Serializable {
         this.descripcion = descripcion;
     }
 
-    /**
-     * @return the idUsuario
-     */
-    public UsuarioEJB getIdUsuario() {
-        return idUsuario;
-    }
 
-    /**
-     * @param idUsuario the idUsuario to set
-     */
-    public void setIdUsuario(UsuarioEJB idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     /**
      * @return the fecha
      */
+    @Column(name="FECHA")
     public Date getFecha() {
         return fecha;
     }
@@ -197,6 +202,7 @@ public class IncidenciaEJB implements Serializable {
     /**
      * @return the created_at
      */
+    @Column(name="created_at")
     public Date getCreated_at() {
         return created_at;
     }
@@ -211,6 +217,7 @@ public class IncidenciaEJB implements Serializable {
     /**
      * @return the updated_at
      */
+    @Column(name="updated_at")
     public Date getUpdated_at() {
         return updated_at;
     }

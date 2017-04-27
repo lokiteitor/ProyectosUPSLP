@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package mx.edu.upslp.callserver.incidencencia.remote;
+package mx.edu.upslp.callserver.incidencia.remote;
 
 import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Remote;
+import mx.edu.upslp.callserver.cliente.ClienteEJB;
 import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 
 /**
@@ -37,10 +38,10 @@ public interface IncidenciaSessionBeanRemote {
 
     boolean registrarIncidencia(HashMap<String,Object> datos);
 
-    List listarIncidencias(int page,String idUsuario);
+    List<IncidenciaEJB> listarIncidencias(int page,String idUsuario);
 
     void actualizarIncidencia(IncidenciaEJB objetivo);
 
-    boolean removerIncidencia(Long id);
+    boolean removerIncidencia(Long id);   
     
 }

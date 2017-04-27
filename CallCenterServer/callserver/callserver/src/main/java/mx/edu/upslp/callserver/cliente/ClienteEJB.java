@@ -26,9 +26,11 @@ package mx.edu.upslp.callserver.cliente;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,46 +40,38 @@ import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
  *
  * @author David Delgado Hernandez 150205@upslp.edu.mx Programacion III Miercoles Horario: 2:00 - 4:00
  */
-@Table(name = "CLIENTE")
+
 @Entity
+@Table(name = "CLIENTE")
 public class ClienteEJB implements Serializable {
 
-    private static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "CORREO")
-    private String correo;    
-    @Column(name="NOMBRE")
-    private String nombreCliente;
+    private String correo;
+    @Column(name = "NOMBRE")
+    private String nombre;
     @Column(name = "APELLIDO")
-    private String apellido;    
-    @Column(name="DIRECCION")
+    private String apellido;
+    @Column(name = "DIRECCION")
     private String direccion;
-    @Column(name="EDAD")
+    @Column(name = "EDAD")
     private Date edad;
-    @Column(name="TELEFONO")
-    private String telefono;    
-    @Column(name="created_at")
-    private Date created_at;
-    @Column(name="updated_at")
-    private Date updated_at;
+    @Column(name = "TELEFONO")
+    private String telefono;
+    @Column(name = "created_at")
+    private Date createdAt;
+    @Column(name = "updated_at")
+    private Date updatedAt;
     
-    @OneToMany(mappedBy = "cliente")
-    private Set<IncidenciaEJB> incidencias;
+    @OneToMany(mappedBy = "cliente",targetEntity = IncidenciaEJB.class)
+    private Collection<IncidenciaEJB> incidencias;
 
-    public Set<IncidenciaEJB> getIncidencias() {
-        return incidencias;
-    }
-
-    public void setIncidencias(Set<IncidenciaEJB> incidencias) {
-        this.incidencias = incidencias;
-    }
-    
-    
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (correo != null ? correo.hashCode() : 0);
+        hash += (getCorreo() != null ? getCorreo().hashCode() : 0);
         return hash;
     }
 
@@ -88,34 +82,20 @@ public class ClienteEJB implements Serializable {
             return false;
         }
         ClienteEJB other = (ClienteEJB) object;
-        if ((this.correo == null && other.correo != null) || (this.correo != null && !this.correo.equals(other.correo))) {
+        if ((this.getCorreo() == null && other.getCorreo() != null) || (this.getCorreo() != null && !this.correo.equals(other.correo))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public java.lang.String toString() {
-        return "mx.edu.upslp.callserver.cliente.ClienteEJB[ id=" + correo + " ]";
-    }
-
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    /**
-     * @param aSerialVersionUID the serialVersionUID to set
-     */
-    public static void setSerialVersionUID(long aSerialVersionUID) {
-        serialVersionUID = aSerialVersionUID;
+    public String toString() {
+        return "mx.edu.upslp.callserver.cliente.ClienteEJB[ id=" + getCorreo() + " ]";
     }
 
     /**
      * @return the correo
-     */
+     */    
     public String getCorreo() {
         return correo;
     }
@@ -128,17 +108,17 @@ public class ClienteEJB implements Serializable {
     }
 
     /**
-     * @return the nombreCliente
+     * @return the nombre
      */
-    public String getNombreCliente() {
-        return nombreCliente;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
-     * @param nombreCliente the nombreCliente to set
+     * @param nombre the nombre to set
      */
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
@@ -158,14 +138,14 @@ public class ClienteEJB implements Serializable {
     /**
      * @return the direccion
      */
-    public java.lang.String getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
 
     /**
      * @param direccion the direccion to set
      */
-    public void setDireccion(java.lang.String direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
@@ -186,43 +166,59 @@ public class ClienteEJB implements Serializable {
     /**
      * @return the telefono
      */
-    public java.lang.String getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
     /**
      * @param telefono the telefono to set
      */
-    public void setTelefono(java.lang.String telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
     /**
-     * @return the created_at
+     * @return the createdAt
      */
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     /**
-     * @param created_at the created_at to set
+     * @param createdAt the createdAt to set
      */
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     /**
-     * @return the updated_at
+     * @return the updatedAt
      */
-    public Date getUpdated_at() {
-        return updated_at;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
     /**
-     * @param updated_at the updated_at to set
+     * @param updatedAt the updatedAt to set
      */
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
+
+    /**
+     * @return the incidencias
+     */
+    public Collection<IncidenciaEJB> getIncidencias() {
+        return incidencias;
+    }
+
+    /**
+     * @param incidencias the incidencias to set
+     */
+    public void setIncidencias(Collection<IncidenciaEJB> incidencias) {
+        this.incidencias = incidencias;
+    }
+    
+    
 
 }

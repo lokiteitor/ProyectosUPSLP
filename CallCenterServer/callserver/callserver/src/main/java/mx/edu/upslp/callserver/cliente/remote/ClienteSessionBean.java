@@ -21,37 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package mx.edu.upslp.callserver.usuario.remote;
+package mx.edu.upslp.callserver.cliente.remote;
 
-import java.util.HashMap;
-import java.util.List;
-import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import mx.edu.upslp.callserver.cliente.ClienteEJB;
+import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
-
 
 /**
  *
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
-@Remote
-public interface UsuarioSessionBeanRemote {
+@Stateless
+public class ClienteSessionBean implements ClienteSessionBeanRemote {
 
-    UsuarioEJB registrarUsuario(HashMap<String,Object> datos);
-
-    boolean login(String username, String password);
-
-    boolean isAdmin(String username);
-
-    List<UsuarioEJB> getAllUsers();
-
-    void actualizarDatosEntidad(UsuarioEJB usuario);
-
-    boolean removerUsuario(String id);
-
-    UsuarioEJB obtenerUsuario(String username);
-
-    boolean integridadDatos(HashMap<String,Object> datos);
+    // Add business logic below. (Right-click in editor and choose
+    // "Insert Code > Add Business Method")}
+    @PersistenceContext(unitName = "mx.edu.upslp_callserver_ejb_1.0PU")
+    private EntityManager manager;
     
-           
+    @Override
+    public ClienteEJB obtenerCliente(Long id) {        
+        // obtiene el cliente que registro la incidencia de id
+        ClienteEJB cliente = manager.find(IncidenciaEJB.class, id).getCliente();
+        
+        ClienteEJB respuesta = new ClienteEJB();
+        
+        return respuesta;
+    }
+    
 }
