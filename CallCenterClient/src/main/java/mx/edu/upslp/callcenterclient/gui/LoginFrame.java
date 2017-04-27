@@ -146,6 +146,7 @@ public class LoginFrame extends javax.swing.JFrame {
             if (flag) {
                 // obtener el usuario
                 miUsuario = usuarioBean.obtenerUsuario(usuarioField.getText());
+
                 if (usuarioBean.isAdmin(usuarioField.getText())) {
                     // lanzar ventana de administracion
                     java.awt.EventQueue.invokeLater(new Runnable() {
@@ -173,6 +174,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         }catch (NamingException ex) {
             System.out.println("Error durante consulta a JNDI");
+            System.err.println(ex.getMessage());
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -292,7 +292,7 @@ public class administradorFrame extends javax.swing.JFrame {
                         .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(wcorreoLabel)
-                        .addGap(0, 13, Short.MAX_VALUE))
+                        .addGap(0, 18, Short.MAX_VALUE))
                     .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enviarButton)
@@ -352,7 +352,7 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(anteriorButton)
                     .addComponent(siguienteButton))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         tabs.addTab("Reportes", jPanel2);
@@ -367,7 +367,7 @@ public class administradorFrame extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 505, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
         );
 
         tabs.addTab("Estadisticas", jPanel3);
@@ -521,9 +521,9 @@ public class administradorFrame extends javax.swing.JFrame {
                         .addGap(169, 169, 169)
                         .addComponent(usuariosLabel))
                     .addGroup(usuariosTabLayout.createSequentialGroup()
-                        .addGap(119, 119, 119)
+                        .addGap(106, 106, 106)
                         .addComponent(usuariosAnteriorButton)
-                        .addGap(18, 18, 18)
+                        .addGap(34, 34, 34)
                         .addComponent(usuariosSiguienteButton)))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
@@ -568,10 +568,11 @@ public class administradorFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(usuariosAccesoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(seguridadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usuariosAnteriorButton)
-                    .addComponent(usuariosSiguienteButton)))
+                    .addComponent(usuariosSiguienteButton)
+                    .addComponent(usuariosAnteriorButton))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         tabs.addTab("Lista de Usuarios", usuariosTab);

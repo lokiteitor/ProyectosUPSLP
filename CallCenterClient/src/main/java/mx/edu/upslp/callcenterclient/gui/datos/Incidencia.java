@@ -34,8 +34,9 @@ import java.util.List;
 import java.util.Properties;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import mx.edu.upslp.callserver.cliente.ClienteEJB;
 import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
-import mx.edu.upslp.callserver.incidencencia.remote.IncidenciaSessionBeanRemote;
+import mx.edu.upslp.callserver.incidencia.remote.IncidenciaSessionBeanRemote;
 
 /**
  *
@@ -60,7 +61,7 @@ public class Incidencia {
     private IncidenciaSessionBeanRemote remoteIncidencia;
     
     private List<IncidenciaEJB> allRegistros;
-    private ArrayList<String> clientes = new ArrayList<String>();
+    private ArrayList<ClienteEJB> clientes = new ArrayList<ClienteEJB>();
     private ArrayList<Long> idIncidencias = new ArrayList<Long>(); 
     private ArrayList<String> niveles = new ArrayList<String>(); 
     private ArrayList<String> tipos = new ArrayList<String>();
@@ -76,7 +77,7 @@ public class Incidencia {
             // se obtiene el contexto para futuras llamadas
             ctx = new InitialContext(props);
             // se obtiene la instancia del objeto remoto
-            remoteIncidencia = (IncidenciaSessionBeanRemote) ctx.lookup("mx.edu.upslp.callserver.incidencencia.remote.IncidenciaSessionBeanRemote");
+            remoteIncidencia = (IncidenciaSessionBeanRemote) ctx.lookup("mx.edu.upslp.callserver.incidencia.remote.IncidenciaSessionBeanRemote");
         } catch (FileNotFoundException ex) {
             System.out.println("No se encontro el archivo");
         } catch (IOException ex) {
@@ -108,19 +109,19 @@ public class Incidencia {
     }
     
     private void getModelRaw(int page,String id){
-        try{
             // pedir los datos al server
-            allRegistros = remoteIncidencia.listarIncidencias(page, id);
-            
+        allRegistros = remoteIncidencia.listarIncidencias(page, id);
+        try{    
             // crea la matriz para el modelo
             for (IncidenciaEJB incidencia : allRegistros) {
                 idIncidencias.add(incidencia.getIdIncidencia());
-                clientes.add(incidencia.getCliente().getNombreCliente());
+                clientes.add(incidencia.getCliente());
                 niveles.add(incidencia.getImportancia());
                 tipos.add(incidencia.getTipo());
             }            
-            
-        }catch (Exception e){
+        }catch(Error e){
+            System.out.println(e.getMessage());
+        }catch(Exception e){
             System.out.println("Error al consultar con el servidor");
             System.out.println(e.getMessage());
         }
@@ -129,8 +130,8 @@ public class Incidencia {
     private Object[][] generarDatos(){
         datos = new Object[idIncidencias.size()][4];
         for (int i = 0; i < idIncidencias.size(); i++) {
-            datos[i][0] = idIncidencias.get(i);
-            datos[i][1] = clientes.get(i);
+            datos[i][0] = idIncidencias.get(i);                                    
+            datos[i][1] = clientes.get(i).getCorreo();
             datos[i][2] = niveles.get(i);
             datos[i][3] = tipos.get(i);
         }

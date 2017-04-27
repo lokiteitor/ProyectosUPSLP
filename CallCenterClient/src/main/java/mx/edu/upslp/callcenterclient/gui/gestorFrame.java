@@ -6,6 +6,7 @@
 package mx.edu.upslp.callcenterclient.gui;
 
 import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 import java.util.Date;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ public class gestorFrame extends javax.swing.JFrame {
     private JCalendar nacimiento = new JCalendar();
     private Validador validador = new Validador();
     private Incidencia manager = new Incidencia();
+    private int page = 1;
     
     private String[] tIncidencias = new String[] {"ID","Cliente","Nivel","Tipo"};
     // modificamos el modelo en su creacion
@@ -38,6 +40,9 @@ public class gestorFrame extends javax.swing.JFrame {
     };    
     
     private JCalendar listaCalendario = new JCalendar();
+    
+    private JDateChooser  edadChooser = new JDateChooser();
+    
     
     /**
      * Creates new form gestorFrame
@@ -65,11 +70,17 @@ public class gestorFrame extends javax.swing.JFrame {
         
         // calendario de nacimiento cliente
         nacimiento.setEnabled(true);
-        nacimiento.setEnabled(true);
+        nacimiento.setVisible(true);
         nacimientoPanel.setLayout(new BoxLayout(nacimientoPanel, View.Y_AXIS));
         nacimientoPanel.add(nacimiento);
         
         nacimiento.setMaxSelectableDate(new Date());
+        
+        // edad chooser
+        edadChooser.setEnabled(true);
+        edadChooser.setVisible(true);
+        edadChooserPanel.setLayout(new BoxLayout((edadChooserPanel), View.Y_AXIS));
+        edadChooserPanel.add(edadChooser);
         
         this.setResizable(false);
         this.setTitle("Asistencia de Quejas y sugerencias");
@@ -140,7 +151,6 @@ public class gestorFrame extends javax.swing.JFrame {
         listaImportanciaCombo = new javax.swing.JComboBox<>();
         listaTelefonoLabel = new javax.swing.JLabel();
         listaEdadLabel = new javax.swing.JLabel();
-        listaEdadField = new javax.swing.JTextField();
         listaTipoLabel = new javax.swing.JLabel();
         listaQuejaRadio = new javax.swing.JRadioButton();
         listaSugerenciaRadio = new javax.swing.JRadioButton();
@@ -158,6 +168,7 @@ public class gestorFrame extends javax.swing.JFrame {
         listaSeguridadPanel = new javax.swing.JPanel();
         listaEliminarLabel = new javax.swing.JLabel();
         listaEliminarButton = new javax.swing.JButton();
+        edadChooserPanel = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -260,6 +271,11 @@ public class gestorFrame extends javax.swing.JFrame {
         correoField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 correoFieldFocusLost(evt);
+            }
+        });
+        correoField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                correoFieldActionPerformed(evt);
             }
         });
 
@@ -434,8 +450,18 @@ public class gestorFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listaTabla);
 
         listaAnteriorButton.setText("Anterior");
+        listaAnteriorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaAnteriorButtonActionPerformed(evt);
+            }
+        });
 
         listaSiguienteButton.setText("Siguiente");
+        listaSiguienteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaSiguienteButtonActionPerformed(evt);
+            }
+        });
 
         listaTituloLabel.setText("Lista de Incidencias");
 
@@ -460,12 +486,6 @@ public class gestorFrame extends javax.swing.JFrame {
         listaTelefonoLabel.setText("Telefono");
 
         listaEdadLabel.setText("Edad");
-
-        listaEdadField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                listaEdadFieldFocusLost(evt);
-            }
-        });
 
         listaTipoLabel.setText("Tipo de Reporte");
 
@@ -546,6 +566,17 @@ public class gestorFrame extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout edadChooserPanelLayout = new javax.swing.GroupLayout(edadChooserPanel);
+        edadChooserPanel.setLayout(edadChooserPanelLayout);
+        edadChooserPanelLayout.setHorizontalGroup(
+            edadChooserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        edadChooserPanelLayout.setVerticalGroup(
+            edadChooserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout listaPanelLayout = new javax.swing.GroupLayout(listaPanel);
         listaPanel.setLayout(listaPanelLayout);
         listaPanelLayout.setHorizontalGroup(
@@ -555,24 +586,10 @@ public class gestorFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(listaPanelLayout.createSequentialGroup()
-                        .addComponent(listaNombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(listaFechaLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(listaPanelLayout.createSequentialGroup()
                         .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(listaImportanciaLabel)
-                                .addComponent(listaImportanciaCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(listaTelefonoLabel)
-                                .addComponent(listaTelefonoField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(listaNombreField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(wListaNombreLabel)
                             .addComponent(wListaTelefonoLabel)
-                            .addComponent(listaDireccionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(listaDireccionField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listaEdadLabel)
-                            .addComponent(listaEdadField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(wListaEdadLabel)
                             .addComponent(listaTipoLabel)
                             .addGroup(listaPanelLayout.createSequentialGroup()
@@ -592,7 +609,27 @@ public class gestorFrame extends javax.swing.JFrame {
                             .addComponent(jScrollPane4)
                             .addGroup(listaPanelLayout.createSequentialGroup()
                                 .addComponent(listaDescripcionLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(listaPanelLayout.createSequentialGroup()
+                        .addComponent(listaNombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(listaFechaLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(listaPanelLayout.createSequentialGroup()
+                        .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(listaDireccionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(listaPanelLayout.createSequentialGroup()
+                                .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(listaImportanciaLabel)
+                                    .addComponent(listaImportanciaCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(listaTelefonoLabel)
+                                    .addComponent(listaTelefonoField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(listaNombreField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(listaEdadLabel)))
+                        .addGap(18, 18, 18)
+                        .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(edadChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(listaCalendarioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(listaPanelLayout.createSequentialGroup()
@@ -620,11 +657,7 @@ public class gestorFrame extends javax.swing.JFrame {
                             .addComponent(listaNombreLabel)
                             .addComponent(listaFechaLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(listaPanelLayout.createSequentialGroup()
-                                .addComponent(listaCalendarioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(listaDescripcionLabel))
+                        .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(listaPanelLayout.createSequentialGroup()
                                 .addComponent(listaNombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -634,24 +667,29 @@ public class gestorFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(listaImportanciaCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(listaTelefonoLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(listaTelefonoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(listaTelefonoLabel))
+                            .addComponent(listaCalendarioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(listaPanelLayout.createSequentialGroup()
+                                .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(listaTelefonoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(listaEdadLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(wListaTelefonoLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(listaDireccionLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(listaDireccionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(listaEdadLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(listaEdadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listaPanelLayout.createSequentialGroup()
+                                .addComponent(edadChooserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addComponent(listaDescripcionLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(listaPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane4)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(listaModificarButton))
                             .addGroup(listaPanelLayout.createSequentialGroup()
@@ -715,7 +753,8 @@ public class gestorFrame extends javax.swing.JFrame {
         }
         else if( tabPanel.getSelectedComponent().getName().equals("lista")){
             // cargar la lista de incidencias
-            incidenciasModel.setDataVector(manager.obtenerDatos(1, miUsuario.getIdUsuario()),tIncidencias);
+            page = 1;
+            incidenciasModel.setDataVector(manager.obtenerDatos(page, miUsuario.getIdUsuario()),tIncidencias);
             wListaNombreLabel.setVisible(false);
             wListaEdadLabel.setVisible(false);
             wListaTelefonoLabel.setVisible(false);
@@ -727,10 +766,13 @@ public class gestorFrame extends javax.swing.JFrame {
         IncidenciaEJB  incidenciaSel = manager.obtenerDatosIncidencia(listaTabla.getSelectedRow());
         
         if (incidenciaSel != null) {
-            listaNombreField.setText(incidenciaSel.getCliente().getNombreCliente());
+            listaNombreField.setText(incidenciaSel.getCliente().getNombre());
             listaTelefonoField.setText(incidenciaSel.getCliente().getTelefono());
             listaDireccionField.setText(incidenciaSel.getCliente().getDireccion());
-            listaEdadField.setText(String.valueOf(incidenciaSel.getCliente().getEdad()));
+            
+            // llenar la fecha de nacimiento
+            edadChooser.setDate(incidenciaSel.getFecha());
+            
             listaDescripcionArea.setText(incidenciaSel.getDescripcion());
             
             if (incidenciaSel.getImportancia().equals("EN ESPERA")) {
@@ -761,17 +803,14 @@ public class gestorFrame extends javax.swing.JFrame {
         boolean integrity = true;
         IncidenciaEJB actualizar;
         Date fecha;
+        Date edad;
                 
-        int edad = validador.isInteger(listaEdadField.getText());
         
         if (!validador.isAlpha(listaNombreField.getText()) || listaNombreField.getText().length() == 0) {
             integrity = false;
         }
         
         if (validador.isInteger(listaTelefonoField.getText()) == -1 || listaTelefonoField.getText().length() != 6) {
-            integrity = false;
-        }
-        if (edad <= 0 || edad > 99) {
             integrity = false;
         }
         if (listaDescripcionArea.getText().length() == 0) {
@@ -787,24 +826,22 @@ public class gestorFrame extends javax.swing.JFrame {
                 actualizar =  manager.obtenerDatosIncidencia(listaTabla.getSelectedRow());
                 
                 // paso la revision
-                actualizar.getCliente().setNombreCliente(listaNombreField.getText());
+                actualizar.getCliente().setNombre(listaNombreField.getText());
                 actualizar.getCliente().setTelefono(listaTelefonoField.getText());                
                 actualizar.getCliente().setDireccion(listaDireccionField.getText());
-                //@todo actualizar a calendario
-                //actualizar.getCliente().setEdad(Integer.valueOf(listaEdadField.getText()));
+
                 
                 actualizar.setIdUsuario(miUsuario);
                 
                 actualizar.setDescripcion(listaDescripcionArea.getText());
 
                 // crear la fecha
-                fecha = new Date(
-                        listaCalendario.getYearChooser().getYear(),
-                        listaCalendario.getMonthChooser().getMonth(),
-                        listaCalendario.getDayChooser().getDay()
-                );
-
+                fecha = listaCalendario.getDate();
                 actualizar.setFecha(new java.sql.Date(fecha.getYear(), fecha.getMonth(), fecha.getDay()));
+                
+                // edad
+                edad = edadChooser.getDate();
+                actualizar.getCliente().setEdad(new java.sql.Date(edad.getYear(),edad.getMonth(),edad.getDay()));
 
                 if (listaImportanciaCombo.getSelectedIndex() == 0) {
                     actualizar.setImportancia("URGENTE");
@@ -821,7 +858,7 @@ public class gestorFrame extends javax.swing.JFrame {
                 manager.actualizarIncidencia(actualizar, 1, miUsuario.getIdUsuario());
                 
                 JOptionPane.showMessageDialog(null, "Registro actualizado correctamente");
-                incidenciasModel.setDataVector(manager.obtenerDatos(1, miUsuario.getIdUsuario()), tIncidencias);
+                incidenciasModel.setDataVector(manager.obtenerDatos(page, miUsuario.getIdUsuario()), tIncidencias);
             }
             
         }else{
@@ -865,7 +902,7 @@ public class gestorFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Error al remover al incidencia");
                 }
                 // regenerar la tabla
-                incidenciasModel.setDataVector(manager.obtenerDatos(1,miUsuario.getIdUsuario()), tIncidencias);
+                incidenciasModel.setDataVector(manager.obtenerDatos(page,miUsuario.getIdUsuario()), tIncidencias);
             }            
         }       
         
@@ -942,19 +979,11 @@ public class gestorFrame extends javax.swing.JFrame {
             registro.setApellido(apellidoField.getText());
 
             // crear la fecha
-            fecha = new Date(
-                calendario.getYearChooser().getYear(),
-                calendario.getMonthChooser().getMonth(),
-                calendario.getDayChooser().getDay()
-            );
+            fecha = calendario.getDate();
 
             registro.setFecha(fecha);
             
-            edad = new Date(
-                    nacimiento.getYearChooser().getYear(), 
-                    nacimiento.getMonthChooser().getMonth(), 
-                    nacimiento.getDayChooser().getDay()
-            );
+            edad = nacimiento.getDate();
             
             registro.setEdad(edad);
             
@@ -991,17 +1020,6 @@ public class gestorFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nombreFieldFocusLost
 
-    private void listaEdadFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_listaEdadFieldFocusLost
-        // TODO add your handling code here:
-        int edad = validador.isInteger(listaEdadField.getText());
-        if (edad != -1 && edad > 0 && edad <= 99) {
-            wListaEdadLabel.setVisible(false);
-        }else{
-            wListaEdadLabel.setVisible(true);
-        }
-
-    }//GEN-LAST:event_listaEdadFieldFocusLost
-
     private void apellidoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apellidoFieldFocusLost
         // TODO add your handling code here:
         if (validador.isAlpha(apellidoField.getText())) {
@@ -1010,6 +1028,27 @@ public class gestorFrame extends javax.swing.JFrame {
             wapellidoLabel.setVisible(true);
         }
     }//GEN-LAST:event_apellidoFieldFocusLost
+
+    private void correoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_correoFieldActionPerformed
+
+    private void listaAnteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaAnteriorButtonActionPerformed
+        // TODO add your handling code here:
+        if (page > 1) {
+            page-=1;
+            incidenciasModel.setDataVector(manager.obtenerDatos(page,miUsuario.getIdUsuario()), tIncidencias);
+            System.out.println(page);
+        }
+    }//GEN-LAST:event_listaAnteriorButtonActionPerformed
+
+    private void listaSiguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSiguienteButtonActionPerformed
+        // TODO add your handling code here:
+        // @todo revisar los limites posibles
+        page+=1;
+        incidenciasModel.setDataVector(manager.obtenerDatos(page,miUsuario.getIdUsuario()), tIncidencias);
+        System.out.println(page);
+    }//GEN-LAST:event_listaSiguienteButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1021,6 +1060,7 @@ public class gestorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel descripcionLabel;
     private javax.swing.JTextArea descripcionText;
     private javax.swing.JTextField direccionField;
+    private javax.swing.JPanel edadChooserPanel;
     private javax.swing.JButton enviarButton;
     private javax.swing.JLabel fechaLabel;
     private javax.swing.JComboBox<String> importanciaCombo;
@@ -1039,7 +1079,6 @@ public class gestorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel listaDescripcionLabel;
     private javax.swing.JTextField listaDireccionField;
     private javax.swing.JLabel listaDireccionLabel;
-    private javax.swing.JTextField listaEdadField;
     private javax.swing.JLabel listaEdadLabel;
     private javax.swing.JButton listaEliminarButton;
     private javax.swing.JLabel listaEliminarLabel;
