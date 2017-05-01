@@ -121,11 +121,11 @@ public class Usuario {
     }      
     
     
-    private void getUsuarioModelRaw(){
+    private void getUsuarioModelRaw(int page){
 
         try{
             // consultar la lista de usuarios
-            allRegistros = remoteUsuario.getAllUsers();
+            allRegistros = remoteUsuario.listUsers(page);
             // con esta lista generar una matriz de objetos para crear el modelo
             
             for (UsuarioEJB usuario : allRegistros) {
@@ -140,13 +140,13 @@ public class Usuario {
         }
     }
     
-    public Object[][] obtenerDatos(boolean regenerar){
+    public Object[][] obtenerDatos(boolean regenerar,int page){
         // llamar a la API si se quiere regenerar
         if (regenerar) {
             usernames.clear();
             apellidos.clear();
             nombres.clear();            
-            getUsuarioModelRaw();            
+            getUsuarioModelRaw(page);            
         }
         generarDatos();
         
@@ -171,10 +171,10 @@ public class Usuario {
         return datos;
     }
     
-    public void actualizarUsuario(UsuarioEJB objetivo){
+    public void actualizarUsuario(UsuarioEJB objetivo,int page){
         try{
             remoteUsuario.actualizarDatosEntidad(objetivo);
-            obtenerDatos(true);            
+            obtenerDatos(true,page);            
         }catch(Exception e){
             System.out.println("Error al consultar al servidor");
             System.out.println(e.getMessage());

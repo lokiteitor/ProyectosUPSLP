@@ -11,6 +11,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.View;
+import mx.edu.upslp.callcenterclient.gui.datos.Estadisticas;
+import mx.edu.upslp.callcenterclient.gui.datos.Movimiento;
 import mx.edu.upslp.callcenterclient.gui.datos.Usuario;
 import mx.edu.upslp.callcenterclient.validaciones.Validador;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
@@ -20,11 +22,17 @@ import mx.edu.upslp.callserver.usuario.UsuarioEJB;
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 public class administradorFrame extends javax.swing.JFrame {
+    private int page = 1;
+    private int movPage = 1;
     private UsuarioEJB miUsuario;
     private Validador validador = new Validador();
     private JCalendar calendario = new JCalendar();
     private String[] usuariosTitle = new String[] {"Username","Nombre","Apellido"};
+    private String[] movUsuarioTitle = new String[] {"Username","Correo","Nombre","Apellido"};
+    private String[] movMovimientosTitle = new String[] {"Folio Incidencia","Tipo","Fecha"};
     private Usuario usuarioManager = new Usuario();
+    private Movimiento movManager = new Movimiento();
+    private Estadisticas estadistica = new Estadisticas();
     // modificamos el modelo en su creacion
     private DefaultTableModel usuariosModel = new DefaultTableModel(){
         boolean[] editColum = {false,false,false};
@@ -33,6 +41,22 @@ public class administradorFrame extends javax.swing.JFrame {
             return editColum[indCol];
         }
     };
+
+    private DefaultTableModel movimientosUsuario = new DefaultTableModel(){
+        boolean[] editColum = {false,false,false,false};
+        // hacemos que las columnas no sea editables
+        public boolean isCellEditable(int indFila,int indCol){
+            return editColum[indCol];
+        }
+    };
+
+    private DefaultTableModel movimientosDetalles = new DefaultTableModel(){
+        boolean[] editColum = {false,false,false,false};
+        // hacemos que las columnas no sea editables
+        public boolean isCellEditable(int indFila,int indCol){
+            return editColum[indCol];
+        }
+    };    
 
     
     /**
@@ -96,12 +120,15 @@ public class administradorFrame extends javax.swing.JFrame {
         correoLabel = new javax.swing.JLabel();
         correoField = new javax.swing.JTextField();
         wcorreoLabel = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        movimientoPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         reportesTable = new javax.swing.JTable();
         listaLabel = new javax.swing.JLabel();
         anteriorButton = new javax.swing.JButton();
         siguienteButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        movimientosTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         usuariosTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -137,6 +164,7 @@ public class administradorFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tabs.setName("movimientos"); // NOI18N
         tabs.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 tabsStateChanged(evt);
@@ -251,7 +279,7 @@ public class administradorFrame extends javax.swing.JFrame {
                             .addComponent(correoLabel)
                             .addComponent(correoField)
                             .addComponent(wcorreoLabel))))
-                .addContainerGap(485, Short.MAX_VALUE))
+                .addContainerGap(388, Short.MAX_VALUE))
         );
         altasPanelLayout.setVerticalGroup(
             altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,61 +329,79 @@ public class administradorFrame extends javax.swing.JFrame {
 
         tabs.addTab("Altas", altasPanel);
 
-        jPanel2.setName("reportes"); // NOI18N
+        movimientoPanel.setName("reportes"); // NOI18N
 
-        reportesTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        reportesTable.setModel(movimientosUsuario);
+        reportesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reportesTableMouseClicked(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(reportesTable);
 
-        listaLabel.setText("Lista de reportes");
+        listaLabel.setText("Lista de Usuarios");
 
         anteriorButton.setText("Anterior");
+        anteriorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anteriorButtonActionPerformed(evt);
+            }
+        });
 
         siguienteButton.setText("Siguiente");
+        siguienteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siguienteButtonActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        movimientosTable.setModel(movimientosDetalles);
+        jScrollPane3.setViewportView(movimientosTable);
+
+        jLabel1.setText("Movimientos");
+
+        javax.swing.GroupLayout movimientoPanelLayout = new javax.swing.GroupLayout(movimientoPanel);
+        movimientoPanel.setLayout(movimientoPanelLayout);
+        movimientoPanelLayout.setHorizontalGroup(
+            movimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(movimientoPanelLayout.createSequentialGroup()
+                .addGroup(movimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(movimientoPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(movimientoPanelLayout.createSequentialGroup()
                         .addGap(174, 174, 174)
-                        .addComponent(listaLabel))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(listaLabel)
+                        .addGap(354, 354, 354)
+                        .addComponent(jLabel1))
+                    .addGroup(movimientoPanelLayout.createSequentialGroup()
                         .addGap(141, 141, 141)
                         .addComponent(anteriorButton)
                         .addGap(18, 18, 18)
                         .addComponent(siguienteButton)))
-                .addContainerGap(684, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        movimientoPanelLayout.setVerticalGroup(
+            movimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(movimientoPanelLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(listaLabel)
+                .addGroup(movimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(listaLabel)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(movimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(movimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(anteriorButton)
                     .addComponent(siguienteButton))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Reportes", jPanel2);
+        tabs.addTab("Movimientos", movimientoPanel);
 
         jPanel3.setName("estadisticas"); // NOI18N
 
@@ -363,7 +409,7 @@ public class administradorFrame extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1143, Short.MAX_VALUE)
+            .addGap(0, 1046, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,8 +431,18 @@ public class administradorFrame extends javax.swing.JFrame {
         usuariosLabel.setText("Lista de Usuarios");
 
         usuariosAnteriorButton.setText("Anterior");
+        usuariosAnteriorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuariosAnteriorButtonActionPerformed(evt);
+            }
+        });
 
         usuariosSiguienteButton.setText("Siguiente");
+        usuariosSiguienteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuariosSiguienteButtonActionPerformed(evt);
+            }
+        });
 
         usuariosNombreLabel.setText("Nombre");
 
@@ -525,7 +581,7 @@ public class administradorFrame extends javax.swing.JFrame {
                         .addComponent(usuariosAnteriorButton)
                         .addGap(34, 34, 34)
                         .addComponent(usuariosSiguienteButton)))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         usuariosTabLayout.setVerticalGroup(
             usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -627,10 +683,7 @@ public class administradorFrame extends javax.swing.JFrame {
         
         if (valid) {
             // las demas validaciones pasaron
-            fecha = new Date(calendario.getYearChooser().getYear(),
-                    calendario.getMonthChooser().getMonth(),
-                    calendario.getDayChooser().getDay()
-            );
+            fecha = calendario.getDate();
             
             usuario.setFechaNacimiento(fecha);
             
@@ -668,7 +721,13 @@ public class administradorFrame extends javax.swing.JFrame {
         
         if (tabs.getSelectedComponent().getName().equals("listaUsuarios")) {
             // consultar la lista de usuarios
-            usuariosModel.setDataVector(usuarioManager.obtenerDatos(true), usuariosTitle);            
+            usuariosModel.setDataVector(usuarioManager.obtenerDatos(true,page), usuariosTitle);            
+        }
+        else if (tabs.getSelectedComponent().getName().equals("reportes")) {
+            movimientosUsuario.setDataVector(usuarioManager.obtenerDatos(true,movPage), movUsuarioTitle);
+        }
+        else if (tabs.getSelectedComponent().getName().equals("estadisticas")) {
+            estadistica.numeroIncidencias();
         }
     }//GEN-LAST:event_tabsStateChanged
 
@@ -702,7 +761,7 @@ public class administradorFrame extends javax.swing.JFrame {
             // obtener el usuario
             UsuarioEJB objetivo = usuarioManager.obtenerDatosUsuario(usuariosTable.getSelectedRow());
             objetivo.setPassword(usuariosPasswordField.getText());
-            usuarioManager.actualizarUsuario(objetivo);            
+            usuarioManager.actualizarUsuario(objetivo,page);            
             JOptionPane.showMessageDialog(null, "Contraseña actualizada correctamente");
             usuariosPasswordField.setText("");
         }
@@ -727,7 +786,7 @@ public class administradorFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Error al remover al usuario");
                 }
                 // regenerar la tabla
-                usuariosModel.setDataVector(usuarioManager.obtenerDatos(true), usuariosTitle);
+                usuariosModel.setDataVector(usuarioManager.obtenerDatos(true,page), usuariosTitle);
             }            
         }       
     }//GEN-LAST:event_usuariosDeleteButtonActionPerformed
@@ -769,6 +828,44 @@ public class administradorFrame extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_nacionalidadFieldFocusLost
 
+    private void usuariosAnteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosAnteriorButtonActionPerformed
+        // TODO add your handling code here:
+        if (page > 1) {
+            page -= 1;
+            usuariosModel.setDataVector(usuarioManager.obtenerDatos(true, page), usuariosTitle);
+        }
+    }//GEN-LAST:event_usuariosAnteriorButtonActionPerformed
+
+    private void usuariosSiguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosSiguienteButtonActionPerformed
+        // TODO add your handling code here:
+        page +=  1;
+        usuariosModel.setDataVector(usuarioManager.obtenerDatos(true, page), usuariosTitle);
+    }//GEN-LAST:event_usuariosSiguienteButtonActionPerformed
+
+    private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorButtonActionPerformed
+        if (movPage > 1) {
+            movPage -= 1;
+            movimientosUsuario.setDataVector(usuarioManager.obtenerDatos(true, movPage), movUsuarioTitle);
+        }
+    }//GEN-LAST:event_anteriorButtonActionPerformed
+
+    private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteButtonActionPerformed
+        // TODO add your handling code here:
+        movPage +=  1;
+        movimientosUsuario.setDataVector(usuarioManager.obtenerDatos(true, movPage), movUsuarioTitle);        
+    }//GEN-LAST:event_siguienteButtonActionPerformed
+
+    private void reportesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportesTableMouseClicked
+        // TODO add your handling code here:
+        // obtener el id del usuario
+        UsuarioEJB usuarioSel = usuarioManager.obtenerDatosUsuario(reportesTable.getSelectedRow());
+        
+        if (usuarioSel != null) {
+            movimientosDetalles.setDataVector(movManager.obtenerDatos(usuarioSel.getIdUsuario()), movMovimientosTitle);
+        }
+        
+    }//GEN-LAST:event_reportesTableMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> accesoCombo;
@@ -782,13 +879,16 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel correoLabel;
     private javax.swing.JButton enviarButton;
     private javax.swing.JLabel fechaLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel listaLabel;
+    private javax.swing.JPanel movimientoPanel;
+    private javax.swing.JTable movimientosTable;
     private javax.swing.JTextField nacionalidadField;
     private javax.swing.JLabel nacionalidadLabel;
     private javax.swing.JTextField nombreField;

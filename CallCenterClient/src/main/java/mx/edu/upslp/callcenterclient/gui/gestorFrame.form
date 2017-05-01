@@ -479,6 +479,11 @@
                       <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="listaDireccionLabel" min="-2" pref="185" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                              <Component id="listaCalendarioPanel" max="32767" attributes="0"/>
+                          </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="wListaNombreLabel" min="-2" max="-2" attributes="0"/>
@@ -498,45 +503,37 @@
                                           <Component id="listaSeguridadPanel" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="listaImportanciaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="listaImportanciaCombo" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                              <Component id="listaTelefonoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="listaTelefonoField" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                              <Component id="listaNombreField" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="listaEdadLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="listaNombreLabel" min="-2" pref="185" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="listaFechaLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <EmptySpace pref="104" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="286" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Component id="listaModificarButton" min="-2" pref="192" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane4" max="32767" attributes="0"/>
+                                  <Component id="edadChooserPanel" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="listaDescripcionLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="listaNombreLabel" min="-2" pref="185" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="listaFechaLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="listaDireccionLabel" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="listaImportanciaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="listaImportanciaCombo" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                                          <Component id="listaTelefonoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="listaTelefonoField" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                                          <Component id="listaNombreField" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="listaEdadLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="edadChooserPanel" max="32767" attributes="0"/>
-                                  <Component id="listaCalendarioPanel" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane4" alignment="0" pref="525" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -573,49 +570,42 @@
                                   <Component id="listaFechaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="listaNombreField" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="wListaNombreLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="listaImportanciaLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="listaCalendarioPanel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="listaImportanciaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="listaEdadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="listaImportanciaCombo" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="listaTelefonoLabel" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="listaCalendarioPanel" max="32767" attributes="0"/>
+                                  <Component id="edadChooserPanel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="listaTelefonoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="listaDescripcionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="listaTelefonoField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="listaEdadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="listaTelefonoField" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="wListaTelefonoLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="listaDireccionLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="listaDireccionField" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="edadChooserPanel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="30" max="32767" attributes="0"/>
-                                      <Component id="listaDescripcionLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jScrollPane4" pref="143" max="32767" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="listaModificarButton" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace pref="19" max="32767" attributes="0"/>
                                       <Component id="wListaEdadLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="listaTipoLabel" min="-2" max="-2" attributes="0"/>
@@ -636,7 +626,10 @@
                                           </Group>
                                       </Group>
                                   </Group>
+                                  <Component id="jScrollPane4" max="32767" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="listaModificarButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -808,7 +801,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -901,7 +894,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
