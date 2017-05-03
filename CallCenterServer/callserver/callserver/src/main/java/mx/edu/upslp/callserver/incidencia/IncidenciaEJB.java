@@ -25,7 +25,8 @@
 package mx.edu.upslp.callserver.incidencia;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,8 +34,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import mx.edu.upslp.callserver.cliente.ClienteEJB;
+import mx.edu.upslp.callserver.movimiento.MovimientoEJB;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
 /**
@@ -60,6 +63,23 @@ public class IncidenciaEJB implements Serializable {
     private  ClienteEJB cliente;   
     
     private  UsuarioEJB idUsuario;
+    
+    private Collection<MovimientoEJB> movimientos;
+
+    /**
+     * @return the movimientos
+     */
+    @OneToMany(targetEntity = MovimientoEJB.class,mappedBy = "incidencia")
+    public Collection<MovimientoEJB> getMovimientos() {
+        return movimientos;
+    }
+
+    /**
+     * @param movimientos the movimientos to set
+     */
+    public void setMovimientos(Collection<MovimientoEJB> movimientos) {
+        this.movimientos = movimientos;
+    }
     
     /**
      * @return the idUsuario

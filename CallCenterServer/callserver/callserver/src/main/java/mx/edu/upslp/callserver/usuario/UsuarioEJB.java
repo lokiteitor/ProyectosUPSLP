@@ -24,7 +24,7 @@
 package mx.edu.upslp.callserver.usuario;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +32,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
+import mx.edu.upslp.callserver.movimiento.MovimientoEJB;
 
 /**
  *
@@ -62,7 +63,23 @@ public class UsuarioEJB implements Serializable {
     private Date updatedAt;   
 
     private Collection<IncidenciaEJB> incidencias;
+    
+    private Collection<MovimientoEJB> movimientos;
 
+    /**
+     * @return the movimientos
+     */
+    @OneToMany(targetEntity = MovimientoEJB.class,mappedBy = "usuario")
+    public Collection<MovimientoEJB> getMovimientos() {
+        return movimientos;
+    }
+
+    /**
+     * @param movimientos the movimientos to set
+     */
+    public void setMovimientos(Collection<MovimientoEJB> movimientos) {
+        this.movimientos = movimientos;
+    }
     
     
     @OneToMany(targetEntity = IncidenciaEJB.class,mappedBy = "idUsuario")

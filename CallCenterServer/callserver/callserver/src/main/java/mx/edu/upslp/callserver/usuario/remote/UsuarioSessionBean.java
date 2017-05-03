@@ -32,6 +32,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
+import java.util.Date;
 
 /**
  *
@@ -53,7 +54,7 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
     @Override
     public UsuarioEJB registrarUsuario(HashMap<String,Object> datos) {
         UsuarioEJB usuario = new UsuarioEJB();
-        java.util.Date now = new java.util.Date();
+        java.util.Date now = new Date();
         boolean integrity = true;
         
         // estos son los datos que debe contener el hashmap
@@ -97,17 +98,16 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
                         Boolean.valueOf(datos.get("administrador").toString()));
 
                 
-                java.util.Date nacimiento = (java.util.Date) datos.get("nacimiento");
-                usuario.setFechaNacimiento(new java.sql.Date(nacimiento.getDate(),
-                        nacimiento.getMonth(), nacimiento.getYear()));
+                java.util.Date nacimiento = (Date) datos.get("nacimiento");
+                usuario.setFechaNacimiento(nacimiento);
 
                 // generar los password y usernames y guardarlos en la db
                 usuario.setUsername(generarUsername(datos.get("nombre").toString()));
                 usuario.setPassword(generarPassword(datos.get("nombre").toString(),
                         datos.get("nombre").toString()));
 
-                usuario.setUpdatedAt(new java.sql.Date(now.getYear(), now.getMonth(), now.getDay()));
-                usuario.setCreatedAt(new java.sql.Date(now.getYear(), now.getMonth(), now.getDay()));                
+                usuario.setUpdatedAt(now);
+                usuario.setCreatedAt(now);                
                 // guardar el usuario
                 manager.persist(usuario);
             }else{               
@@ -289,7 +289,7 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
             integridad = false;
         }
         
-        if (!(datos.get("nacimiento") instanceof java.util.Date)) {
+        if (!(datos.get("nacimiento") instanceof Date)) {
             integridad = false;
         }
  
@@ -310,6 +310,23 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         }
         
         return integridad;
+    }
+
+    @Override
+    public List<UsuarioEJB> listUsers(int page) {
+        List<UsuarioEJB> resultados;
+        String sql = "SELECT * FROM USUARIO LIMIT ?,? ";
+        // escapa los parametros de la consulta
+        // devolver las consultas encapsuladas en IncidenciaEJB
+        Query query = manager.createNativeQuery(sql, UsuarioEJB.class);
+        query.setParameter(1,(page-1)*10 );
+        query.setParameter(2, (page)*10);
+        
+        
+        // obtener los resultados
+        resultados = query.getResultList();
+                       
+        return resultados;
     }
 
     

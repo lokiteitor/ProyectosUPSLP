@@ -21,39 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package mx.edu.upslp.callserver.usuario.remote;
+package mx.edu.upslp.callserver.movimiento.remote;
 
-import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Remote;
-import mx.edu.upslp.callserver.cliente.ClienteEJB;
-import mx.edu.upslp.callserver.usuario.UsuarioEJB;
-
+import mx.edu.upslp.callserver.movimiento.MovimientoEJB;
 
 /**
  *
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 @Remote
-public interface UsuarioSessionBeanRemote {
+public interface MovimientoSessionBeanRemote {
 
-    UsuarioEJB registrarUsuario(HashMap<String,Object> datos);
+    List<MovimientoEJB> listarMovimientos(String idUsuario);
 
-    boolean login(String username, String password);
-
-    boolean isAdmin(String username);
-
-    List<UsuarioEJB> getAllUsers();
-
-    void actualizarDatosEntidad(UsuarioEJB usuario);
-
-    boolean removerUsuario(String id);
-
-    UsuarioEJB obtenerUsuario(String username);
-
-    boolean integridadDatos(HashMap<String,Object> datos);
-
-    List<UsuarioEJB> listUsers(int page);
     
-           
+    
 }

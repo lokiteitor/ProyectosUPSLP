@@ -21,39 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package mx.edu.upslp.callserver.usuario.remote;
+package mx.edu.upslp.callserver.movimiento.remote;
 
-import java.util.HashMap;
 import java.util.List;
-import javax.ejb.Remote;
-import mx.edu.upslp.callserver.cliente.ClienteEJB;
-import mx.edu.upslp.callserver.usuario.UsuarioEJB;
-
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import mx.edu.upslp.callserver.movimiento.MovimientoEJB;
 
 /**
  *
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
-@Remote
-public interface UsuarioSessionBeanRemote {
+@Stateless
+public class MovimientoSessionBean implements MovimientoSessionBeanRemote {
+    @PersistenceContext(unitName = "mx.edu.upslp_callserver_ejb_1.0PU")
+    private EntityManager manager;       
 
-    UsuarioEJB registrarUsuario(HashMap<String,Object> datos);
+    @Override
+    public List<MovimientoEJB> listarMovimientos(String idUsuario) {
+        List<MovimientoEJB> resultados;
+        String sql = "SELECT * FROM MOVIMIENTO WHERE ID_USUARIO=?";
+        Query query = manager.createNativeQuery(sql,MovimientoEJB.class);
+        query.setParameter(1, idUsuario);
+        
+        resultados = query.getResultList();
+        
+        return resultados;
+    }
 
-    boolean login(String username, String password);
 
-    boolean isAdmin(String username);
 
-    List<UsuarioEJB> getAllUsers();
-
-    void actualizarDatosEntidad(UsuarioEJB usuario);
-
-    boolean removerUsuario(String id);
-
-    UsuarioEJB obtenerUsuario(String username);
-
-    boolean integridadDatos(HashMap<String,Object> datos);
-
-    List<UsuarioEJB> listUsers(int page);
     
-           
+    
 }

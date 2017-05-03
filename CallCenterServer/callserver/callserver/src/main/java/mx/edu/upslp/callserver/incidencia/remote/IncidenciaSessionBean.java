@@ -32,6 +32,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import mx.edu.upslp.callserver.cliente.ClienteEJB;
 import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
+import mx.edu.upslp.callserver.movimiento.MovimientoEJB;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
 /**
@@ -53,6 +54,7 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
         boolean integrity = true;
         // revisar el diccionario y relacionar los datos
         IncidenciaEJB incidencia = new IncidenciaEJB();
+        MovimientoEJB movimiento = new MovimientoEJB();
         ClienteEJB cliente = null;
         Date now = new Date();
         
@@ -80,17 +82,17 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
 
                 if (cliente == null) {
                     cliente = new ClienteEJB();
-                    cliente.setCreatedAt(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));
+                    cliente.setCreatedAt(new Date());
                 }       
                 // guarda los datos del cliente o los actualiza
-                java.util.Date edad = (java.util.Date)datos.get("edad");
-                cliente.setEdad(new java.sql.Date(edad.getYear(), edad.getMonth(), edad.getDay()));                    
+                Date edad = (Date)datos.get("edad");
+                cliente.setEdad(edad);                    
                 cliente.setCorreo(datos.get("correo").toString());
                 cliente.setNombre(datos.get("nombre").toString());
                 cliente.setApellido(datos.get("apellido").toString());
                 cliente.setDireccion(datos.get("direccion").toString());                   
                 cliente.setTelefono(datos.get("telefono").toString());                            
-                cliente.setUpdatedAt(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));                    
+                cliente.setUpdatedAt(new Date());
                 manager.persist(cliente);                    
 
                 // registrar los datos de la incidencia
@@ -101,13 +103,23 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
                 UsuarioEJB usuario = manager.find(UsuarioEJB.class, datos.get("idusuario").toString());
                 incidencia.setIdUsuario(usuario);
                 incidencia.setCliente(cliente);
-                java.util.Date fecha = (java.util.Date)datos.get("fecha");
+                Date fecha = (Date)datos.get("fecha");
                 
-                incidencia.setFecha(new java.sql.Date(fecha.getYear(), fecha.getMonth(), fecha.getDay()));
-                incidencia.setCreated_at(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));
-                incidencia.setUpdated_at(new java.sql.Date(now.getYear(),now.getMonth(),now.getYear()));
+                incidencia.setFecha(fecha);
+                incidencia.setCreated_at(now);
+                incidencia.setUpdated_at(now);
                 
                 manager.persist(incidencia);
+                
+                // guardar registro de movimiento
+                
+                movimiento.setCreated_at(now);
+                movimiento.setIncidencia(incidencia);
+                movimiento.setTipo("ALTA");
+                movimiento.setUpdated_at(now);
+                movimiento.setUsuario(usuario);
+                
+                manager.persist(movimiento);
                 
                 success = true;
                 
@@ -165,7 +177,7 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
             integrity = false;
         }
         
-        if (!(datos.get("edad") instanceof java.util.Date)) {
+        if (!(datos.get("edad") instanceof Date)) {
             integrity = false;
         }
         
@@ -183,7 +195,7 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
             integrity = false;
         }
             
-        if (!((datos.get("fecha")) instanceof java.util.Date)) {
+        if (!((datos.get("fecha")) instanceof Date)) {
             integrity = false;
         }
             
@@ -225,11 +237,24 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
      */
     @Override
     public void actualizarIncidencia(IncidenciaEJB objetivo) {
+        MovimientoEJB movimiento = new MovimientoEJB();
         // retomar la conexion para la entidad
         IncidenciaEJB entity = manager.merge(objetivo);
+        UsuarioEJB usuario = manager.merge(objetivo.getIdUsuario());
+        ClienteEJB cliente = manager.merge(objetivo.getCliente());
         //@todo validar si es necesario
         // guardar los datos
+        manager.persist(usuario);
+        manager.persist(cliente);
         manager.persist(entity);
+        
+        // crear registro de movimiento
+        movimiento.setCreated_at(new Date());
+        movimiento.setIncidencia(entity);
+        movimiento.setTipo("MODIFICACION");
+        movimiento.setUpdated_at(new Date());
+        movimiento.setUsuario(usuario);
+        manager.persist(movimiento);
     }
 
     /**
@@ -239,6 +264,8 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
      */
     @Override
     public boolean removerIncidencia(Long id) {
+        MovimientoEJB movimientoEJB = new MovimientoEJB();
+        UsuarioEJB usuario;
         boolean response = true;
         // buscar el registro
         IncidenciaEJB objetivo = manager.find(IncidenciaEJB.class, id);
@@ -247,6 +274,14 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
             response = false;
         }else{
             manager.remove(objetivo);
+            // registrar movimiento
+            usuario = manager.merge(objetivo.getIdUsuario());
+            movimientoEJB.setCreated_at(new Date());
+            movimientoEJB.setIncidencia(null);
+            movimientoEJB.setTipo("BAJA");
+            movimientoEJB.setUpdated_at(new Date());
+            movimientoEJB.setUsuario(usuario);
+            manager.persist(movimientoEJB);
         }
         
         return response;

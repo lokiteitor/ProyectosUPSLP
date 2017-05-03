@@ -24,13 +24,17 @@
 package mx.edu.upslp.callserver.movimiento;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
+import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
 /**
  *
@@ -47,16 +51,20 @@ public class MovimientoEJB implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="ID_MOVIMIENTO")
     private Long idMovimiento;
-    @Column(name="ID_INCIDENCIA")
-    private Long idIncidencia;
-    @Column(name="ID_USUARIO")
-    private Long idUsuario;
     @Column(name="TIPO")
     private String Tipo;
     @Column(name="created_at")
     private Date created_at;
     @Column(name="updated_at")
     private Date updated_at;
+    
+    @ManyToOne(targetEntity = IncidenciaEJB.class)
+    @JoinColumn(name = "ID_INCIDENCIA",referencedColumnName = "ID_INCIDENCIA")
+    private IncidenciaEJB incidencia;
+    @ManyToOne(targetEntity = UsuarioEJB.class)
+    @JoinColumn(name = "ID_USUARIO",referencedColumnName = "CORREO")
+    private UsuarioEJB usuario;
+    
 
     /**
      * @return the idMovimiento
@@ -72,33 +80,6 @@ public class MovimientoEJB implements Serializable {
         this.idMovimiento = idMovimiento;
     }
 
-    /**
-     * @return the idIncidencia
-     */
-    public Long getIdIncidencia() {
-        return idIncidencia;
-    }
-
-    /**
-     * @param idIncidencia the idIncidencia to set
-     */
-    public void setIdIncidencia(Long idIncidencia) {
-        this.idIncidencia = idIncidencia;
-    }
-
-    /**
-     * @return the idUsuario
-     */
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    /**
-     * @param idUsuario the idUsuario to set
-     */
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     /**
      * @return the Tipo
@@ -166,6 +147,34 @@ public class MovimientoEJB implements Serializable {
     @Override
     public String toString() {
         return "mx.edu.upslp.callserver.movimiento.MovimientoEJB[ id=" + idMovimiento + " ]";
+    }
+
+    /**
+     * @return the incidencia
+     */
+    public IncidenciaEJB getIncidencia() {
+        return incidencia;
+    }
+
+    /**
+     * @param incidencia the incidencia to set
+     */
+    public void setIncidencia(IncidenciaEJB incidencia) {
+        this.incidencia = incidencia;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioEJB getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioEJB usuario) {
+        this.usuario = usuario;
     }
     
 }
