@@ -27,6 +27,7 @@ package mx.edu.upslp.callcenterclient.gui.datos;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,6 +47,7 @@ public class Movimiento {
     private InitialContext ctx;
     private MovimientoSessionBeanRemote remoteMovimiento;
     private List<MovimientoEJB> allMovimientos;
+    private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy hh:mm");
     
     private ArrayList<Long> idMovimientos = new ArrayList<Long>();
     private ArrayList<String> tipos = new ArrayList<String>();
@@ -71,15 +73,21 @@ public class Movimiento {
     }
 
     private void getModelRaw(String id){
-            // pedir los datos al server
-        allMovimientos = remoteMovimiento.listarMovimientos(id);
+            // pedir los datos al server        
         try{    
+            allMovimientos = remoteMovimiento.listarMovimientos(id);
+            System.out.println(allMovimientos);
             // crea la matriz para el modelo
             for (MovimientoEJB movimiento : allMovimientos) {
-                idMovimientos.add(movimiento.getIncidencia().getIdIncidencia());
+                if (movimiento.getIncidencia() != null) {
+                    idMovimientos.add(movimiento.getIncidencia().getIdIncidencia());
+                }else{
+                    idMovimientos.add(0L);
+                }
                 tipos.add(movimiento.getTipo());
                 fechas.add(movimiento.getCreated_at());
             }            
+            
         }catch(Error e){
             System.out.println(e.getMessage());
         }catch(Exception e){
@@ -93,7 +101,7 @@ public class Movimiento {
         datos = new Object[idMovimientos.size()][4];
         for (int i = 0; i < idMovimientos.size(); i++) {
             datos[i][0] = idMovimientos.get(i);                                    
-            datos[i][2] = fechas.get(i);
+            datos[i][2] = formato.format(fechas.get(i));
             datos[i][1] = tipos.get(i);
         }
         return datos;
@@ -109,5 +117,5 @@ public class Movimiento {
         generarDatos();
         return datos;
     }
-
+    
 }

@@ -6,7 +6,9 @@
 package mx.edu.upslp.callcenterclient.gui;
 
 import com.toedter.calendar.JCalendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +18,13 @@ import mx.edu.upslp.callcenterclient.gui.datos.Movimiento;
 import mx.edu.upslp.callcenterclient.gui.datos.Usuario;
 import mx.edu.upslp.callcenterclient.validaciones.Validador;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
 
 /**
  *
@@ -33,6 +42,15 @@ public class administradorFrame extends javax.swing.JFrame {
     private Usuario usuarioManager = new Usuario();
     private Movimiento movManager = new Movimiento();
     private Estadisticas estadistica = new Estadisticas();
+    private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat formatoAV = new SimpleDateFormat("dd/MM/yyyy hh:mm");    
+    
+    // graficas
+    private DefaultPieDataset totalIncidencias = new DefaultPieDataset();
+    private DefaultCategoryDataset usuariosActivos = new  DefaultCategoryDataset();
+    private JFreeChart grafico;
+    private ChartPanel graficoChartPanel;
+    
     // modificamos el modelo en su creacion
     private DefaultTableModel usuariosModel = new DefaultTableModel(){
         boolean[] editColum = {false,false,false};
@@ -87,6 +105,7 @@ public class administradorFrame extends javax.swing.JFrame {
         wnacionalidadLabel.setVisible(false);
         wcorreoLabel.setVisible(false);
         
+        
     }
 
     /**
@@ -129,7 +148,6 @@ public class administradorFrame extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         movimientosTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         usuariosTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         usuariosTable = new javax.swing.JTable();
@@ -159,6 +177,11 @@ public class administradorFrame extends javax.swing.JFrame {
         usuariosDeleteButton = new javax.swing.JButton();
         actualizarPasswordButton = new javax.swing.JButton();
         usuariosTurnoField = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        reporteTotalButton = new javax.swing.JButton();
+        reporteUsuariosMButton = new javax.swing.JButton();
+        graficaPanel = new javax.swing.JPanel();
 
         jTextField8.setText("jTextField8");
 
@@ -403,21 +426,6 @@ public class administradorFrame extends javax.swing.JFrame {
 
         tabs.addTab("Movimientos", movimientoPanel);
 
-        jPanel3.setName("estadisticas"); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1046, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
-        );
-
-        tabs.addTab("Estadisticas", jPanel3);
-
         usuariosTab.setName("listaUsuarios"); // NOI18N
 
         usuariosTable.setModel(usuariosModel);
@@ -633,6 +641,78 @@ public class administradorFrame extends javax.swing.JFrame {
 
         tabs.addTab("Lista de Usuarios", usuariosTab);
 
+        jPanel3.setName("estadisticas"); // NOI18N
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        reporteTotalButton.setText("Reportes Totales");
+        reporteTotalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteTotalButtonActionPerformed(evt);
+            }
+        });
+
+        reporteUsuariosMButton.setText("Usuarios Mas Activos");
+        reporteUsuariosMButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteUsuariosMButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(reporteTotalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reporteUsuariosMButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(reporteTotalButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reporteUsuariosMButton)
+                .addContainerGap(420, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout graficaPanelLayout = new javax.swing.GroupLayout(graficaPanel);
+        graficaPanel.setLayout(graficaPanelLayout);
+        graficaPanelLayout.setHorizontalGroup(
+            graficaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 845, Short.MAX_VALUE)
+        );
+        graficaPanelLayout.setVerticalGroup(
+            graficaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(graficaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(graficaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        tabs.addTab("Estadisticas", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -747,9 +827,11 @@ public class administradorFrame extends javax.swing.JFrame {
                 usuariosAccesoField.setText("GESTOR");
             }
             // fechas
-            usuariosFechaField.setText(usuarioSel.getFechaNacimiento().toString());
-            usuariosCreacionField.setText(usuarioSel.getCreatedAt().toString());
-            usuariosActualizacionField.setText(usuarioSel.getUpdatedAt().toString());
+
+            
+            usuariosFechaField.setText(formato.format(usuarioSel.getFechaNacimiento()));
+            usuariosCreacionField.setText(formatoAV.format(usuarioSel.getCreatedAt()));
+            usuariosActualizacionField.setText(formatoAV.format(usuarioSel.getUpdatedAt()));
         }
         
         
@@ -866,6 +948,51 @@ public class administradorFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_reportesTableMouseClicked
 
+    private void reporteTotalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteTotalButtonActionPerformed
+        // TODO add your handling code here:
+        int[] datos = estadistica.numeroIncidencias();
+        
+        if (datos != null) {
+            // fuente de datos
+            totalIncidencias.setValue("QUEJAS", datos[0]);
+            totalIncidencias.setValue("SUGERENCIAS", datos[1]);
+            // creando el grafico
+            grafico = ChartFactory.createPieChart("Incidencias por categoria",
+                    totalIncidencias,
+                    true,
+                    true,
+                    false);
+            //graficoChartPanel = new ChartPanel(grafico);
+            //graficaPanel.add(graficoChartPanel);
+            ChartFrame frame = new ChartFrame("Incidencias totales", grafico);
+            frame.pack();
+            frame.setVisible(true);
+            
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al leer datos desde el servidor");
+        }
+        
+    }//GEN-LAST:event_reporteTotalButtonActionPerformed
+
+    private void reporteUsuariosMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteUsuariosMButtonActionPerformed
+        // TODO add your handling code here:
+        HashMap<String,Integer> resultados = estadistica.listarMayores();
+        
+        if (resultados != null) {
+            for (String key : resultados.keySet()) {
+                usuariosActivos.setValue(resultados.get(key), key, key);
+            }
+            
+            grafico = ChartFactory.createBarChart("Usuarios mas activos", "Usuario", "Incidencias", usuariosActivos);
+            ChartFrame frame = new ChartFrame("Usuarios mas activos", grafico);
+            frame.pack();
+            frame.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al leer los datos del servidor");
+        }
+    }//GEN-LAST:event_reporteUsuariosMButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> accesoCombo;
@@ -879,8 +1006,10 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel correoLabel;
     private javax.swing.JButton enviarButton;
     private javax.swing.JLabel fechaLabel;
+    private javax.swing.JPanel graficaPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -893,6 +1022,8 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel nacionalidadLabel;
     private javax.swing.JTextField nombreField;
     private javax.swing.JLabel nombreLabel;
+    private javax.swing.JButton reporteTotalButton;
+    private javax.swing.JButton reporteUsuariosMButton;
     private javax.swing.JTable reportesTable;
     private javax.swing.JLabel seguridadLabel;
     private javax.swing.JPanel seguridadPanel;

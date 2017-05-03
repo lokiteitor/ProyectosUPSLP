@@ -27,10 +27,13 @@ package mx.edu.upslp.callcenterclient.gui.datos;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import mx.edu.upslp.callserver.estadistica.EstadisticaSessionBeanRemote;
+import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
 /**
  *
@@ -40,6 +43,7 @@ public class Estadisticas {
     private Properties props = new Properties();
     private InitialContext ctx;
     private EstadisticaSessionBeanRemote estRemote;
+    private List<UsuarioEJB> consulta;
     
     public Estadisticas() {
         // cargamos la configuracion del JNDI
@@ -58,9 +62,37 @@ public class Estadisticas {
         }          
     }
     
-    public void numeroIncidencias(){
-        estRemote.cantidadIncidencias();
+    public int[] numeroIncidencias(){
+        int[] datos;
+        
+        try{
+            datos = estRemote.cantidadIncidencias();
+        }catch(Exception e){
+            datos =  null;
+            System.err.println("Error al consultar estadisticas");
+            System.err.println(e.getMessage());
+        }        
+        return datos;
+        
     }
     
+    public HashMap<String,Integer> listarMayores(){
+        HashMap<String,Integer> result = new HashMap<String,Integer>();
+        
+        try{
+            consulta = estRemote.IncidenciaPorUsuario();
+            
+            for (UsuarioEJB usuario : consulta) {
+                result.put(usuario.getIdUsuario().toString(),Integer.valueOf(usuario.getIncidencias().size()));
+            }
+            
+            
+        }catch(Exception e){
+            result = null;
+            System.err.println("Error al consultar al servidor");
+            System.err.println(e.getMessage());
+        }                
+        return result;
+    }
     
 }
