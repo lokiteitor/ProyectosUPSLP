@@ -5,17 +5,24 @@
  */
 package mx.edu.upslp.callcenterclient.gui;
 
+import com.github.lgooddatepicker.components.TimePicker;
 import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashMap;
 import javax.swing.BoxLayout;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.View;
 import mx.edu.upslp.callcenterclient.gui.datos.Estadisticas;
 import mx.edu.upslp.callcenterclient.gui.datos.Movimiento;
 import mx.edu.upslp.callcenterclient.gui.datos.Usuario;
+import mx.edu.upslp.callcenterclient.pdf.ReporteIncidenciasHoraPDF;
+import mx.edu.upslp.callcenterclient.pdf.ReporteIncidenciasHoyPDF;
 import mx.edu.upslp.callcenterclient.validaciones.Validador;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 import org.jfree.chart.ChartFactory;
@@ -35,7 +42,7 @@ public class administradorFrame extends javax.swing.JFrame {
     private int movPage = 1;
     private UsuarioEJB miUsuario;
     private Validador validador = new Validador();
-    private JCalendar calendario = new JCalendar();
+    private JDateChooser calendario = new JDateChooser();
     private String[] usuariosTitle = new String[] {"Username","Nombre","Apellido"};
     private String[] movUsuarioTitle = new String[] {"Username","Correo","Nombre","Apellido"};
     private String[] movMovimientosTitle = new String[] {"Folio Incidencia","Tipo","Fecha"};
@@ -44,6 +51,8 @@ public class administradorFrame extends javax.swing.JFrame {
     private Estadisticas estadistica = new Estadisticas();
     private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat formatoAV = new SimpleDateFormat("dd/MM/yyyy hh:mm");    
+    
+    private TimePicker  filtroHora = new  TimePicker();
     
     // graficas
     private DefaultPieDataset totalIncidencias = new DefaultPieDataset();
@@ -92,8 +101,12 @@ public class administradorFrame extends javax.swing.JFrame {
         // crear su manejador de eventos
         
         calendario.setMaxSelectableDate(new Date());
-                
-        
+        // filtro
+        filtroHora.setTime(LocalTime.now());
+        filtroHora.setEnabled(true);
+        filtroHora.setVisible(true);
+        panelFiltro.setLayout(new BoxLayout(panelFiltro, View.Y_AXIS));        
+        panelFiltro.add(filtroHora);
         
         this.setResizable(false);
         this.setTitle("Asistencia de Quejas y sugerencias");
@@ -104,6 +117,7 @@ public class administradorFrame extends javax.swing.JFrame {
         wapellidoLabel.setVisible(false);
         wnacionalidadLabel.setVisible(false);
         wcorreoLabel.setVisible(false);
+        
         
         
     }
@@ -119,26 +133,6 @@ public class administradorFrame extends javax.swing.JFrame {
 
         jTextField8 = new javax.swing.JTextField();
         tabs = new javax.swing.JTabbedPane();
-        altasPanel = new javax.swing.JPanel();
-        nombreLabel = new javax.swing.JLabel();
-        nombreField = new javax.swing.JTextField();
-        apellidoLabel = new javax.swing.JLabel();
-        apellidoField = new javax.swing.JTextField();
-        fechaLabel = new javax.swing.JLabel();
-        turnoLabel = new javax.swing.JLabel();
-        turnoCombo = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        nacionalidadLabel = new javax.swing.JLabel();
-        enviarButton = new javax.swing.JButton();
-        accesoCombo = new javax.swing.JComboBox<>();
-        wnombreLabel = new javax.swing.JLabel();
-        wapellidoLabel = new javax.swing.JLabel();
-        nacionalidadField = new javax.swing.JTextField();
-        wnacionalidadLabel = new javax.swing.JLabel();
-        calendarPanel = new javax.swing.JPanel();
-        correoLabel = new javax.swing.JLabel();
-        correoField = new javax.swing.JTextField();
-        wcorreoLabel = new javax.swing.JLabel();
         movimientoPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         reportesTable = new javax.swing.JTable();
@@ -181,7 +175,34 @@ public class administradorFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         reporteTotalButton = new javax.swing.JButton();
         reporteUsuariosMButton = new javax.swing.JButton();
+        reporteHoyButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        panelFiltro = new javax.swing.JPanel();
+        filtroHoraButton = new javax.swing.JButton();
         graficaPanel = new javax.swing.JPanel();
+        altasPanel = new javax.swing.JPanel();
+        nombreLabel = new javax.swing.JLabel();
+        nombreField = new javax.swing.JTextField();
+        apellidoLabel = new javax.swing.JLabel();
+        apellidoField = new javax.swing.JTextField();
+        fechaLabel = new javax.swing.JLabel();
+        turnoLabel = new javax.swing.JLabel();
+        turnoCombo = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        nacionalidadLabel = new javax.swing.JLabel();
+        accesoCombo = new javax.swing.JComboBox<>();
+        wnombreLabel = new javax.swing.JLabel();
+        wapellidoLabel = new javax.swing.JLabel();
+        nacionalidadField = new javax.swing.JTextField();
+        wnacionalidadLabel = new javax.swing.JLabel();
+        calendarPanel = new javax.swing.JPanel();
+        correoLabel = new javax.swing.JLabel();
+        correoField = new javax.swing.JTextField();
+        wcorreoLabel = new javax.swing.JLabel();
+        enviarButton = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jTextField8.setText("jTextField8");
 
@@ -193,164 +214,6 @@ public class administradorFrame extends javax.swing.JFrame {
                 tabsStateChanged(evt);
             }
         });
-
-        altasPanel.setName("altas"); // NOI18N
-
-        nombreLabel.setText("Nombre");
-
-        nombreField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                nombreFieldFocusLost(evt);
-            }
-        });
-
-        apellidoLabel.setText("Apellido");
-
-        apellidoField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                apellidoFieldFocusLost(evt);
-            }
-        });
-
-        fechaLabel.setText("Fecha de Nacimiento");
-
-        turnoLabel.setText("Turno");
-
-        turnoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"MATUTINO","VESPERTINO","NOCTURNO"}));
-
-        jLabel5.setText("Nivel de Acceso");
-
-        nacionalidadLabel.setText("Nacionalidad");
-
-        enviarButton.setText("Enviar");
-        enviarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enviarButtonActionPerformed(evt);
-            }
-        });
-
-        accesoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"GESTOR","ADMINISTRADOR"}));
-
-        wnombreLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        wnombreLabel.setForeground(new java.awt.Color(255, 0, 0));
-        wnombreLabel.setText("*Nombre Invalido");
-
-        wapellidoLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        wapellidoLabel.setForeground(new java.awt.Color(255, 0, 0));
-        wapellidoLabel.setText("* Apellido Invalido");
-
-        nacionalidadField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                nacionalidadFieldFocusLost(evt);
-            }
-        });
-
-        wnacionalidadLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        wnacionalidadLabel.setForeground(new java.awt.Color(255, 0, 0));
-        wnacionalidadLabel.setText("* Nacionalidad Invalida");
-
-        javax.swing.GroupLayout calendarPanelLayout = new javax.swing.GroupLayout(calendarPanel);
-        calendarPanel.setLayout(calendarPanelLayout);
-        calendarPanelLayout.setHorizontalGroup(
-            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        calendarPanelLayout.setVerticalGroup(
-            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        correoLabel.setText("Correo");
-
-        correoField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                correoFieldFocusLost(evt);
-            }
-        });
-
-        wcorreoLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        wcorreoLabel.setForeground(new java.awt.Color(255, 0, 0));
-        wcorreoLabel.setText("* Correo Invalido");
-
-        javax.swing.GroupLayout altasPanelLayout = new javax.swing.GroupLayout(altasPanel);
-        altasPanel.setLayout(altasPanelLayout);
-        altasPanelLayout.setHorizontalGroup(
-            altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(altasPanelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(wapellidoLabel)
-                    .addComponent(enviarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(altasPanelLayout.createSequentialGroup()
-                        .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(wnombreLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nombreLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nombreField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(apellidoLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(apellidoField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fechaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(wnacionalidadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nacionalidadField)
-                            .addComponent(turnoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(turnoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(nacionalidadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(accesoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(correoLabel)
-                            .addComponent(correoField)
-                            .addComponent(wcorreoLabel))))
-                .addContainerGap(388, Short.MAX_VALUE))
-        );
-        altasPanelLayout.setVerticalGroup(
-            altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(altasPanelLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreLabel)
-                    .addComponent(turnoLabel))
-                .addGap(18, 18, 18)
-                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(turnoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(wnombreLabel)
-                .addGap(2, 2, 2)
-                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(apellidoLabel)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(apellidoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(accesoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(wapellidoLabel)
-                .addGap(1, 1, 1)
-                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fechaLabel)
-                    .addComponent(nacionalidadLabel))
-                .addGap(18, 18, 18)
-                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(altasPanelLayout.createSequentialGroup()
-                        .addComponent(nacionalidadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(wnacionalidadLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(correoLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(wcorreoLabel)
-                        .addGap(0, 18, Short.MAX_VALUE))
-                    .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(enviarButton)
-                .addGap(100, 100, 100))
-        );
-
-        tabs.addTab("Altas", altasPanel);
 
         movimientoPanel.setName("reportes"); // NOI18N
 
@@ -421,7 +284,7 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addGroup(movimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(anteriorButton)
                     .addComponent(siguienteButton))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         tabs.addTab("Movimientos", movimientoPanel);
@@ -636,7 +499,7 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usuariosSiguienteButton)
                     .addComponent(usuariosAnteriorButton))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         tabs.addTab("Lista de Usuarios", usuariosTab);
@@ -659,15 +522,56 @@ public class administradorFrame extends javax.swing.JFrame {
             }
         });
 
+        reporteHoyButton.setText("Reporte Diario");
+        reporteHoyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteHoyButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Reportes por Hora");
+
+        javax.swing.GroupLayout panelFiltroLayout = new javax.swing.GroupLayout(panelFiltro);
+        panelFiltro.setLayout(panelFiltroLayout);
+        panelFiltroLayout.setHorizontalGroup(
+            panelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelFiltroLayout.setVerticalGroup(
+            panelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        filtroHoraButton.setText("Generar");
+        filtroHoraButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtroHoraButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(reporteTotalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reporteUsuariosMButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reporteHoyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(panelFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(reporteTotalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(reporteUsuariosMButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(filtroHoraButton)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -676,7 +580,15 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addComponent(reporteTotalButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reporteUsuariosMButton)
-                .addContainerGap(420, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reporteHoyButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filtroHoraButton)
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout graficaPanelLayout = new javax.swing.GroupLayout(graficaPanel);
@@ -713,6 +625,183 @@ public class administradorFrame extends javax.swing.JFrame {
 
         tabs.addTab("Estadisticas", jPanel3);
 
+        altasPanel.setName("altas"); // NOI18N
+
+        nombreLabel.setText("Nombre");
+
+        nombreField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nombreFieldFocusLost(evt);
+            }
+        });
+
+        apellidoLabel.setText("Apellido");
+
+        apellidoField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                apellidoFieldFocusLost(evt);
+            }
+        });
+
+        fechaLabel.setText("Fecha de Nacimiento");
+
+        turnoLabel.setText("Turno");
+
+        turnoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"MATUTINO","VESPERTINO","NOCTURNO"}));
+
+        jLabel5.setText("Nivel de Acceso");
+
+        nacionalidadLabel.setText("Nacionalidad");
+
+        accesoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"GESTOR","ADMINISTRADOR"}));
+
+        wnombreLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wnombreLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wnombreLabel.setText("*Nombre Invalido");
+
+        wapellidoLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wapellidoLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wapellidoLabel.setText("* Apellido Invalido");
+
+        nacionalidadField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nacionalidadFieldFocusLost(evt);
+            }
+        });
+        nacionalidadField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nacionalidadFieldActionPerformed(evt);
+            }
+        });
+
+        wnacionalidadLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wnacionalidadLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wnacionalidadLabel.setText("* Nacionalidad Invalida");
+
+        javax.swing.GroupLayout calendarPanelLayout = new javax.swing.GroupLayout(calendarPanel);
+        calendarPanel.setLayout(calendarPanelLayout);
+        calendarPanelLayout.setHorizontalGroup(
+            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        calendarPanelLayout.setVerticalGroup(
+            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 23, Short.MAX_VALUE)
+        );
+
+        correoLabel.setText("Correo");
+
+        correoField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                correoFieldFocusLost(evt);
+            }
+        });
+
+        wcorreoLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wcorreoLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wcorreoLabel.setText("* Correo Invalido");
+
+        enviarButton.setText("Enviar");
+        enviarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout altasPanelLayout = new javax.swing.GroupLayout(altasPanel);
+        altasPanel.setLayout(altasPanelLayout);
+        altasPanelLayout.setHorizontalGroup(
+            altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(altasPanelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(wcorreoLabel)
+                    .addComponent(wapellidoLabel)
+                    .addGroup(altasPanelLayout.createSequentialGroup()
+                        .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(wnombreLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nombreLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nombreField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(apellidoLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(apellidoField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(fechaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(correoField))
+                            .addComponent(correoLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(wnacionalidadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nacionalidadField)
+                            .addComponent(turnoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(turnoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(nacionalidadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(accesoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(enviarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(388, Short.MAX_VALUE))
+        );
+        altasPanelLayout.setVerticalGroup(
+            altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(altasPanelLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreLabel)
+                    .addComponent(turnoLabel))
+                .addGap(19, 19, 19)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(turnoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(wnombreLabel)
+                .addGap(2, 2, 2)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(apellidoLabel)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(apellidoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(accesoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addComponent(wapellidoLabel)
+                .addGap(1, 1, 1)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fechaLabel)
+                    .addComponent(nacionalidadLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nacionalidadField, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(calendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(correoLabel)
+                    .addComponent(wnacionalidadLabel))
+                .addGap(16, 16, 16)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enviarButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wcorreoLabel)
+                .addGap(197, 197, 197))
+        );
+
+        tabs.addTab("Altas", altasPanel);
+
+        menu.setText("Menu");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Salir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menu.add(jMenuItem1);
+
+        jMenuBar1.add(menu);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -726,76 +815,6 @@ public class administradorFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
-        boolean valid = true;
-        boolean administrador;
-        Date fecha;
-        Usuario usuario = new Usuario();
-        // validar los datos
-        if (!validador.isAlphaSpace(nombreField.getText()) || nombreField.getText().length() == 0) {
-            valid = false;
-            wnombreLabel.setVisible(true);            
-        }else{
-            usuario.setNombre(nombreField.getText());
-        }
-        
-        if (!validador.isAlphaSpace(apellidoField.getText()) || apellidoField.getText().length() == 0) {
-            valid = false;
-            wapellidoLabel.setVisible(true);            
-        }else{
-            usuario.setApellido(apellidoField.getText());
-        }
-        
-        if (!validador.isAlpha(nacionalidadField.getText()) || nacionalidadField.getText().length() == 0) {
-            valid = false;
-            wnacionalidadLabel.setVisible(true);            
-        }else{
-            usuario.setNacionalidad(nacionalidadField.getText());
-        }
-        
-        if (!validador.isEmail(correoField.getText())) {
-            wcorreoLabel.setVisible(true);
-            valid = false;
-        }else{
-            usuario.setCorreo(correoField.getText());            
-        }
-        
-        if (valid) {
-            // las demas validaciones pasaron
-            fecha = calendario.getDate();
-            
-            usuario.setFechaNacimiento(fecha);
-            
-            if (accesoCombo.getSelectedIndex() == 0) {
-                administrador = false;
-            }
-            else{
-                administrador = true;
-            }                        
-            usuario.setAdministrador(Boolean.valueOf(administrador));
-            
-            if (turnoCombo.getSelectedIndex() == 0) {
-                usuario.setTurno("MATUTINO");
-            }else if (turnoCombo.getSelectedIndex() == 1) {
-                usuario.setTurno("VESPERTINO");
-            }else{
-                usuario.setTurno("NOCTURNO");
-            }
-            
-            if (usuario.registro() == null) {
-                JOptionPane.showMessageDialog(null, "Error al crear el usuario revisa los datos por favor");
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Usuario creado con exito\nUsername: " +
-                        usuario.getUsername() + 
-                        "\nPassword: " + usuario.getPassword());
-            }            
-        }else{
-            JOptionPane.showMessageDialog(this, "Los datos ingresados son invalidos");
-        }
-                
-    }//GEN-LAST:event_enviarButtonActionPerformed
 
     private void tabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsStateChanged
         
@@ -872,43 +891,6 @@ public class administradorFrame extends javax.swing.JFrame {
             }            
         }       
     }//GEN-LAST:event_usuariosDeleteButtonActionPerformed
-
-    private void correoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_correoFieldFocusLost
-        // validar el correo
-        if (validador.isEmail(correoField.getText())) {
-            wcorreoLabel.setVisible(false);
-        }else{
-            wcorreoLabel.setVisible(true);
-        }
-    }//GEN-LAST:event_correoFieldFocusLost
-
-    private void nombreFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFieldFocusLost
-        // TODO add your handling code here:
-        if (validador.isAlphaSpace(nombreField.getText())) {
-           wnombreLabel.setVisible(false);
-        }else{
-           wnombreLabel.setVisible(true);
-        }        
-    }//GEN-LAST:event_nombreFieldFocusLost
-
-    private void apellidoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apellidoFieldFocusLost
-        // TODO add your handling code here:
-        if (validador.isAlphaSpace(apellidoField.getText())) {
-           wapellidoLabel.setVisible(false);
-        }else{
-           wapellidoLabel.setVisible(true);
-        }         
-    }//GEN-LAST:event_apellidoFieldFocusLost
-
-    private void nacionalidadFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nacionalidadFieldFocusLost
-        // TODO add your handling code here:
-        if (validador.isAlpha(nacionalidadField.getText())) {
-            wnacionalidadLabel.setVisible(false);
-        }
-        else{
-            wnacionalidadLabel.setVisible(true);
-        }        
-    }//GEN-LAST:event_nacionalidadFieldFocusLost
 
     private void usuariosAnteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosAnteriorButtonActionPerformed
         // TODO add your handling code here:
@@ -993,6 +975,162 @@ public class administradorFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_reporteUsuariosMButtonActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LoginFrame().setVisible(true);
+            }
+        });
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void reporteHoyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteHoyButtonActionPerformed
+        // seleccionar la ruta
+        JFileChooser ruta = new JFileChooser();
+        ruta.showSaveDialog(this);
+        File destino = ruta.getSelectedFile();
+        
+        
+        HashMap<String,Object[]> datos = estadistica.incidenciasHoy();
+        
+        ReporteIncidenciasHoyPDF reporte = new ReporteIncidenciasHoyPDF(destino);
+        reporte.setIds((Long[])datos.get("ids"));
+        reporte.setClientes((String[])datos.get("clientes"));
+        reporte.setImportancias((String[])datos.get("importancias"));
+        reporte.setTipos((String[])datos.get("tipos"));
+        reporte.setUsuarios((String[])datos.get("usuarios"));
+        reporte.createPDF();
+    }//GEN-LAST:event_reporteHoyButtonActionPerformed
+
+    private void filtroHoraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroHoraButtonActionPerformed
+        JFileChooser ruta = new JFileChooser();
+        ruta.showSaveDialog(this);
+        File destino = ruta.getSelectedFile();
+        
+        LocalTime tiempo = filtroHora.getTime();
+        HashMap<String,Object[]> datos = estadistica.IncidenciaPorHora(tiempo);
+        
+        ReporteIncidenciasHoraPDF reporte = new ReporteIncidenciasHoraPDF(destino);
+        reporte.setIds((Long[])datos.get("ids"));
+        reporte.setClientes((String[])datos.get("clientes"));
+        reporte.setImportancias((String[])datos.get("importancias"));
+        reporte.setTipos((String[])datos.get("tipos"));
+        reporte.setUsuarios((String[])datos.get("usuarios"));
+        reporte.createPDF();        
+        
+    }//GEN-LAST:event_filtroHoraButtonActionPerformed
+
+    private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
+        boolean valid = true;
+        boolean administrador;
+        Date fecha;
+        Usuario usuario = new Usuario();
+        // validar los datos
+        if (!validador.isAlphaSpace(nombreField.getText()) || nombreField.getText().length() == 0) {
+            valid = false;
+            wnombreLabel.setVisible(true);
+        }else{
+            usuario.setNombre(nombreField.getText());
+        }
+
+        if (!validador.isAlphaSpace(apellidoField.getText()) || apellidoField.getText().length() == 0) {
+            valid = false;
+            wapellidoLabel.setVisible(true);
+        }else{
+            usuario.setApellido(apellidoField.getText());
+        }
+
+        if (!validador.isAlpha(nacionalidadField.getText()) || nacionalidadField.getText().length() == 0) {
+            valid = false;
+            wnacionalidadLabel.setVisible(true);
+        }else{
+            usuario.setNacionalidad(nacionalidadField.getText());
+        }
+
+        if (!validador.isEmail(correoField.getText())) {
+            wcorreoLabel.setVisible(true);
+            valid = false;
+        }else{
+            usuario.setCorreo(correoField.getText());
+        }
+
+        if (valid) {
+            // las demas validaciones pasaron
+            fecha = calendario.getDate();
+
+            usuario.setFechaNacimiento(fecha);
+
+            if (accesoCombo.getSelectedIndex() == 0) {
+                administrador = false;
+            }
+            else{
+                administrador = true;
+            }
+            usuario.setAdministrador(Boolean.valueOf(administrador));
+
+            if (turnoCombo.getSelectedIndex() == 0) {
+                usuario.setTurno("MATUTINO");
+            }else if (turnoCombo.getSelectedIndex() == 1) {
+                usuario.setTurno("VESPERTINO");
+            }else{
+                usuario.setTurno("NOCTURNO");
+            }
+
+            if (usuario.registro() == null) {
+                JOptionPane.showMessageDialog(null, "Error al crear el usuario revisa los datos por favor");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuario creado con exito\nUsername: " +
+                    usuario.getUsername() +
+                    "\nPassword: " + usuario.getPassword());
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Los datos ingresados son invalidos");
+        }
+    }//GEN-LAST:event_enviarButtonActionPerformed
+
+    private void correoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_correoFieldFocusLost
+        // validar el correo
+        if (validador.isEmail(correoField.getText())) {
+            wcorreoLabel.setVisible(false);
+        }else{
+            wcorreoLabel.setVisible(true);
+        }
+    }//GEN-LAST:event_correoFieldFocusLost
+
+    private void nacionalidadFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacionalidadFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nacionalidadFieldActionPerformed
+
+    private void nacionalidadFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nacionalidadFieldFocusLost
+        // TODO add your handling code here:
+        if (validador.isAlpha(nacionalidadField.getText())) {
+            wnacionalidadLabel.setVisible(false);
+        }
+        else{
+            wnacionalidadLabel.setVisible(true);
+        }
+    }//GEN-LAST:event_nacionalidadFieldFocusLost
+
+    private void apellidoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apellidoFieldFocusLost
+        // TODO add your handling code here:
+        if (validador.isAlphaSpace(apellidoField.getText())) {
+            wapellidoLabel.setVisible(false);
+        }else{
+            wapellidoLabel.setVisible(true);
+        }
+    }//GEN-LAST:event_apellidoFieldFocusLost
+
+    private void nombreFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFieldFocusLost
+        // TODO add your handling code here:
+        if (validador.isAlphaSpace(nombreField.getText())) {
+            wnombreLabel.setVisible(false);
+        }else{
+            wnombreLabel.setVisible(true);
+        }
+    }//GEN-LAST:event_nombreFieldFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> accesoCombo;
@@ -1006,9 +1144,13 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel correoLabel;
     private javax.swing.JButton enviarButton;
     private javax.swing.JLabel fechaLabel;
+    private javax.swing.JButton filtroHoraButton;
     private javax.swing.JPanel graficaPanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1016,12 +1158,15 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel listaLabel;
+    private javax.swing.JMenu menu;
     private javax.swing.JPanel movimientoPanel;
     private javax.swing.JTable movimientosTable;
     private javax.swing.JTextField nacionalidadField;
     private javax.swing.JLabel nacionalidadLabel;
     private javax.swing.JTextField nombreField;
     private javax.swing.JLabel nombreLabel;
+    private javax.swing.JPanel panelFiltro;
+    private javax.swing.JButton reporteHoyButton;
     private javax.swing.JButton reporteTotalButton;
     private javax.swing.JButton reporteUsuariosMButton;
     private javax.swing.JTable reportesTable;

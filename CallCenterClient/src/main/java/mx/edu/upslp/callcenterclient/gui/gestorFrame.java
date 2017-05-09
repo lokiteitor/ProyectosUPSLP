@@ -23,8 +23,8 @@ import mx.edu.upslp.callserver.usuario.UsuarioEJB;
  */
 public class gestorFrame extends javax.swing.JFrame {
     private UsuarioEJB miUsuario;
-    private JCalendar calendario = new JCalendar();
-    private JCalendar nacimiento = new JCalendar();
+    private JDateChooser calendario = new JDateChooser();
+    private JDateChooser nacimiento = new JDateChooser();
     private Validador validador = new Validador();
     private Incidencia manager = new Incidencia();
     private int page = 1;
@@ -107,36 +107,6 @@ public class gestorFrame extends javax.swing.JFrame {
         listaTipoGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         tabPanel = new javax.swing.JTabbedPane();
-        registroPanel = new javax.swing.JPanel();
-        usuarioLabel = new javax.swing.JLabel();
-        usuarioField = new javax.swing.JTextField();
-        fechaLabel = new javax.swing.JLabel();
-        nombreLabel = new javax.swing.JLabel();
-        nombreField = new javax.swing.JTextField();
-        importanciaLabel = new javax.swing.JLabel();
-        importanciaCombo = new javax.swing.JComboBox<>();
-        telefonoLabel = new javax.swing.JLabel();
-        reporteLabel = new javax.swing.JLabel();
-        quejaRadio = new javax.swing.JRadioButton();
-        sugerenciarRadio = new javax.swing.JRadioButton();
-        descripcionLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        descripcionText = new javax.swing.JTextArea();
-        enviarButton = new javax.swing.JButton();
-        calendarPanel = new javax.swing.JPanel();
-        wtelefonoLabel = new javax.swing.JLabel();
-        wnombreLabel = new javax.swing.JLabel();
-        telefonoField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        direccionField = new javax.swing.JTextField();
-        correoLabel = new javax.swing.JLabel();
-        correoField = new javax.swing.JTextField();
-        wcorreoLabe = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        nacimientoPanel = new javax.swing.JPanel();
-        apellidoLabel = new javax.swing.JLabel();
-        apellidoField = new javax.swing.JTextField();
-        wapellidoLabel = new javax.swing.JLabel();
         listaPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaTabla = new javax.swing.JTable();
@@ -169,6 +139,39 @@ public class gestorFrame extends javax.swing.JFrame {
         listaEliminarLabel = new javax.swing.JLabel();
         listaEliminarButton = new javax.swing.JButton();
         edadChooserPanel = new javax.swing.JPanel();
+        registroPanel = new javax.swing.JPanel();
+        usuarioLabel = new javax.swing.JLabel();
+        usuarioField = new javax.swing.JTextField();
+        fechaLabel = new javax.swing.JLabel();
+        nombreLabel = new javax.swing.JLabel();
+        nombreField = new javax.swing.JTextField();
+        importanciaLabel = new javax.swing.JLabel();
+        importanciaCombo = new javax.swing.JComboBox<>();
+        telefonoLabel = new javax.swing.JLabel();
+        reporteLabel = new javax.swing.JLabel();
+        quejaRadio = new javax.swing.JRadioButton();
+        sugerenciarRadio = new javax.swing.JRadioButton();
+        descripcionLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descripcionText = new javax.swing.JTextArea();
+        enviarButton = new javax.swing.JButton();
+        calendarPanel = new javax.swing.JPanel();
+        wtelefonoLabel = new javax.swing.JLabel();
+        wnombreLabel = new javax.swing.JLabel();
+        telefonoField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        direccionField = new javax.swing.JTextField();
+        correoLabel = new javax.swing.JLabel();
+        correoField = new javax.swing.JTextField();
+        wcorreoLabe = new javax.swing.JLabel();
+        nacimientoPanel = new javax.swing.JPanel();
+        apellidoLabel = new javax.swing.JLabel();
+        apellidoField = new javax.swing.JTextField();
+        wapellidoLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -188,256 +191,6 @@ public class gestorFrame extends javax.swing.JFrame {
                 tabPanelStateChanged(evt);
             }
         });
-
-        registroPanel.setName("registro"); // NOI18N
-
-        usuarioLabel.setText("Usuario: ");
-
-        usuarioField.setEditable(false);
-
-        fechaLabel.setText("Fecha");
-
-        nombreLabel.setText("Nombre del Cliente");
-
-        nombreField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                nombreFieldFocusLost(evt);
-            }
-        });
-
-        importanciaLabel.setText("Importancia");
-
-        importanciaCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"URGENTE","EN ESPERA"}));
-
-        telefonoLabel.setText("Telefono");
-
-        reporteLabel.setText("Tipo de Reporte");
-
-        tipoGrupo.add(quejaRadio);
-        quejaRadio.setText("Queja");
-        quejaRadio.setName("queja"); // NOI18N
-
-        tipoGrupo.add(sugerenciarRadio);
-        sugerenciarRadio.setText("Sugerencia");
-        sugerenciarRadio.setName("sugerencia"); // NOI18N
-
-        descripcionLabel.setText("Descripcion del Problema");
-
-        descripcionText.setColumns(20);
-        descripcionText.setRows(5);
-        jScrollPane1.setViewportView(descripcionText);
-
-        enviarButton.setText("Enviar");
-        enviarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enviarButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout calendarPanelLayout = new javax.swing.GroupLayout(calendarPanel);
-        calendarPanel.setLayout(calendarPanelLayout);
-        calendarPanelLayout.setHorizontalGroup(
-            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 304, Short.MAX_VALUE)
-        );
-        calendarPanelLayout.setVerticalGroup(
-            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        wtelefonoLabel.setForeground(new java.awt.Color(255, 0, 0));
-        wtelefonoLabel.setText("* Telefono no valido");
-
-        wnombreLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        wnombreLabel.setForeground(new java.awt.Color(255, 0, 0));
-        wnombreLabel.setText("* Nombre no valido");
-
-        telefonoField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                telefonoFieldFocusLost(evt);
-            }
-        });
-
-        jLabel1.setText("Direccion");
-
-        direccionField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                direccionFieldFocusLost(evt);
-            }
-        });
-
-        correoLabel.setText("Correo");
-
-        correoField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                correoFieldFocusLost(evt);
-            }
-        });
-        correoField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                correoFieldActionPerformed(evt);
-            }
-        });
-
-        wcorreoLabe.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        wcorreoLabe.setForeground(new java.awt.Color(255, 0, 0));
-        wcorreoLabe.setText("* Correo invalido");
-
-        jLabel2.setText("Fecha Nacimiento");
-
-        javax.swing.GroupLayout nacimientoPanelLayout = new javax.swing.GroupLayout(nacimientoPanel);
-        nacimientoPanel.setLayout(nacimientoPanelLayout);
-        nacimientoPanelLayout.setHorizontalGroup(
-            nacimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        nacimientoPanelLayout.setVerticalGroup(
-            nacimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        apellidoLabel.setText("Apellido");
-
-        apellidoField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                apellidoFieldFocusLost(evt);
-            }
-        });
-
-        wapellidoLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        wapellidoLabel.setForeground(new java.awt.Color(255, 0, 0));
-        wapellidoLabel.setText("* Apellido Invalido");
-
-        javax.swing.GroupLayout registroPanelLayout = new javax.swing.GroupLayout(registroPanel);
-        registroPanel.setLayout(registroPanelLayout);
-        registroPanelLayout.setHorizontalGroup(
-            registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(registroPanelLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(registroPanelLayout.createSequentialGroup()
-                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(registroPanelLayout.createSequentialGroup()
-                                    .addComponent(quejaRadio)
-                                    .addGap(78, 78, 78)
-                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(sugerenciarRadio)
-                                        .addComponent(direccionField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(registroPanelLayout.createSequentialGroup()
-                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(importanciaLabel)
-                                        .addComponent(telefonoLabel))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(importanciaCombo, 0, 130, Short.MAX_VALUE)
-                                        .addComponent(telefonoField)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, registroPanelLayout.createSequentialGroup()
-                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(nombreLabel)
-                                        .addComponent(apellidoLabel))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                        .addComponent(apellidoField)))
-                                .addComponent(wnombreLabel, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(reporteLabel)
-                            .addComponent(wtelefonoLabel)
-                            .addComponent(jLabel1))
-                        .addGap(105, 105, 105)
-                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(registroPanelLayout.createSequentialGroup()
-                                .addComponent(correoLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 342, Short.MAX_VALUE)
-                                .addComponent(usuarioLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(usuarioField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(registroPanelLayout.createSequentialGroup()
-                                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(wcorreoLabe)
-                                    .addGroup(registroPanelLayout.createSequentialGroup()
-                                        .addComponent(fechaLabel)
-                                        .addGap(273, 273, 273)
-                                        .addComponent(jLabel2)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(registroPanelLayout.createSequentialGroup()
-                                .addComponent(calendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nacimientoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(registroPanelLayout.createSequentialGroup()
-                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(wapellidoLabel)
-                            .addComponent(descripcionLabel)
-                            .addComponent(enviarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        registroPanelLayout.setVerticalGroup(
-            registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(registroPanelLayout.createSequentialGroup()
-                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(registroPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(usuarioLabel)
-                            .addComponent(usuarioField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(registroPanelLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombreLabel)
-                            .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(correoLabel)
-                            .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wnombreLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(apellidoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(apellidoLabel))
-                    .addComponent(wcorreoLabe))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wapellidoLabel)
-                .addGap(16, 16, 16)
-                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(importanciaLabel)
-                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(importanciaCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fechaLabel)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nacimientoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registroPanelLayout.createSequentialGroup()
-                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(telefonoLabel)
-                            .addComponent(telefonoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(wtelefonoLabel)
-                        .addGap(48, 48, 48)
-                        .addComponent(reporteLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(quejaRadio)
-                            .addComponent(sugerenciarRadio))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(direccionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(descripcionLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(enviarButton)
-                .addContainerGap())
-        );
-
-        tabPanel.addTab("Registrar Incidencia", registroPanel);
 
         listaPanel.setName("lista"); // NOI18N
 
@@ -628,7 +381,7 @@ public class gestorFrame extends javax.swing.JFrame {
                             .addGroup(listaPanelLayout.createSequentialGroup()
                                 .addComponent(listaDescripcionLabel)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(listaPanelLayout.createSequentialGroup()
                 .addGroup(listaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -684,7 +437,7 @@ public class gestorFrame extends javax.swing.JFrame {
                                 .addComponent(listaDireccionLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(listaDireccionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                                 .addComponent(wListaEdadLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(listaTipoLabel)
@@ -710,6 +463,263 @@ public class gestorFrame extends javax.swing.JFrame {
         );
 
         tabPanel.addTab("Lista de Incidencias", listaPanel);
+
+        registroPanel.setName("registro"); // NOI18N
+
+        usuarioLabel.setText("Usuario: ");
+
+        usuarioField.setEditable(false);
+
+        fechaLabel.setText("Fecha");
+
+        nombreLabel.setText("Nombre del Cliente");
+
+        nombreField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nombreFieldFocusLost(evt);
+            }
+        });
+
+        importanciaLabel.setText("Importancia");
+
+        importanciaCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"URGENTE","EN ESPERA"}));
+
+        telefonoLabel.setText("Telefono");
+
+        reporteLabel.setText("Tipo de Reporte");
+
+        tipoGrupo.add(quejaRadio);
+        quejaRadio.setText("Queja");
+        quejaRadio.setName("queja"); // NOI18N
+
+        tipoGrupo.add(sugerenciarRadio);
+        sugerenciarRadio.setText("Sugerencia");
+        sugerenciarRadio.setName("sugerencia"); // NOI18N
+
+        descripcionLabel.setText("Descripcion del Problema");
+
+        descripcionText.setColumns(20);
+        descripcionText.setRows(5);
+        jScrollPane1.setViewportView(descripcionText);
+
+        enviarButton.setText("Enviar");
+        enviarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout calendarPanelLayout = new javax.swing.GroupLayout(calendarPanel);
+        calendarPanel.setLayout(calendarPanelLayout);
+        calendarPanelLayout.setHorizontalGroup(
+            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        calendarPanelLayout.setVerticalGroup(
+            calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+
+        wtelefonoLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wtelefonoLabel.setText("* Telefono no valido");
+
+        wnombreLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wnombreLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wnombreLabel.setText("* Nombre no valido");
+
+        telefonoField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                telefonoFieldFocusLost(evt);
+            }
+        });
+
+        jLabel1.setText("Direccion");
+
+        direccionField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                direccionFieldFocusLost(evt);
+            }
+        });
+
+        correoLabel.setText("Correo");
+
+        correoField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                correoFieldFocusLost(evt);
+            }
+        });
+        correoField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                correoFieldActionPerformed(evt);
+            }
+        });
+
+        wcorreoLabe.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wcorreoLabe.setForeground(new java.awt.Color(255, 0, 0));
+        wcorreoLabe.setText("* Correo invalido");
+
+        javax.swing.GroupLayout nacimientoPanelLayout = new javax.swing.GroupLayout(nacimientoPanel);
+        nacimientoPanel.setLayout(nacimientoPanelLayout);
+        nacimientoPanelLayout.setHorizontalGroup(
+            nacimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 473, Short.MAX_VALUE)
+        );
+        nacimientoPanelLayout.setVerticalGroup(
+            nacimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
+
+        apellidoLabel.setText("Apellido");
+
+        apellidoField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                apellidoFieldFocusLost(evt);
+            }
+        });
+
+        wapellidoLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        wapellidoLabel.setForeground(new java.awt.Color(255, 0, 0));
+        wapellidoLabel.setText("* Apellido Invalido");
+
+        jLabel2.setText("Fecha Nacimiento");
+
+        javax.swing.GroupLayout registroPanelLayout = new javax.swing.GroupLayout(registroPanel);
+        registroPanel.setLayout(registroPanelLayout);
+        registroPanelLayout.setHorizontalGroup(
+            registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registroPanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(registroPanelLayout.createSequentialGroup()
+                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(registroPanelLayout.createSequentialGroup()
+                                    .addComponent(quejaRadio)
+                                    .addGap(78, 78, 78)
+                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(sugerenciarRadio)
+                                        .addComponent(direccionField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(registroPanelLayout.createSequentialGroup()
+                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(importanciaLabel)
+                                        .addComponent(telefonoLabel))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(importanciaCombo, 0, 130, Short.MAX_VALUE)
+                                        .addComponent(telefonoField)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, registroPanelLayout.createSequentialGroup()
+                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(nombreLabel)
+                                        .addComponent(apellidoLabel))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                        .addComponent(apellidoField)))
+                                .addComponent(wnombreLabel, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(reporteLabel)
+                            .addComponent(wtelefonoLabel)
+                            .addComponent(jLabel1)
+                            .addComponent(wapellidoLabel)
+                            .addComponent(enviarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(105, 105, 105)
+                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nacimientoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(registroPanelLayout.createSequentialGroup()
+                                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(wcorreoLabe)
+                                    .addComponent(fechaLabel)
+                                    .addGroup(registroPanelLayout.createSequentialGroup()
+                                        .addComponent(correoLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(usuarioLabel)))
+                                .addGap(33, 33, 33)
+                                .addComponent(usuarioField))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(descripcionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        registroPanelLayout.setVerticalGroup(
+            registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registroPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreLabel)
+                    .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(correoLabel)
+                    .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usuarioLabel)
+                    .addComponent(usuarioField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wnombreLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registroPanelLayout.createSequentialGroup()
+                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(apellidoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(apellidoLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(wapellidoLabel)
+                        .addGap(16, 16, 16)
+                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(importanciaLabel)
+                            .addComponent(importanciaCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(registroPanelLayout.createSequentialGroup()
+                        .addComponent(wcorreoLabe)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(calendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registroPanelLayout.createSequentialGroup()
+                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(telefonoLabel)
+                            .addComponent(telefonoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(wtelefonoLabel)
+                        .addGap(48, 48, 48)
+                        .addComponent(reporteLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(quejaRadio)
+                            .addComponent(sugerenciarRadio))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(registroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(direccionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(registroPanelLayout.createSequentialGroup()
+                        .addComponent(fechaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nacimientoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(descripcionLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(enviarButton)
+                .addContainerGap())
+        );
+
+        tabPanel.addTab("Registrar Incidencia", registroPanel);
+
+        jMenu1.setText("Menu");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Salir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -903,6 +913,44 @@ public class gestorFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_listaEliminarButtonActionPerformed
 
+    private void listaAnteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaAnteriorButtonActionPerformed
+        // TODO add your handling code here:
+        if (page > 1) {
+            page-=1;
+            incidenciasModel.setDataVector(manager.obtenerDatos(page,miUsuario.getIdUsuario()), tIncidencias);            
+        }
+    }//GEN-LAST:event_listaAnteriorButtonActionPerformed
+
+    private void listaSiguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSiguienteButtonActionPerformed
+        // TODO add your handling code here:
+        // @todo revisar los limites posibles
+        page+=1;
+        incidenciasModel.setDataVector(manager.obtenerDatos(page,miUsuario.getIdUsuario()), tIncidencias);
+    }//GEN-LAST:event_listaSiguienteButtonActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LoginFrame().setVisible(true);
+            }
+        });
+        this.dispose();        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void apellidoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apellidoFieldFocusLost
+        // TODO add your handling code here:
+        if (validador.isAlpha(apellidoField.getText())) {
+            wapellidoLabel.setVisible(false);
+        }else{
+            wapellidoLabel.setVisible(true);
+        }
+    }//GEN-LAST:event_apellidoFieldFocusLost
+
+    private void correoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_correoFieldActionPerformed
+
     private void correoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_correoFieldFocusLost
         // TODO add your handling code here:
         if (validador.isEmail(correoField.getText()) || correoField.getText().length() == 0) {
@@ -925,7 +973,6 @@ public class gestorFrame extends javax.swing.JFrame {
         }else{
             wtelefonoLabel.setVisible(true);
         }
-
     }//GEN-LAST:event_telefonoFieldFocusLost
 
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
@@ -934,7 +981,6 @@ public class gestorFrame extends javax.swing.JFrame {
         boolean integrity = true;
         Date fecha;
         Date edad;
-
 
         if (!validador.isAlpha(nombreField.getText()) || nombreField.getText().length() == 0) {
             wnombreLabel.setVisible(true);
@@ -952,16 +998,16 @@ public class gestorFrame extends javax.swing.JFrame {
         if (direccionField.getText().length() == 0) {
             integrity = false;
         }
-        
+
         if (correoField.getText().length() == 0 || !validador.isEmail(correoField.getText())) {
             integrity = false;
             wcorreoLabe.setVisible(true);
         }
-        
+
         if (apellidoField.getText().length() == 0 || !validador.isAlpha(apellidoField.getText())) {
             wapellidoLabel.setVisible(true);
             integrity = false;
-        }        
+        }
 
         if (integrity) {
             // paso la revision
@@ -977,11 +1023,11 @@ public class gestorFrame extends javax.swing.JFrame {
             fecha = calendario.getDate();
 
             registro.setFecha(fecha);
-            
+
             edad = nacimiento.getDate();
-            
+
             registro.setEdad(edad);
-            
+
             if (importanciaCombo.getSelectedIndex() == 0) {
                 registro.setImportancia("URGENTE");
             }else{
@@ -1015,34 +1061,6 @@ public class gestorFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nombreFieldFocusLost
 
-    private void apellidoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apellidoFieldFocusLost
-        // TODO add your handling code here:
-        if (validador.isAlpha(apellidoField.getText())) {
-            wapellidoLabel.setVisible(false);
-        }else{
-            wapellidoLabel.setVisible(true);
-        }
-    }//GEN-LAST:event_apellidoFieldFocusLost
-
-    private void correoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_correoFieldActionPerformed
-
-    private void listaAnteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaAnteriorButtonActionPerformed
-        // TODO add your handling code here:
-        if (page > 1) {
-            page-=1;
-            incidenciasModel.setDataVector(manager.obtenerDatos(page,miUsuario.getIdUsuario()), tIncidencias);            
-        }
-    }//GEN-LAST:event_listaAnteriorButtonActionPerformed
-
-    private void listaSiguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSiguienteButtonActionPerformed
-        // TODO add your handling code here:
-        // @todo revisar los limites posibles
-        page+=1;
-        incidenciasModel.setDataVector(manager.obtenerDatos(page,miUsuario.getIdUsuario()), tIncidencias);
-    }//GEN-LAST:event_listaSiguienteButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoField;
@@ -1061,6 +1079,9 @@ public class gestorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

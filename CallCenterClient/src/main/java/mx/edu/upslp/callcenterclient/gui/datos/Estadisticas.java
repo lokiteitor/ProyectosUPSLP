@@ -27,12 +27,16 @@ package mx.edu.upslp.callcenterclient.gui.datos;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import mx.edu.upslp.callserver.estadistica.EstadisticaSessionBeanRemote;
+import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
 /**
@@ -93,6 +97,89 @@ public class Estadisticas {
             System.err.println(e.getMessage());
         }                
         return result;
+    }
+    
+    public HashMap<String,Object[]> incidenciasHoy(){
+        List<IncidenciaEJB> resultado;
+        HashMap<String,Object[]> datos = new HashMap<String,Object[]>();
+        Long[] ids;
+        String[] tipos;
+        String[] importancias;
+        String[] usuarios;
+        String[] clientes;
+        int cont = 0;
+        
+        try{
+            resultado = estRemote.incidenciasHoy();
+            ids = new Long[resultado.size()];
+            tipos = new String[resultado.size()];
+            importancias = new String[resultado.size()];
+            usuarios = new String[resultado.size()];
+            clientes = new String[resultado.size()];
+            for (IncidenciaEJB incidencia : resultado) {                
+                ids[cont] = incidencia.getIdIncidencia();
+                tipos[cont] = incidencia.getTipo();
+                importancias[cont] = incidencia.getImportancia();
+                usuarios[cont] = incidencia.getIdUsuario().getIdUsuario();
+                clientes[cont] = incidencia.getCliente().getCorreo();
+                cont++;                        
+            }
+            
+            datos.put("ids", ids);
+            datos.put("tipos", tipos);
+            datos.put("importancias", importancias);
+            datos.put("usuarios", usuarios);
+            datos.put("clientes", clientes);
+            
+        }catch(Exception e){
+            System.err.println("Error al consultar el servidor");
+            System.err.println(e.getMessage());
+            datos = null;
+        }
+        
+        return datos;        
+    }
+    
+    public HashMap<String,Object[]> IncidenciaPorHora(LocalTime hora){
+        List<IncidenciaEJB> resultado;
+        HashMap<String,Object[]> datos = new HashMap<String,Object[]>();
+        Long[] ids;
+        String[] tipos;
+        String[] importancias;
+        String[] usuarios;
+        String[] clientes;
+        int cont = 0;
+        
+        try{
+            resultado = estRemote.IncidenciasPorHora(hora);
+            ids = new Long[resultado.size()];
+            tipos = new String[resultado.size()];
+            importancias = new String[resultado.size()];
+            usuarios = new String[resultado.size()];
+            clientes = new String[resultado.size()];
+            for (IncidenciaEJB incidencia : resultado) {                
+                ids[cont] = incidencia.getIdIncidencia();
+                tipos[cont] = incidencia.getTipo();
+                importancias[cont] = incidencia.getImportancia();
+                usuarios[cont] = incidencia.getIdUsuario().getIdUsuario();
+                clientes[cont] = incidencia.getCliente().getCorreo();
+                cont++;                        
+            }
+            
+            datos.put("ids", ids);
+            datos.put("tipos", tipos);
+            datos.put("importancias", importancias);
+            datos.put("usuarios", usuarios);
+            datos.put("clientes", clientes);
+            
+        }catch(Exception e){
+            System.err.println("Error al consultar el servidor");
+            System.err.println(e.getMessage());
+            datos = null;
+        }
+        
+        return datos;         
+        
     }
     
 }

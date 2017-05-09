@@ -7,11 +7,34 @@
         <Property name="text" type="java.lang.String" value="jTextField8"/>
       </Properties>
     </Component>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="menu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Menu"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+Q"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Salir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -50,255 +73,6 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="altasPanel">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="altas" noResource="true"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Altas">
-                <Property name="tabTitle" type="java.lang.String" value="Altas"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="wapellidoLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="enviarButton" min="-2" pref="152" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="wnombreLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nombreLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nombreField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="apellidoLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="apellidoField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="fechaLabel" alignment="0" pref="300" max="32767" attributes="0"/>
-                                  <Component id="calendarPanel" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="wnacionalidadLabel" max="32767" attributes="0"/>
-                                  <Component id="nacionalidadField" max="32767" attributes="0"/>
-                                  <Component id="turnoLabel" max="32767" attributes="0"/>
-                                  <Component id="turnoCombo" max="32767" attributes="0"/>
-                                  <Component id="jLabel5" pref="300" max="32767" attributes="0"/>
-                                  <Component id="nacionalidadLabel" max="32767" attributes="0"/>
-                                  <Component id="accesoCombo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="correoLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="correoField" max="32767" attributes="0"/>
-                                  <Component id="wcorreoLabel" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="388" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="nombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="turnoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="nombreField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="turnoCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                      <Component id="wnombreLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="apellidoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="apellidoField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="accesoCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                      <Component id="wapellidoLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="fechaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nacionalidadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="nacionalidadField" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="wnacionalidadLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="correoLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="correoField" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="wcorreoLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="calendarPanel" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="enviarButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="nombreLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nombre"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="nombreField">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nombreFieldFocusLost"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="apellidoLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Apellido"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="apellidoField">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="apellidoFieldFocusLost"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="fechaLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Fecha de Nacimiento"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="turnoLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Turno"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="turnoCombo">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] {&quot;MATUTINO&quot;,&quot;VESPERTINO&quot;,&quot;NOCTURNO&quot;})" type="code"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nivel de Acceso"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="nacionalidadLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nacionalidad"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="enviarButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Enviar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enviarButtonActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="accesoCombo">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] {&quot;GESTOR&quot;,&quot;ADMINISTRADOR&quot;})" type="code"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="wnombreLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="10" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="*Nombre Invalido"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="wapellidoLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="10" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="* Apellido Invalido"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="nacionalidadField">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nacionalidadFieldFocusLost"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="wnacionalidadLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="10" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="* Nacionalidad Invalida"/>
-              </Properties>
-            </Component>
-            <Container class="javax.swing.JPanel" name="calendarPanel">
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-            </Container>
-            <Component class="javax.swing.JLabel" name="correoLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Correo"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="correoField">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="correoFieldFocusLost"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="wcorreoLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="10" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="* Correo Invalido"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Container class="javax.swing.JPanel" name="movimientoPanel">
           <Properties>
             <Property name="name" type="java.lang.String" value="reportes" noResource="true"/>
@@ -357,7 +131,7 @@
                           <Component id="anteriorButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="siguienteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="42" max="32767" attributes="0"/>
+                      <EmptySpace pref="78" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -571,7 +345,7 @@
                           <Component id="usuariosSiguienteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="usuariosAnteriorButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="37" max="32767" attributes="0"/>
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -848,11 +622,30 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="reporteTotalButton" max="32767" attributes="0"/>
-                              <Component id="reporteUsuariosMButton" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="reporteTotalButton" max="32767" attributes="0"/>
+                                      <Component id="reporteUsuariosMButton" max="32767" attributes="0"/>
+                                      <Component id="reporteHoyButton" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="panelFiltro" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="filtroHoraButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -863,7 +656,15 @@
                           <Component id="reporteTotalButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="reporteUsuariosMButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="420" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="reporteHoyButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="panelFiltro" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="filtroHoraButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="249" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -885,6 +686,42 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteUsuariosMButtonActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JButton" name="reporteHoyButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Reporte Diario"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteHoyButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Reportes por Hora"/>
+                  </Properties>
+                </Component>
+                <Container class="javax.swing.JPanel" name="panelFiltro">
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                </Container>
+                <Component class="javax.swing.JButton" name="filtroHoraButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Generar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroHoraButtonActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="graficaPanel">
@@ -902,6 +739,257 @@
                 </DimensionLayout>
               </Layout>
             </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="altasPanel">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="altas" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Altas">
+                <Property name="tabTitle" type="java.lang.String" value="Altas"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="wcorreoLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="wapellidoLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="wnombreLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="nombreLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="nombreField" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="apellidoLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="apellidoField" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="fechaLabel" alignment="0" pref="300" max="32767" attributes="0"/>
+                                      <Component id="calendarPanel" max="32767" attributes="0"/>
+                                      <Component id="correoField" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="correoLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="wnacionalidadLabel" max="32767" attributes="0"/>
+                                  <Component id="nacionalidadField" max="32767" attributes="0"/>
+                                  <Component id="turnoLabel" max="32767" attributes="0"/>
+                                  <Component id="turnoCombo" max="32767" attributes="0"/>
+                                  <Component id="jLabel5" pref="300" max="32767" attributes="0"/>
+                                  <Component id="nacionalidadLabel" max="32767" attributes="0"/>
+                                  <Component id="accesoCombo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="enviarButton" min="-2" pref="152" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="388" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="turnoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nombreField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="turnoCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Component id="wnombreLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="apellidoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="apellidoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="accesoCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="wapellidoLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="fechaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nacionalidadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="nacionalidadField" min="-2" pref="17" max="-2" attributes="0"/>
+                          <Component id="calendarPanel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="correoLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="wnacionalidadLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="correoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="enviarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="wcorreoLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="nombreLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nombre"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="nombreField">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nombreFieldFocusLost"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="apellidoLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Apellido"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="apellidoField">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="apellidoFieldFocusLost"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fechaLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fecha de Nacimiento"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="turnoLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Turno"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="turnoCombo">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] {&quot;MATUTINO&quot;,&quot;VESPERTINO&quot;,&quot;NOCTURNO&quot;})" type="code"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nivel de Acceso"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="nacionalidadLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nacionalidad"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="accesoCombo">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] {&quot;GESTOR&quot;,&quot;ADMINISTRADOR&quot;})" type="code"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="wnombreLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="10" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="*Nombre Invalido"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="wapellidoLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="10" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="* Apellido Invalido"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="nacionalidadField">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nacionalidadFieldFocusLost"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nacionalidadFieldActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="wnacionalidadLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="10" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="* Nacionalidad Invalida"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JPanel" name="calendarPanel">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+            <Component class="javax.swing.JLabel" name="correoLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Correo"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="correoField">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="correoFieldFocusLost"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="wcorreoLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="10" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="* Correo Invalido"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="enviarButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Enviar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enviarButtonActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
