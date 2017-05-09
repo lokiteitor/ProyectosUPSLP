@@ -28,8 +28,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -87,6 +85,7 @@ public class Estadisticas {
             consulta = estRemote.IncidenciaPorUsuario();
             
             for (UsuarioEJB usuario : consulta) {
+                System.out.println(usuario.getIncidencias());
                 result.put(usuario.getIdUsuario().toString(),Integer.valueOf(usuario.getIncidencias().size()));
             }
             

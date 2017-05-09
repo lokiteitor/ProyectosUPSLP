@@ -23,12 +23,16 @@
  */
 
 package mx.edu.upslp.callcenterclient.pdf;
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -37,16 +41,19 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 /**
  *
  * @author David Delgado Hernandez 150205@upslp.edu.mx Programacion III Miercoles Horario: 2:00 - 4:00
  */
 public class ReporteIncidenciasHoyPDF {
-    private static final Font parrafoFont = FontFactory.getFont(FontFactory.TIMES,16);
-    private static final Font TituloFont = FontFactory.getFont(FontFactory.HELVETICA,14);
+    private String separador = System.getProperty("file.separator");    
+    private static final Font parrafoFont = FontFactory.getFont(FontFactory.TIMES,12);
+    private static final Font TituloFont = FontFactory.getFont(FontFactory.HELVETICA,16);
     private Document documento;
     private PdfPTable table = new PdfPTable(5);
     private PdfPCell columnHeader;
+    private Chapter capTabla = new Chapter(1);    
     
     private Long[] ids;
     private String[] tipos;
@@ -118,6 +125,7 @@ public class ReporteIncidenciasHoyPDF {
             // insertamos los metadatos
             addMetadata();            
             // con el archivo abierto insertamos los datos
+            addTitle();
             addTable();
         }catch(DocumentException e){
             System.err.println("Error al escribir en el documento");
@@ -146,23 +154,23 @@ public class ReporteIncidenciasHoyPDF {
     }
     
     private void headerTitle(){
-        columnHeader = new PdfPCell(new Phrase("ID"));
+        columnHeader = new PdfPCell(new Phrase("ID",parrafoFont));
         columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(columnHeader);
         
-        columnHeader = new PdfPCell(new Phrase("TIPO"));
+        columnHeader = new PdfPCell(new Phrase("TIPO",parrafoFont));
         columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(columnHeader);
 
-        columnHeader = new PdfPCell(new Phrase("IMPORTANCIA"));
+        columnHeader = new PdfPCell(new Phrase("IMPORTANCIA",parrafoFont));
         columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(columnHeader);
         
-        columnHeader = new PdfPCell(new Phrase("USUARIO"));
+        columnHeader = new PdfPCell(new Phrase("USUARIO",parrafoFont));
         columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(columnHeader);
 
-        columnHeader = new PdfPCell(new Phrase("Cliente"));
+        columnHeader = new PdfPCell(new Phrase("CLIENTE",parrafoFont));
         columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(columnHeader);
         //table.setHeaderRows(1);
@@ -172,28 +180,50 @@ public class ReporteIncidenciasHoyPDF {
     private void addContent(){
         PdfPCell cell;
         for (int i = 0; i < ids.length; i++) {
-            cell = new PdfPCell(new Phrase(String.valueOf(ids[i])));
+            cell = new PdfPCell(new Phrase(String.valueOf(ids[i]),parrafoFont));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);           
 
-            cell = new PdfPCell(new Phrase(String.valueOf(tipos[i])));
+            cell = new PdfPCell(new Phrase(String.valueOf(tipos[i]),parrafoFont));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(importancias[i])));
+            cell = new PdfPCell(new Phrase(String.valueOf(importancias[i]),parrafoFont));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);            
             
-            cell = new PdfPCell(new Phrase(String.valueOf(usuarios[i])));
+            cell = new PdfPCell(new Phrase(String.valueOf(usuarios[i]),parrafoFont));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);            
             
-            cell = new PdfPCell(new Phrase(String.valueOf(clientes[i])));
+            cell = new PdfPCell(new Phrase(String.valueOf(clientes[i]),parrafoFont));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);            
         }
     }
 
+        
+    private void addTitle(){
+        
+        Image logo;
+        try{
+            logo = Image.getInstance("imagenes"+separador+"logo.png");           
+            capTabla.add(logo);
+        }catch(BadElementException e){
+            System.err.println("Error al abrir el logo");
+            System.err.println(e.getMessage());
+        }catch(IOException e){
+            System.err.println("Error de entrada/salida");
+            System.err.println(e.getMessage());
+        }
+        
+        Chunk title = new Chunk("\n\nReporte de incidencias por hora",TituloFont);
+        capTabla.add(title);
+        capTabla.add(new Paragraph("A continuacion se muestra los reportes durante la hora "+
+                "seleccionada"));                
+    }
+    
+    
     /**
      * @return the ids
      */
