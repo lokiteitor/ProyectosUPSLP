@@ -28,6 +28,7 @@ import java.util.Date;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -69,7 +70,7 @@ public class UsuarioEJB implements Serializable {
     /**
      * @return the movimientos
      */
-    @OneToMany(targetEntity = MovimientoEJB.class,mappedBy = "usuario")
+    @OneToMany(targetEntity = MovimientoEJB.class,mappedBy = "usuario",fetch = FetchType.EAGER)
     public Collection<MovimientoEJB> getMovimientos() {
         return movimientos;
     }
@@ -82,7 +83,7 @@ public class UsuarioEJB implements Serializable {
     }
     
     
-    @OneToMany(targetEntity = IncidenciaEJB.class,mappedBy = "idUsuario")
+    @OneToMany(targetEntity = IncidenciaEJB.class,mappedBy = "idUsuario",fetch = FetchType.EAGER)
     public Collection<IncidenciaEJB> getIncidencias() {
         return incidencias;
     }

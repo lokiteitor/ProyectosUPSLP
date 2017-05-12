@@ -36,7 +36,7 @@ import mx.edu.upslp.callserver.movimiento.MovimientoEJB;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
 /**
- *
+ * Este Session Bean obtiene los datos relacionados con la incidencias
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 @Stateless
@@ -273,7 +273,12 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
         if (objetivo == null) {
             response = false;
         }else{
-            manager.remove(objetivo);
+            
+            // obtener todos los movimientos
+            for (MovimientoEJB movimiento : objetivo.getMovimientos()) {
+                movimiento.setIncidencia(null);
+                manager.persist(movimiento);
+            }
             // registrar movimiento
             usuario = manager.merge(objetivo.getIdUsuario());
             movimientoEJB.setCreated_at(new Date());
@@ -282,9 +287,23 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
             movimientoEJB.setUpdated_at(new Date());
             movimientoEJB.setUsuario(usuario);
             manager.persist(movimientoEJB);
+            
+            manager.remove(objetivo);
         }
         
         return response;
+    }
+    /**
+     * Obtiene los datos de un cliente especifico
+     * @param correo correo de identificacion del cliente
+     * @return Instancia EJB con los datos del cliente
+     */
+    @Override
+    public ClienteEJB getClienteData(String correo) {
+        
+        ClienteEJB cliente = manager.find(ClienteEJB.class, correo);
+        
+        return cliente;
     }
 
     

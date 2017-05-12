@@ -245,7 +245,11 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         UsuarioEJB entity = manager.merge(usuario);
         manager.persist(entity);               
     }
-
+    /**
+     * remueve un usuario de la base de datos
+     * @param id correo del usuario a eliminar
+     * @return true  si la operacion fue exitosa
+     */
     @Override
     public boolean removerUsuario(String id) {
         boolean response = true;
@@ -258,7 +262,11 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         }        
         return response;
     }
-
+    /**
+     * obtiene los datos de un usuario especifico
+     * @param username correo del usuario a buscar
+     * @return Instancia EJB del usuario
+     */
     @Override
     public UsuarioEJB obtenerUsuario(String username) {
         UsuarioEJB usuario;
@@ -272,7 +280,11 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
                 
         return usuario;
     }
-
+    /**
+     * revisa que los datos utilizados para registrar el usuario sean correctos
+     * @param datos HashMap con los datos a registraar
+     * @return true si paso la validacion
+     */
     @Override
     public boolean integridadDatos(HashMap<String,Object> datos) {
         boolean integridad = true;
@@ -311,23 +323,24 @@ public class UsuarioSessionBean implements UsuarioSessionBeanRemote {
         
         return integridad;
     }
-
+    /**
+     * Lista los usuarios que no son administradores
+     * @param page pagina del bloque 10 en 10 a mostrar
+     * @return List con el bloque de usuario encontrados
+     */
     @Override
     public List<UsuarioEJB> listUsers(int page) {
         List<UsuarioEJB> resultados;
-        String sql = "SELECT * FROM USUARIO LIMIT ?,? ";
+        String sql = "SELECT * FROM USUARIO WHERE ADMINISTRADOR=0 LIMIT ?,? ";
         // escapa los parametros de la consulta
         // devolver las consultas encapsuladas en IncidenciaEJB
         Query query = manager.createNativeQuery(sql, UsuarioEJB.class);
         query.setParameter(1,(page-1)*10 );
         query.setParameter(2, (page)*10);
-        
-        
+                
         // obtener los resultados
         resultados = query.getResultList();
                        
         return resultados;
     }
-
-    
 }

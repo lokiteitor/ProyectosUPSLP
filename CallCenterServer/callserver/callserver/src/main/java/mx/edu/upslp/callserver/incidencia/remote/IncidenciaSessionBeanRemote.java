@@ -43,5 +43,7 @@ public interface IncidenciaSessionBeanRemote {
     void actualizarIncidencia(IncidenciaEJB objetivo);
 
     boolean removerIncidencia(Long id);   
+
+    ClienteEJB getClienteData(String correo);
     
 }

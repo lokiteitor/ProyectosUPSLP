@@ -31,17 +31,20 @@ import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
 /**
- *
+ * Este Session Bean controla todas las acciones relacionadas con los clientes
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 @Stateless
 public class ClienteSessionBean implements ClienteSessionBeanRemote {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")}
     @PersistenceContext(unitName = "mx.edu.upslp_callserver_ejb_1.0PU")
     private EntityManager manager;
-    
+
+    /**
+     * Obtiene los datos del cliente relacionado con una incidencia especifica
+     * @param id identificador de la incidencia
+     * @return 
+     */
     @Override
     public ClienteEJB obtenerCliente(Long id) {        
         // obtiene el cliente que registro la incidencia de id

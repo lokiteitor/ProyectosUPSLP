@@ -23,6 +23,8 @@
  */
 package mx.edu.upslp.callserver.estadistica;
 
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
 import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
@@ -40,5 +42,10 @@ public interface EstadisticaSessionBeanRemote {
     List<IncidenciaEJB> incidenciasHoy();
     
     List<UsuarioEJB> IncidenciaPorUsuario();
+
+    List IncidenciasPorHora(LocalTime hora);
+    
+    List<IncidenciaEJB> incidenciasDia(Date fecha);
+    
     
 }

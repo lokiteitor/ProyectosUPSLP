@@ -23,6 +23,8 @@
  */
 package mx.edu.upslp.callserver.estadistica;
 
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -41,6 +43,10 @@ public class EstadisticaSessionBean implements EstadisticaSessionBeanRemote {
     @PersistenceContext(unitName = "mx.edu.upslp_callserver_ejb_1.0PU")
     private EntityManager manager;           
     
+    /**
+     * obtiene la cantidad de incidencias por tipo
+     * @return retorna un arreglo [QUEJAS,SUGERENCIAS]
+     */
     @Override
     public int[] cantidadIncidencias() {
         int[] datos = new int[2];
@@ -68,30 +74,54 @@ public class EstadisticaSessionBean implements EstadisticaSessionBeanRemote {
         
         return datos;
     }
-
+    /**
+     * Muestra las incidencias que se registraron el dia de hoy 
+     * @return retorna una List con las incidencias
+     */
     @Override
     public List<IncidenciaEJB> incidenciasHoy() {
-        String sql = "SELECT * FROM INCIDENCIA WHERE DATE(created_at)=curdate()";
+        String sql = "SELECT * FROM INCIDENCIA WHERE DATE(FECHA)=curdate()";
         Query query = manager.createNativeQuery(sql,IncidenciaEJB.class);
         
         List<IncidenciaEJB> resultados = query.getResultList();
         
+        System.out.println(resultados);
+        
         return resultados;
     }
     
+    /**
+     * Muestra las incidencias registradas en un dia en especifico
+     * @param fecha fecha a buscar
+     * @return List con las incidencias encontradas
+     */
+    @Override
+    public List<IncidenciaEJB> incidenciasDia(Date fecha) {
+        String sql = "SELECT * FROM INCIDENCIA WHERE DATE(FECHA)=?";
+        Query query = manager.createNativeQuery(sql,IncidenciaEJB.class);
+        query.setParameter(1, fecha);
+        List<IncidenciaEJB> resultados = query.getResultList();
+        
+        System.out.println(resultados);
+        
+        return resultados;
+    }    
+    
+    /**
+     * devuelve las incidencias registradas por un un usuario
+     * @return List con las incidencias encontradas
+     */
     @Override
     public List<UsuarioEJB> IncidenciaPorUsuario() {
         // crear consulta que utiliza los resultados de otra para consultar solo una vez
-        String sql = " SELECT * FROM USUARIO JOIN (SELECT ID_USUARIO FROM INCIDENCIA GROUP BY ID_USUARIO ORDER BY COUNT(ID_USUARIO) LIMIT 10) as sub ON USUARIO.CORREO IN (sub.ID_USUARIO);";
+        String sql = "SELECT * FROM USUARIO JOIN (SELECT ID_USUARIO FROM INCIDENCIA GROUP BY ID_USUARIO ORDER BY COUNT(ID_USUARIO) LIMIT 10) as sub ON USUARIO.CORREO IN (sub.ID_USUARIO)";
         
         Query query = manager.createNativeQuery(sql,UsuarioEJB.class);
         List<UsuarioEJB> mayores = query.getResultList();
         
-        if (mayores.isEmpty()) {
-            System.out.println("Vacia");
+        for (int i = 0; i < mayores.size(); i++) {
+            System.out.println(mayores.get(i).getIncidencias());
         }
-        
-        System.out.println(mayores);
         
         
         mayores.get(0);
@@ -99,7 +129,25 @@ public class EstadisticaSessionBean implements EstadisticaSessionBeanRemote {
         return mayores;
     }    
     
-    
-    
-    
+    /**
+     * Muestra las incidencias de hoy registradas dentro de cierta hora
+     * @param hora la hora a buscar
+     * @return List de incidencias encontradas
+     */
+    @Override
+    public List IncidenciasPorHora(LocalTime hora) {
+        //hora.format(DateTimeFormatter.ISO_TIME);
+        String sql = "SELECT * FROM INCIDENCIA WHERE FECHA=CURDATE() AND TIME(created_at) BETWEEN TIME(?) and  DATE_ADD(TIME(?),INTERVAL 1 HOUR)";
+        Query query = manager.createNativeQuery(sql,IncidenciaEJB.class);
+        
+        query.setParameter(1,hora.toString()+":00");
+        query.setParameter(2,hora.toString()+":00");
+                
+        List<IncidenciaEJB> resultados = query.getResultList();
+        System.out.println(hora.toString()+":00");
+        System.out.println(resultados);
+        
+        
+        return resultados;
+    }    
 }

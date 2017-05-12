@@ -26,6 +26,8 @@
  * Created: 21/04/2017
  */
 
+SET SESSION time_zone = 'America/Mexico_City';
+SET GLOBAL time_zone = 'America/Mexico_City';
 
 CREATE DATABASE callcenter;
 

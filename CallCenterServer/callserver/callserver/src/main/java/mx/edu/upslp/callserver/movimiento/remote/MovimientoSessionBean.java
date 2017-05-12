@@ -31,14 +31,18 @@ import javax.persistence.Query;
 import mx.edu.upslp.callserver.movimiento.MovimientoEJB;
 
 /**
- *
+ * Este Session Bean esta encargada de manipular los datos relacionados con los movimientos
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 @Stateless
 public class MovimientoSessionBean implements MovimientoSessionBeanRemote {
     @PersistenceContext(unitName = "mx.edu.upslp_callserver_ejb_1.0PU")
     private EntityManager manager;       
-
+    /**
+     * lista los movimientos relacionados por cierto usuario
+     * @param idUsuario correo del usuario a buscar
+     * @return List con los movimientos realizados
+     */
     @Override
     public List<MovimientoEJB> listarMovimientos(String idUsuario) {
         List<MovimientoEJB> resultados;
@@ -51,8 +55,4 @@ public class MovimientoSessionBean implements MovimientoSessionBeanRemote {
         return resultados;
     }
 
-
-
-    
-    
 }
