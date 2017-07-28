@@ -47,13 +47,30 @@ public class Movimiento {
     private InitialContext ctx;
     private MovimientoSessionBeanRemote remoteMovimiento;
     private List<MovimientoEJB> allMovimientos;
+    /**
+     * formatea las fechas
+     */
     private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-    
+    /**
+     * lista con los id de los movimientos
+     */
     private ArrayList<Long> idMovimientos = new ArrayList<Long>();
+    /**
+     * lista los tipos de movimiento
+     */
     private ArrayList<String> tipos = new ArrayList<String>();
+    /**
+     * lista con las fechas de las incidecias
+     */
     private ArrayList<Date> fechas = new ArrayList<Date>();
+    /**
+     * datos de los modelos
+     */
     private Object[][] datos;
-
+    
+    /**
+     * El constructor se conecta con la base de datos
+     */
     public Movimiento() {
         // cargamos la configuracion del JNDI
         try{
@@ -71,7 +88,10 @@ public class Movimiento {
         }        
         
     }
-
+    /**
+     * Obtiene los datos del servidor J2EE
+     * @param id id del movimiento
+     */
     private void getModelRaw(String id){
             // pedir los datos al server        
         try{    
@@ -96,7 +116,10 @@ public class Movimiento {
         }
     }
     
-    
+    /**
+     * genera los datos para los modelos de tablas
+     * @return Arreglo de objetos con los datos
+     */
     private Object[][] generarDatos(){
         datos = new Object[idMovimientos.size()][4];
         for (int i = 0; i < idMovimientos.size(); i++) {
@@ -107,7 +130,11 @@ public class Movimiento {
         return datos;
     }    
 
-
+    /**
+     * Obtiene los datos de los movimientos de  un usuario
+     * @param idUsuario id del usuario
+     * @return arreglo con los movimientos realizados
+     */
     public Object[][] obtenerDatos(String idUsuario){                
         
         idMovimientos.clear();

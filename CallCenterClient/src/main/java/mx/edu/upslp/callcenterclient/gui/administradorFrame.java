@@ -1,13 +1,31 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2017 David Delgado Hernandez 150205@upslp.edu.mx.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package mx.edu.upslp.callcenterclient.gui;
 
 import com.github.lgooddatepicker.components.TimePicker;
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import java.awt.BorderLayout;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -21,12 +39,13 @@ import javax.swing.text.View;
 import mx.edu.upslp.callcenterclient.gui.datos.Estadisticas;
 import mx.edu.upslp.callcenterclient.gui.datos.Movimiento;
 import mx.edu.upslp.callcenterclient.gui.datos.Usuario;
+import mx.edu.upslp.callcenterclient.pdf.ReporteIncidenciasDiaPDF;
 import mx.edu.upslp.callcenterclient.pdf.ReporteIncidenciasHoraPDF;
 import mx.edu.upslp.callcenterclient.pdf.ReporteIncidenciasHoyPDF;
+import mx.edu.upslp.callcenterclient.validaciones.MyException;
 import mx.edu.upslp.callcenterclient.validaciones.Validador;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -34,7 +53,7 @@ import org.jfree.data.general.DefaultPieDataset;
 
 
 /**
- *
+ * Este Frame muestra los controles el administrador
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 public class administradorFrame extends javax.swing.JFrame {
@@ -44,15 +63,17 @@ public class administradorFrame extends javax.swing.JFrame {
     private Validador validador = new Validador();
     private JDateChooser calendario = new JDateChooser();
     private String[] usuariosTitle = new String[] {"Username","Nombre","Apellido"};
-    private String[] movUsuarioTitle = new String[] {"Username","Correo","Nombre","Apellido"};
+    private String[] movUsuarioTitle = new String[] {"Username","Nombre","Apellido"};
     private String[] movMovimientosTitle = new String[] {"Folio Incidencia","Tipo","Fecha"};
     private Usuario usuarioManager = new Usuario();
     private Movimiento movManager = new Movimiento();
     private Estadisticas estadistica = new Estadisticas();
     private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat formatoAV = new SimpleDateFormat("dd/MM/yyyy hh:mm");    
-    
+    private Date fechaMaxima = new Date();
     private TimePicker  filtroHora = new  TimePicker();
+    
+    private JDateChooser filtroDia = new JDateChooser();
     
     // graficas
     private DefaultPieDataset totalIncidencias = new DefaultPieDataset();
@@ -70,7 +91,7 @@ public class administradorFrame extends javax.swing.JFrame {
     };
 
     private DefaultTableModel movimientosUsuario = new DefaultTableModel(){
-        boolean[] editColum = {false,false,false,false};
+        boolean[] editColum = {false,false,false};
         // hacemos que las columnas no sea editables
         public boolean isCellEditable(int indFila,int indCol){
             return editColum[indCol];
@@ -87,10 +108,12 @@ public class administradorFrame extends javax.swing.JFrame {
 
     
     /**
-     * Creates new form administradorFrame
+     * Inicializa los componentes del frame
      */
     public administradorFrame(UsuarioEJB miUsuario) {
         this.miUsuario = miUsuario;
+        fechaMaxima.setTime(fechaMaxima.getTime() - (long)(5.676E11));
+        
         initComponents();
         // agregar el calendario a pantalla
         calendario.setEnabled(true);
@@ -99,8 +122,10 @@ public class administradorFrame extends javax.swing.JFrame {
         calendarPanel.add(calendario);
         
         // crear su manejador de eventos
-        
-        calendario.setMaxSelectableDate(new Date());
+        // restar 18 años
+        Date fecha = new Date();
+        calendario.setMaxSelectableDate(fechaMaxima);
+        calendario.setDate(fechaMaxima);
         // filtro
         filtroHora.setTime(LocalTime.now());
         filtroHora.setEnabled(true);
@@ -117,7 +142,14 @@ public class administradorFrame extends javax.swing.JFrame {
         wapellidoLabel.setVisible(false);
         wnacionalidadLabel.setVisible(false);
         wcorreoLabel.setVisible(false);
+        // panel de graficos
+        graficaPanel.setLayout(new BorderLayout());
         
+        filtroDia.setMaxSelectableDate(new Date());
+        filtroDia.setEnabled(true);
+        filtroDia.setVisible(true);
+        panelDiaFiltro.setLayout(new BoxLayout(panelDiaFiltro, View.Y_AXIS));
+        panelDiaFiltro.add(filtroDia);
         
         
     }
@@ -164,13 +196,13 @@ public class administradorFrame extends javax.swing.JFrame {
         usuariosActualizacionLabel = new javax.swing.JLabel();
         usuariosActualizacionField = new javax.swing.JTextField();
         seguridadPanel = new javax.swing.JPanel();
-        seguridadLabel = new javax.swing.JLabel();
         usuariosPasswordLabel = new javax.swing.JLabel();
         usuariosPasswordField = new javax.swing.JPasswordField();
         usuariosDeleteLabel = new javax.swing.JLabel();
         usuariosDeleteButton = new javax.swing.JButton();
         actualizarPasswordButton = new javax.swing.JButton();
         usuariosTurnoField = new javax.swing.JTextField();
+        seguridadLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         reporteTotalButton = new javax.swing.JButton();
@@ -179,6 +211,9 @@ public class administradorFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         panelFiltro = new javax.swing.JPanel();
         filtroHoraButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        panelDiaFiltro = new javax.swing.JPanel();
+        reporteDiaButton = new javax.swing.JButton();
         graficaPanel = new javax.swing.JPanel();
         altasPanel = new javax.swing.JPanel();
         nombreLabel = new javax.swing.JLabel();
@@ -196,10 +231,10 @@ public class administradorFrame extends javax.swing.JFrame {
         nacionalidadField = new javax.swing.JTextField();
         wnacionalidadLabel = new javax.swing.JLabel();
         calendarPanel = new javax.swing.JPanel();
-        correoLabel = new javax.swing.JLabel();
         correoField = new javax.swing.JTextField();
         wcorreoLabel = new javax.swing.JLabel();
         enviarButton = new javax.swing.JButton();
+        correoLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -284,7 +319,7 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addGroup(movimientoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(anteriorButton)
                     .addComponent(siguienteButton))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         tabs.addTab("Movimientos", movimientoPanel);
@@ -347,8 +382,6 @@ public class administradorFrame extends javax.swing.JFrame {
 
         seguridadPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
-        seguridadLabel.setText("Area de Seguridad");
-
         usuariosPasswordLabel.setText("Cambiar Contraseña");
 
         usuariosDeleteLabel.setText("Eliminar Usuario");
@@ -374,12 +407,11 @@ public class administradorFrame extends javax.swing.JFrame {
             .addGroup(seguridadPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(seguridadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seguridadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(seguridadPanelLayout.createSequentialGroup()
                         .addComponent(usuariosPasswordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(usuariosDeleteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))
+                        .addGap(63, 63, 63))
                     .addGroup(seguridadPanelLayout.createSequentialGroup()
                         .addGroup(seguridadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(actualizarPasswordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,15 +419,12 @@ public class administradorFrame extends javax.swing.JFrame {
                                 .addComponent(usuariosPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(usuariosDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         seguridadPanelLayout.setVerticalGroup(
             seguridadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(seguridadPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(seguridadLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(33, 33, 33)
                 .addGroup(seguridadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usuariosPasswordLabel)
                     .addComponent(usuariosDeleteLabel))
@@ -405,10 +434,12 @@ public class administradorFrame extends javax.swing.JFrame {
                     .addComponent(usuariosDeleteButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(actualizarPasswordButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         usuariosTurnoField.setEditable(false);
+
+        seguridadLabel.setText("Area de Seguridad");
 
         javax.swing.GroupLayout usuariosTabLayout = new javax.swing.GroupLayout(usuariosTab);
         usuariosTab.setLayout(usuariosTabLayout);
@@ -433,17 +464,22 @@ public class administradorFrame extends javax.swing.JFrame {
                             .addComponent(usuariosAccesoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                             .addComponent(usuariosAccesoField)
                             .addComponent(usuariosTurnoField))
-                        .addGap(32, 32, 32)
-                        .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(usuariosTabLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
                                 .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(usuariosCreacionField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usuariosCreacionLabel))
-                                .addGap(18, 18, 18)
-                                .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(usuariosActualizacionLabel)
-                                    .addComponent(usuariosActualizacionField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(seguridadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(usuariosTabLayout.createSequentialGroup()
+                                        .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(usuariosCreacionField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(usuariosCreacionLabel))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(usuariosActualizacionLabel)
+                                            .addComponent(usuariosActualizacionField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(seguridadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, usuariosTabLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(seguridadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(usuariosTabLayout.createSequentialGroup()
                         .addGap(169, 169, 169)
                         .addComponent(usuariosLabel))
@@ -460,7 +496,7 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(usuariosLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(usuariosTabLayout.createSequentialGroup()
                         .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -473,14 +509,16 @@ public class administradorFrame extends javax.swing.JFrame {
                             .addComponent(usuariosCreacionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(usuariosActualizacionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(usuariosApellidoLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(usuariosApellidoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(usuariosFechaLabel)
+                        .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usuariosApellidoLabel)
+                            .addComponent(seguridadLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(usuariosTabLayout.createSequentialGroup()
+                                .addComponent(usuariosApellidoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(usuariosFechaLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(usuariosFechaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(usuariosNacionalidadLabel)
@@ -494,12 +532,12 @@ public class administradorFrame extends javax.swing.JFrame {
                                 .addComponent(usuariosAccesoLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(usuariosAccesoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(seguridadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(seguridadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(usuariosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usuariosSiguienteButton)
                     .addComponent(usuariosAnteriorButton))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         tabs.addTab("Lista de Usuarios", usuariosTab);
@@ -549,6 +587,26 @@ public class administradorFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Reporte por Dia");
+
+        javax.swing.GroupLayout panelDiaFiltroLayout = new javax.swing.GroupLayout(panelDiaFiltro);
+        panelDiaFiltro.setLayout(panelDiaFiltroLayout);
+        panelDiaFiltroLayout.setHorizontalGroup(
+            panelDiaFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelDiaFiltroLayout.setVerticalGroup(
+            panelDiaFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 108, Short.MAX_VALUE)
+        );
+
+        reporteDiaButton.setText("Generar");
+        reporteDiaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteDiaButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -566,11 +624,19 @@ public class administradorFrame extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(panelFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelDiaFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(filtroHoraButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(filtroHoraButton)
+                .addComponent(reporteDiaButton)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -588,7 +654,13 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addComponent(panelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filtroHoraButton)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelDiaFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(reporteDiaButton)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout graficaPanelLayout = new javax.swing.GroupLayout(graficaPanel);
@@ -668,11 +740,6 @@ public class administradorFrame extends javax.swing.JFrame {
                 nacionalidadFieldFocusLost(evt);
             }
         });
-        nacionalidadField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nacionalidadFieldActionPerformed(evt);
-            }
-        });
 
         wnacionalidadLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         wnacionalidadLabel.setForeground(new java.awt.Color(255, 0, 0));
@@ -688,8 +755,6 @@ public class administradorFrame extends javax.swing.JFrame {
             calendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 23, Short.MAX_VALUE)
         );
-
-        correoLabel.setText("Correo");
 
         correoField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -708,6 +773,8 @@ public class administradorFrame extends javax.swing.JFrame {
             }
         });
 
+        correoLabel.setText("Correo");
+
         javax.swing.GroupLayout altasPanelLayout = new javax.swing.GroupLayout(altasPanel);
         altasPanel.setLayout(altasPanelLayout);
         altasPanelLayout.setHorizontalGroup(
@@ -715,7 +782,6 @@ public class administradorFrame extends javax.swing.JFrame {
             .addGroup(altasPanelLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(wcorreoLabel)
                     .addComponent(wapellidoLabel)
                     .addGroup(altasPanelLayout.createSequentialGroup()
                         .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -728,16 +794,17 @@ public class administradorFrame extends javax.swing.JFrame {
                                 .addComponent(fechaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                 .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(correoField))
+                            .addComponent(wcorreoLabel)
                             .addComponent(correoLabel))
                         .addGap(18, 18, 18)
                         .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(wnacionalidadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nacionalidadField)
                             .addComponent(turnoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(turnoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(nacionalidadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(accesoCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nacionalidadField)
                             .addComponent(enviarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(388, Short.MAX_VALUE))
         );
@@ -768,21 +835,21 @@ public class administradorFrame extends javax.swing.JFrame {
                 .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fechaLabel)
                     .addComponent(nacionalidadLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nacionalidadField, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(calendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(correoLabel)
-                    .addComponent(wnacionalidadLabel))
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(calendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nacionalidadField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(wnacionalidadLabel)
+                    .addComponent(correoLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(altasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(enviarButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(wcorreoLabel)
-                .addGap(197, 197, 197))
+                .addGap(269, 269, 269))
         );
 
         tabs.addTab("Altas", altasPanel);
@@ -815,7 +882,11 @@ public class administradorFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Este evento se desata al cambiar entre cegillas de los paneles
+     * @param evt evento desatado
+     */
     private void tabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsStateChanged
         
         if (tabs.getSelectedComponent().getName().equals("listaUsuarios")) {
@@ -829,7 +900,11 @@ public class administradorFrame extends javax.swing.JFrame {
             estadistica.numeroIncidencias();
         }
     }//GEN-LAST:event_tabsStateChanged
-
+    /**
+     * Este evento se desata cuando el usuario da click sobre un elemento de la 
+     * tabla de usuarios
+     * @param evt evento desatado
+     */
     private void usuariosTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuariosTableMouseClicked
         // al hacer click sobre algun componente obtener la informacion del usuario
         UsuarioEJB usuarioSel = usuarioManager.obtenerDatosUsuario(usuariosTable.getSelectedRow());
@@ -845,32 +920,41 @@ public class administradorFrame extends javax.swing.JFrame {
             else{
                 usuariosAccesoField.setText("GESTOR");
             }
-            // fechas
-
-            
+            // fechas            
             usuariosFechaField.setText(formato.format(usuarioSel.getFechaNacimiento()));
             usuariosCreacionField.setText(formatoAV.format(usuarioSel.getCreatedAt()));
             usuariosActualizacionField.setText(formatoAV.format(usuarioSel.getUpdatedAt()));
-        }
-        
-        
+        }               
     }//GEN-LAST:event_usuariosTableMouseClicked
-
+    
+    /**
+     * Este evento se desata al presionar el boton de actualizar contraseña
+     * @param evt evento
+     */
     private void actualizarPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarPasswordButtonActionPerformed
-        // cambiar la contraseña                
+        // cambiar la contraseña                              
         if (usuariosTable.getSelectedRow() != -1 && usuariosPasswordField.getText().length() > 0) {
             // obtener el usuario
             UsuarioEJB objetivo = usuarioManager.obtenerDatosUsuario(usuariosTable.getSelectedRow());
             objetivo.setPassword(usuariosPasswordField.getText());
             usuarioManager.actualizarUsuario(objetivo,page);            
-            JOptionPane.showMessageDialog(null, "Contraseña actualizada correctamente");
+            
+            try{
+                throw new MyException("Contraseña actualizada correctamente");
+            }
+            catch(MyException e){
+                JOptionPane.showMessageDialog(null, e.toString());
+            }                        
             usuariosPasswordField.setText("");
         }
-        else{
+        else{                       
             JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario para realizar esta accion");
         }
     }//GEN-LAST:event_actualizarPasswordButtonActionPerformed
-
+    /**
+     * Este evento desata la eliminacion de un usuario
+     * @param evt evento
+     */
     private void usuariosDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosDeleteButtonActionPerformed
         // eliminar el usuario
         if (usuariosTable.getSelectedRow() != -1 ) {
@@ -891,7 +975,12 @@ public class administradorFrame extends javax.swing.JFrame {
             }            
         }       
     }//GEN-LAST:event_usuariosDeleteButtonActionPerformed
-
+    
+    /**
+     * Este evento se desata para paginar la lista de usuarios en bloques de 10 
+     * retrocediendo en la lista
+     * @param evt evento
+     */
     private void usuariosAnteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosAnteriorButtonActionPerformed
         // TODO add your handling code here:
         if (page > 1) {
@@ -899,26 +988,40 @@ public class administradorFrame extends javax.swing.JFrame {
             usuariosModel.setDataVector(usuarioManager.obtenerDatos(true, page), usuariosTitle);
         }
     }//GEN-LAST:event_usuariosAnteriorButtonActionPerformed
-
+    /**
+     * Este evento se desata para paginar la lista de usuarios en bloques de 10
+     * adelantando en la lista
+     * @param evt 
+     */
     private void usuariosSiguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosSiguienteButtonActionPerformed
         // TODO add your handling code here:
         page +=  1;
         usuariosModel.setDataVector(usuarioManager.obtenerDatos(true, page), usuariosTitle);
     }//GEN-LAST:event_usuariosSiguienteButtonActionPerformed
-
+    /**
+     * Este evento retrocede en bloques de 10 la lista de movimientos
+     * @param evt evento
+     */
     private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorButtonActionPerformed
         if (movPage > 1) {
             movPage -= 1;
             movimientosUsuario.setDataVector(usuarioManager.obtenerDatos(true, movPage), movUsuarioTitle);
         }
     }//GEN-LAST:event_anteriorButtonActionPerformed
-
+    
+    /**
+     * Este evento avanza en bloques de 10 la lista de movimientos 
+     * @param evt evento
+     */
     private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteButtonActionPerformed
         // TODO add your handling code here:
         movPage +=  1;
         movimientosUsuario.setDataVector(usuarioManager.obtenerDatos(true, movPage), movUsuarioTitle);        
     }//GEN-LAST:event_siguienteButtonActionPerformed
-
+    /**
+     * Este evento se desata al seleccionar un movimiento para mostrar sus detalles
+     * @param evt evento
+     */
     private void reportesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportesTableMouseClicked
         // TODO add your handling code here:
         // obtener el id del usuario
@@ -929,7 +1032,12 @@ public class administradorFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_reportesTableMouseClicked
-
+    
+    /**
+     * Este evento se desata para crear el grafico con el numero de incidencias
+     * por categoria
+     * @param evt evento
+     */
     private void reporteTotalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteTotalButtonActionPerformed
         // TODO add your handling code here:
         int[] datos = estadistica.numeroIncidencias();
@@ -944,11 +1052,9 @@ public class administradorFrame extends javax.swing.JFrame {
                     true,
                     true,
                     false);
-            //graficoChartPanel = new ChartPanel(grafico);
-            //graficaPanel.add(graficoChartPanel);
-            ChartFrame frame = new ChartFrame("Incidencias totales", grafico);
-            frame.pack();
-            frame.setVisible(true);
+            graficoChartPanel = new ChartPanel(grafico);
+            graficaPanel.add(graficoChartPanel);
+            graficaPanel.validate();
             
             
         }else{
@@ -956,7 +1062,11 @@ public class administradorFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_reporteTotalButtonActionPerformed
-
+    /**
+     * Este evento se desata para generar los graficos con los 10 usuarios con mas 
+     * registros
+     * @param evt evento
+     */
     private void reporteUsuariosMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteUsuariosMButtonActionPerformed
         // TODO add your handling code here:
         HashMap<String,Integer> resultados = estadistica.listarMayores();
@@ -967,14 +1077,19 @@ public class administradorFrame extends javax.swing.JFrame {
             }
             
             grafico = ChartFactory.createBarChart("Usuarios mas activos", "Usuario", "Incidencias", usuariosActivos);
-            ChartFrame frame = new ChartFrame("Usuarios mas activos", grafico);
-            frame.pack();
-            frame.setVisible(true);
+            graficoChartPanel = new ChartPanel(grafico);
+            graficaPanel.add(graficoChartPanel);
+            graficaPanel.validate();
+            
         }else{
             JOptionPane.showMessageDialog(this, "Error al leer los datos del servidor");
         }
     }//GEN-LAST:event_reporteUsuariosMButtonActionPerformed
-
+    
+    /**
+     * Este evento se para salir del panel de administracion
+     * @param evt evento
+     */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -984,7 +1099,11 @@ public class administradorFrame extends javax.swing.JFrame {
         });
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    /**
+     * Este evento se desata para generar el reporte en PDF de las incidencias 
+     * del dia de hoy
+     * @param evt evento
+     */
     private void reporteHoyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteHoyButtonActionPerformed
         // seleccionar la ruta
         JFileChooser ruta = new JFileChooser();
@@ -1002,7 +1121,11 @@ public class administradorFrame extends javax.swing.JFrame {
         reporte.setUsuarios((String[])datos.get("usuarios"));
         reporte.createPDF();
     }//GEN-LAST:event_reporteHoyButtonActionPerformed
-
+    /**
+     * este evento se desata para generar el reporte de las incidencias en PDF 
+     * que se registraron el dia de hoy a determinada hora
+     * @param evt evento
+     */
     private void filtroHoraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroHoraButtonActionPerformed
         JFileChooser ruta = new JFileChooser();
         ruta.showSaveDialog(this);
@@ -1020,7 +1143,11 @@ public class administradorFrame extends javax.swing.JFrame {
         reporte.createPDF();        
         
     }//GEN-LAST:event_filtroHoraButtonActionPerformed
-
+    
+    /**
+     * este evento se desata para registrar un usuario
+     * @param evt evento
+     */
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
         boolean valid = true;
         boolean administrador;
@@ -1089,7 +1216,10 @@ public class administradorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Los datos ingresados son invalidos");
         }
     }//GEN-LAST:event_enviarButtonActionPerformed
-
+    /**
+     * Este evento se desata al perder el foco para validar el correo
+     * @param evt evento
+     */
     private void correoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_correoFieldFocusLost
         // validar el correo
         if (validador.isEmail(correoField.getText())) {
@@ -1098,21 +1228,10 @@ public class administradorFrame extends javax.swing.JFrame {
             wcorreoLabel.setVisible(true);
         }
     }//GEN-LAST:event_correoFieldFocusLost
-
-    private void nacionalidadFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacionalidadFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nacionalidadFieldActionPerformed
-
-    private void nacionalidadFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nacionalidadFieldFocusLost
-        // TODO add your handling code here:
-        if (validador.isAlpha(nacionalidadField.getText())) {
-            wnacionalidadLabel.setVisible(false);
-        }
-        else{
-            wnacionalidadLabel.setVisible(true);
-        }
-    }//GEN-LAST:event_nacionalidadFieldFocusLost
-
+    /**
+     * Este evento se desata para validar el campo de apellido
+     * @param evt evento
+     */
     private void apellidoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apellidoFieldFocusLost
         // TODO add your handling code here:
         if (validador.isAlphaSpace(apellidoField.getText())) {
@@ -1121,7 +1240,10 @@ public class administradorFrame extends javax.swing.JFrame {
             wapellidoLabel.setVisible(true);
         }
     }//GEN-LAST:event_apellidoFieldFocusLost
-
+    /**
+     * Este evento se desata para validar el nombre en la alta de usuario
+     * @param evt evento
+     */
     private void nombreFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFieldFocusLost
         // TODO add your handling code here:
         if (validador.isAlphaSpace(nombreField.getText())) {
@@ -1130,6 +1252,38 @@ public class administradorFrame extends javax.swing.JFrame {
             wnombreLabel.setVisible(true);
         }
     }//GEN-LAST:event_nombreFieldFocusLost
+    /**
+     * Este evento se genera para generar el reporte de incidencias del dia en PDF
+     * @param evt evento
+     */
+    private void reporteDiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteDiaButtonActionPerformed
+        // obtener la fecha seleccionada        
+
+        JFileChooser ruta = new JFileChooser();
+        ruta.showSaveDialog(this);
+        File destino = ruta.getSelectedFile();
+               
+        HashMap<String,Object[]> datos = estadistica.incidenciasDia(filtroDia.getDate());
+        
+        ReporteIncidenciasDiaPDF reporte = new ReporteIncidenciasDiaPDF(destino);
+        reporte.setIds((Long[])datos.get("ids"));
+        reporte.setClientes((String[])datos.get("clientes"));
+        reporte.setImportancias((String[])datos.get("importancias"));
+        reporte.setTipos((String[])datos.get("tipos"));
+        reporte.setUsuarios((String[])datos.get("usuarios"));
+        reporte.createPDF();         
+        
+    }//GEN-LAST:event_reporteDiaButtonActionPerformed
+
+    private void nacionalidadFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nacionalidadFieldFocusLost
+        // TODO add your handling code here:
+        if (nacionalidadField.getText().length() > 0 && validador.isAlpha(nacionalidadField.getText())) {
+            wnacionalidadLabel.setVisible(false);
+        }
+        else{
+            wnacionalidadLabel.setVisible(true);
+        }
+    }//GEN-LAST:event_nacionalidadFieldFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1148,6 +1302,7 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JPanel graficaPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -1165,7 +1320,9 @@ public class administradorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel nacionalidadLabel;
     private javax.swing.JTextField nombreField;
     private javax.swing.JLabel nombreLabel;
+    private javax.swing.JPanel panelDiaFiltro;
     private javax.swing.JPanel panelFiltro;
+    private javax.swing.JButton reporteDiaButton;
     private javax.swing.JButton reporteHoyButton;
     private javax.swing.JButton reporteTotalButton;
     private javax.swing.JButton reporteUsuariosMButton;

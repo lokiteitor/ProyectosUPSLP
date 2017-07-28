@@ -28,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -38,15 +39,30 @@ import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 import mx.edu.upslp.callserver.usuario.UsuarioEJB;
 
 /**
- *
+ * Clase que me permite obtener las estadisticas del servidor
  * @author David Delgado Hernandez 150205@upslp.edu.mx Programacion III Miercoles Horario: 2:00 - 4:00
  */
 public class Estadisticas {
+    /**
+     * Atributo donde se guardan los atributos para el JDNI
+     */
     private Properties props = new Properties();
+    /**
+     * Este contexto nos otorgara una conexion al servidor
+     */
     private InitialContext ctx;
+    /**
+     * De esta forma podemos obtener el EJB remoto
+     */
     private EstadisticaSessionBeanRemote estRemote;
+    /**
+     * Aqui guardamos los usuarios que arroje la consulta
+     */
     private List<UsuarioEJB> consulta;
     
+    /**
+     * Este constructor permite conectarse al servidor J2EE para obtener los EJB
+     */
     public Estadisticas() {
         // cargamos la configuracion del JNDI
         try{
@@ -64,6 +80,10 @@ public class Estadisticas {
         }          
     }
     
+    /**
+     * retorna el total de incidencias y el tipo al que pertenecen
+     * @return arreglo con los datos de cuantas incidencias
+     */
     public int[] numeroIncidencias(){
         int[] datos;
         
@@ -78,6 +98,11 @@ public class Estadisticas {
         
     }
     
+    /**
+     * lista los usuarios con la mayor actividad
+     * @return retorna un HashMap con el nombre de usuario como clave y el listado 
+     * de incidencias
+     */
     public HashMap<String,Integer> listarMayores(){
         HashMap<String,Integer> result = new HashMap<String,Integer>();
         
@@ -98,6 +123,10 @@ public class Estadisticas {
         return result;
     }
     
+    /**
+     * Retorna las incidencias cuya fecha coincida con la actual
+     * @return HashMap con las claves (ids,tipos,importancias,usuarios,clientes)
+     */
     public HashMap<String,Object[]> incidenciasHoy(){
         List<IncidenciaEJB> resultado;
         HashMap<String,Object[]> datos = new HashMap<String,Object[]>();
@@ -138,7 +167,11 @@ public class Estadisticas {
         
         return datos;        
     }
-    
+    /**
+     * Retorna las incidencias que coincidan con determinada hora
+     * @param hora LocalTime con la fecha a buscar
+     * @return HashMap con las claves (ids,tipos,importancias,usuarios,clientes)
+     */
     public HashMap<String,Object[]> IncidenciaPorHora(LocalTime hora){
         List<IncidenciaEJB> resultado;
         HashMap<String,Object[]> datos = new HashMap<String,Object[]>();
@@ -180,5 +213,51 @@ public class Estadisticas {
         return datos;         
         
     }
+    
+    /**
+     * Muestra las incidencias de un dia en especifico
+     * @param fecha dia aa buscar
+     * @return HashMap con los datos encontrados
+     */
+    public HashMap<String,Object[]> incidenciasDia(Date fecha){
+        List<IncidenciaEJB> resultado;
+        HashMap<String,Object[]> datos = new HashMap<String,Object[]>();
+        Long[] ids;
+        String[] tipos;
+        String[] importancias;
+        String[] usuarios;
+        String[] clientes;
+        int cont = 0;
+        
+        try{
+            resultado = estRemote.incidenciasDia(fecha);
+            ids = new Long[resultado.size()];
+            tipos = new String[resultado.size()];
+            importancias = new String[resultado.size()];
+            usuarios = new String[resultado.size()];
+            clientes = new String[resultado.size()];
+            for (IncidenciaEJB incidencia : resultado) {                
+                ids[cont] = incidencia.getIdIncidencia();
+                tipos[cont] = incidencia.getTipo();
+                importancias[cont] = incidencia.getImportancia();
+                usuarios[cont] = incidencia.getIdUsuario().getIdUsuario();
+                clientes[cont] = incidencia.getCliente().getCorreo();
+                cont++;                        
+            }
+            
+            datos.put("ids", ids);
+            datos.put("tipos", tipos);
+            datos.put("importancias", importancias);
+            datos.put("usuarios", usuarios);
+            datos.put("clientes", clientes);
+            
+        }catch(Exception e){
+            System.err.println("Error al consultar el servidor");
+            System.err.println(e.getMessage());
+            datos = null;
+        }
+        
+        return datos;        
+    }    
     
 }

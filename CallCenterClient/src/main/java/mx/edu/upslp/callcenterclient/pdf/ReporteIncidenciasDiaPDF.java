@@ -45,37 +45,72 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Genera el reporte en PDF de las incidencias en una hora especifica
+ * Esta clase se encarga de generar los reportes del dia en PDF
  * @author David Delgado Hernandez 150205@upslp.edu.mx Programacion III Miercoles Horario: 2:00 - 4:00
  */
-public class ReporteIncidenciasHoraPDF {
-    private String separador = System.getProperty("file.separator");
+public class ReporteIncidenciasDiaPDF {
+    private String separador = System.getProperty("file.separator");    
     private static final Font parrafoFont = FontFactory.getFont(FontFactory.COURIER,8);
     private static final Font TituloFont = FontFactory.getFont(FontFactory.COURIER,16);
     private Document documento;
     private PdfPTable table = new PdfPTable(5);
     private PdfPCell columnHeader;
-    private Chapter capTabla = new Chapter(1);
+    private Chapter capTabla = new Chapter(1);    
     
     private Long[] ids;
     private String[] tipos;
     private String[] importancias;
     private String[] usuarios;
     private String[] clientes;
+
+    /**
+     * @param ids the ids to set
+     */
+    public void setIds(Long[] ids) {
+        this.ids = ids;
+    }
+
+    /**
+     * @param tipos the tipos to set
+     */
+    public void setTipos(String[] tipos) {
+        this.tipos = tipos;
+    }
+
+    /**
+     * @param importancias the importancias to set
+     */
+    public void setImportancias(String[] importancias) {
+        this.importancias = importancias;
+    }
+
+    /**
+     * @param usuarios the usuarios to set
+     */
+    public void setUsuarios(String[] usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    /**
+     * @param clientes the clientes to set
+     */
+    public void setClientes(String[] clientes) {
+        this.clientes = clientes;
+    }
     
     
     /**
-     * genera la instancia para un nuevo archivo PDF 
-     * @param salida ruta donde guardar el archivo
+     * Genera la instancia del PDF
+     * @param salida ruta de salida
      */
-    public ReporteIncidenciasHoraPDF(File salida){
+    public ReporteIncidenciasDiaPDF(File salida){
         // creamos el documento
         try{
             documento = new Document();
             // obtenemos el objeto para escribirlo
             PdfWriter.getInstance(documento, new FileOutputStream(salida));
             documento.open();
-            
+
             
         }catch(FileNotFoundException e){
             System.err.println("El archivo o directorio no existe");
@@ -83,12 +118,14 @@ public class ReporteIncidenciasHoraPDF {
         }catch(DocumentException e){
             System.err.println("Error al crear el documento");
             System.err.println(e.getMessage());
-        }   
-        
+        }catch(NullPointerException e){
+            System.err.println("No se puede acceder al archivo");
+            System.err.println(e.getMessage());
+        }
     }
     
     /**
-     * escribe los datos preparados dentro del archivo
+     * escribe los cambios en el PDF
      */
     private void write(){        
         try{
@@ -102,38 +139,36 @@ public class ReporteIncidenciasHoraPDF {
             System.err.println(e.getMessage());
         }
     }
-    
     /**
-     * genera el PDF de memoria a HDD
+     * metodo de entrada para la creacion del PDF
      */
     public void createPDF(){
         write();
         documento.close();
     }
-    
     /**
-     * agrega los metadatos al PDF
+     * Agrega los metadatos al PDF
      */
     private void addMetadata(){
         documento.addTitle("Reporte de incidencias diario");
         documento.addAuthor("CallCenter");
         documento.addCreationDate();
     }
-    
     /**
-     * agrega una tabla al pdf
+     * Agrega la tabla al archivo PDF
      * @throws DocumentException 
      */
     private void addTable() throws DocumentException{
-        table.setTotalWidth(200);
-        Section stabla = capTabla.addSection("");        
+        Chapter capTabla = new Chapter(1);
+        Section stabla = capTabla.addSection("Tabla de reportes");        
         headerTitle();
         addContent();
         stabla.add(table);
         documento.add(capTabla);
     }
+    
     /**
-     * Agrega la cabezera de la tabla
+     * Agrega las cabezeras a la tabla
      */
     private void headerTitle(){
         columnHeader = new PdfPCell(new Phrase("ID",parrafoFont));
@@ -160,31 +195,7 @@ public class ReporteIncidenciasHoraPDF {
     }
     
     /**
-     * Agrega la cabezera del archivo
-     */
-    private void addTitle(){
-        
-        Image logo;
-        try{
-            logo = Image.getInstance("imagenes"+separador+"logo.png");           
-            capTabla.add(logo);
-        }catch(BadElementException e){
-            System.err.println("Error al abrir el logo");
-            System.err.println(e.getMessage());
-        }catch(IOException e){
-            System.err.println("Error de entrada/salida");
-            System.err.println(e.getMessage());
-        }
-        
-        Chunk title = new Chunk("\n\n",TituloFont);
-        capTabla.add(title);
-        capTabla.add(new Paragraph("A continuacion se muestra los reportes durante la hora "+
-                "seleccionada"));
-        
-        
-    }
-    /**
-     * agrega el contenido a la tabla
+     * Agrega el contenido a la tabla
      */
     private void addContent(){
         PdfPCell cell;
@@ -210,19 +221,37 @@ public class ReporteIncidenciasHoraPDF {
             table.addCell(cell);            
         }
     }
-
+    
+    /**
+     * Agrega la cabezera del PDF
+     */
+        
+    private void addTitle(){
+        
+        Image logo;
+        try{
+            logo = Image.getInstance("imagenes"+separador+"logo.png");           
+            capTabla.add(logo);
+        }catch(BadElementException e){
+            System.err.println("Error al abrir el logo");
+            System.err.println(e.getMessage());
+        }catch(IOException e){
+            System.err.println("Error de entrada/salida");
+            System.err.println(e.getMessage());
+        }
+        
+        Chunk title = new Chunk("\n\nReporte de incidencias por hora",TituloFont);
+        capTabla.add(title);
+        capTabla.add(new Paragraph("A continuacion se muestra los reportes durante la hora "+
+                "seleccionada"));                
+    }
+    
+    
     /**
      * @return the ids
      */
     public Long[] getIds() {
         return ids;
-    }
-
-    /**
-     * @param ids the ids to set
-     */
-    public void setIds(Long[] ids) {
-        this.ids = ids;
     }
 
     /**
@@ -233,26 +262,11 @@ public class ReporteIncidenciasHoraPDF {
     }
 
     /**
-     * @param tipos the tipos to set
-     */
-    public void setTipos(String[] tipos) {
-        this.tipos = tipos;
-    }
-
-    /**
      * @return the importancias
      */
     public String[] getImportancias() {
         return importancias;
     }
-
-    /**
-     * @param importancias the importancias to set
-     */
-    public void setImportancias(String[] importancias) {
-        this.importancias = importancias;
-    }
-
     /**
      * @return the usuarios
      */
@@ -261,23 +275,11 @@ public class ReporteIncidenciasHoraPDF {
     }
 
     /**
-     * @param usuarios the usuarios to set
-     */
-    public void setUsuarios(String[] usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    /**
      * @return the clientes
      */
     public String[] getClientes() {
         return clientes;
     }
+    
 
-    /**
-     * @param clientes the clientes to set
-     */
-    public void setClientes(String[] clientes) {
-        this.clientes = clientes;
-    }
 }

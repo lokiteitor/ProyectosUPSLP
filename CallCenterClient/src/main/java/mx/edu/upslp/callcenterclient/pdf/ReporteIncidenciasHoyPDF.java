@@ -43,13 +43,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 /**
- *
+ * Genera el reporte en PDF de las incidencias del dia de hoy
  * @author David Delgado Hernandez 150205@upslp.edu.mx Programacion III Miercoles Horario: 2:00 - 4:00
  */
 public class ReporteIncidenciasHoyPDF {
     private String separador = System.getProperty("file.separator");    
-    private static final Font parrafoFont = FontFactory.getFont(FontFactory.TIMES,12);
-    private static final Font TituloFont = FontFactory.getFont(FontFactory.HELVETICA,16);
+    private static final Font parrafoFont = FontFactory.getFont(FontFactory.COURIER,8);
+    private static final Font TituloFont = FontFactory.getFont(FontFactory.COURIER,16);
     private Document documento;
     private PdfPTable table = new PdfPTable(5);
     private PdfPCell columnHeader;
@@ -97,7 +97,10 @@ public class ReporteIncidenciasHoyPDF {
     }
     
     
-    
+    /**
+     * Genera la instancia del PDF
+     * @param salida ruta de salida
+     */
     public ReporteIncidenciasHoyPDF(File salida){
         // creamos el documento
         try{
@@ -119,7 +122,9 @@ public class ReporteIncidenciasHoyPDF {
         }
     }
     
-    
+    /**
+     * escribe los cambios en el PDF
+     */
     private void write(){        
         try{
             // insertamos los metadatos
@@ -132,27 +137,37 @@ public class ReporteIncidenciasHoyPDF {
             System.err.println(e.getMessage());
         }
     }
-    
+    /**
+     * metodo de entrada para la creacion del PDF
+     */
     public void createPDF(){
         write();
         documento.close();
     }
-    
+    /**
+     * Agrega los metadatos al PDF
+     */
     private void addMetadata(){
         documento.addTitle("Reporte de incidencias diario");
         documento.addAuthor("CallCenter");
         documento.addCreationDate();
     }
-    
+    /**
+     * Agrega la tabla al archivo PDF
+     * @throws DocumentException 
+     */
     private void addTable() throws DocumentException{
         Chapter capTabla = new Chapter(1);
-        Section stabla = capTabla.addSection("Tabla de reportes");        
+        Section stabla = capTabla.addSection("");        
         headerTitle();
         addContent();
         stabla.add(table);
         documento.add(capTabla);
     }
     
+    /**
+     * Agrega las cabezeras a la tabla
+     */
     private void headerTitle(){
         columnHeader = new PdfPCell(new Phrase("ID",parrafoFont));
         columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -177,6 +192,9 @@ public class ReporteIncidenciasHoyPDF {
         
     }
     
+    /**
+     * Agrega el contenido a la tabla
+     */
     private void addContent(){
         PdfPCell cell;
         for (int i = 0; i < ids.length; i++) {
@@ -201,7 +219,10 @@ public class ReporteIncidenciasHoyPDF {
             table.addCell(cell);            
         }
     }
-
+    
+    /**
+     * Agrega la cabezera del PDF
+     */
         
     private void addTitle(){
         
@@ -209,6 +230,7 @@ public class ReporteIncidenciasHoyPDF {
         try{
             logo = Image.getInstance("imagenes"+separador+"logo.png");           
             capTabla.add(logo);
+            System.out.println("ok");
         }catch(BadElementException e){
             System.err.println("Error al abrir el logo");
             System.err.println(e.getMessage());
@@ -217,10 +239,9 @@ public class ReporteIncidenciasHoyPDF {
             System.err.println(e.getMessage());
         }
         
-        Chunk title = new Chunk("\n\nReporte de incidencias por hora",TituloFont);
+        Chunk title = new Chunk("\n\n",TituloFont);
         capTabla.add(title);
-        capTabla.add(new Paragraph("A continuacion se muestra los reportes durante la hora "+
-                "seleccionada"));                
+        capTabla.add(new Paragraph(""));                
     }
     
     
@@ -256,8 +277,5 @@ public class ReporteIncidenciasHoyPDF {
      */
     public String[] getClientes() {
         return clientes;
-    }
-
-
-    
+    }    
 }

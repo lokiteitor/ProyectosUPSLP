@@ -85,14 +85,8 @@ public class Usuario {
     }
       
     /**
-     * Crea un nuevo usuario
-     * @param nombre
-     * @param apellido
-     * @param fechaNacimiento
-     * @param nacionalidad
-     * @param turno
-     * @param administrador 
-     * @return 
+     * registra un usuario con los datos de la clase
+     * @return instancia EJB del usuario
      */
     public UsuarioEJB registro(){
         // utilizar el session bean para registra el usuario
@@ -120,7 +114,10 @@ public class Usuario {
         return this.usuario;
     }      
     
-    
+    /**
+     * Obtiene la lista de usuarios del servidor
+     * @param page pagina de la DB a mostrar
+     */
     private void getUsuarioModelRaw(int page){
 
         try{
@@ -129,7 +126,7 @@ public class Usuario {
             // con esta lista generar una matriz de objetos para crear el modelo
             
             for (UsuarioEJB usuario : allRegistros) {
-                usernames.add(usuario.getNombre());
+                usernames.add(usuario.getUsername());
                 apellidos.add(usuario.getApellido());
                 nombres.add(usuario.getNombre());
             }
@@ -140,6 +137,12 @@ public class Usuario {
         }
     }
     
+    /**
+     * obtiene los datos de los usuarios para el modelo de tabla
+     * @param regenerar vuelve a recuperar los datos
+     * @param page pagina de la DB a mostrar
+     * @return datos de los usuarios
+     */
     public Object[][] obtenerDatos(boolean regenerar,int page){
         // llamar a la API si se quiere regenerar
         if (regenerar) {
@@ -152,7 +155,11 @@ public class Usuario {
         
         return datos;
     }
-    
+    /**
+     * Obtiene los datos de un usuario especifico
+     * @param indx indice del usuario
+     * @return instancia EJB del usuario
+     */
     public UsuarioEJB obtenerDatosUsuario(int indx){
         UsuarioEJB response = null;
         if (allRegistros != null && allRegistros.size() >= indx ) {
@@ -161,16 +168,25 @@ public class Usuario {
         return response;
     }
     
+    /**
+     * guarda los datos del servidor en la matriz a devolver
+     * @return matriz con los datos de los usuarios
+     */
     private Object[][] generarDatos(){
         datos = new Object[nombres.size()][4];
         for (int i = 0; i < nombres.size(); i++) {
-            datos[i][0] = nombres.get(i);
-            datos[i][1] = apellidos.get(i);
-            datos[i][2] = usernames.get(i);
+            datos[i][1] = nombres.get(i);
+            datos[i][2] = apellidos.get(i);
+            datos[i][0] = usernames.get(i);
         }
         return datos;
     }
     
+    /**
+     * actualiza los datos de la instancia EJB en la base de datos
+     * @param objetivo EJB a actualizar
+     * @param page pagina DB a mostrar
+     */
     public void actualizarUsuario(UsuarioEJB objetivo,int page){
         try{
             remoteUsuario.actualizarDatosEntidad(objetivo);
@@ -181,6 +197,11 @@ public class Usuario {
         }
     }
     
+    /**
+     * remueve una instancia EJB de la base de datos
+     * @param id id del usuario
+     * @return true si la operacion se realizo correctamente
+     */
     public boolean removerUsuario(String id){
         boolean response;
         try{

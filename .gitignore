@@ -1,1 +1,26 @@
 /Guarderia/dist/
+/CallCenterClient/client/nbproject/private/
+/CallCenterClient/client/build/
+/CallCenterClient/client/dist/
+/CallCenterClient/quejas/build/
+/CallCenterClient/quejas/nbproject/private/
+/CallCenterClient/GUI/build/
+/CallCenterClient/GUI/nbproject/private/
+/CallCenterClient/Diseñp GUI/build/
+/CallCenterClient/Diseñp GUI/nbproject/private/
+/CallCenterClient/Diseño GUI/build/
+/CallCenterClient/Diseño GUI/nbproject/private/
+/CallCenterClient/target/
+/CallCenterServer/UsuarioEJB/target/
+/CallCenterServer/callserver/callserver/target/
+/CallCenterServer/test/target/
+/CallCenterServer/testserver/nbproject/private/
+/CallCenterServer/testserver/build/
+/CallCenterServer/testserver/dist/
+/CallCenterServer/testter/nbproject/private/
+/CallCenterServer/Test/nbproject/private/
+/CallCenterServer/Test/build/
+/CallCenterServer/Test/dist/
+/CallCenterServer/test/nbproject/private/
+/Sincronizados/nbproject/private/
+/Sincronizados/build/

@@ -8,7 +8,12 @@ package mx.edu.upslp.callcenterclient.main;
 import mx.edu.upslp.callcenterclient.gui.LoginFrame;
 
 /**
- *
+ * Adminstrador:
+ * usuario: david
+ * password: pass
+ * Gestor:
+ * usuario: 5d/
+ * password: Lui1L
  * @author David Delgado Hernandez 150205@upslp.edu.mx
  */
 public class Main {

@@ -287,7 +287,10 @@ public class IncidenciaSessionBean implements IncidenciaSessionBeanRemote {
             movimientoEJB.setUpdated_at(new Date());
             movimientoEJB.setUsuario(usuario);
             manager.persist(movimientoEJB);
-            
+            //@todo arreglar problemas de integridad referencial
+            //objetivo.setCliente(null);
+            //objetivo.setIdUsuario(null);
+            //manager.persist(objetivo);
             manager.remove(objetivo);
         }
         

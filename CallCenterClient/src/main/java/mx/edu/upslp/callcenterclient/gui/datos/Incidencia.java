@@ -39,32 +39,86 @@ import mx.edu.upslp.callserver.incidencia.IncidenciaEJB;
 import mx.edu.upslp.callserver.incidencia.remote.IncidenciaSessionBeanRemote;
 
 /**
- *
+ * Esta clase se encarga de consultar los datos de las incidencias al servidor
  * @author David Delgado Hernandez 150205@upslp.edu.mx Programacion III Miercoles Horario: 2:00 - 4:00
  */
 public class Incidencia {
-    
+    /**
+     * tipo de la incidencia
+     */
     private String tipo;
+    /**
+     * importancia de la incidencia
+     */
     private String importancia;
+    /**
+     * descripcion de la incidencia
+     */
     private String descripcion;
+    /**
+     * id del usuario que la registro
+     */
     private String idUsuario;
+    /**
+     * nombre del cliente
+     */
     private String nombreCliente;
+    /**
+     * domicilio del cliente
+     */
     private String direccion;
+    /**
+     * edad del cliente
+     */
     private Date edad;
+    /**
+     * telefono del cliente
+     */
     private String telefono;
+    /**
+     * fecha de la incidencia
+     */
     private Date fecha;
+    /**
+     * correo del cliente
+     */
     private String correo;
+    /**
+     * apellido del cliente
+     */
     private String apellido;
-    
+    /**
+     * propiedades del JDNI
+     */
     private Properties props = new Properties();
+    /**
+     * Contexto remoto para llamar a los EJB
+     */
     private InitialContext ctx;
     private IncidenciaSessionBeanRemote remoteIncidencia;
-    
+    /**
+     * Lista con las incidencias que devuelve
+     */
     private List<IncidenciaEJB> allRegistros;
+    /**
+     * Lista con los clientes
+     */
     private ArrayList<ClienteEJB> clientes = new ArrayList<ClienteEJB>();
+    /**
+     * lista con los ids de Incidencias
+     */
     private ArrayList<Long> idIncidencias = new ArrayList<Long>(); 
+    /**
+     * lista con los niveles de incidencias
+     */
     private ArrayList<String> niveles = new ArrayList<String>(); 
+    /**
+     * lista con los tipos
+     */
     private ArrayList<String> tipos = new ArrayList<String>();
+    /**
+     * lista con los datos utilizados en los modelos
+     */
     private Object[][] datos;
 
     /**
@@ -87,6 +141,10 @@ public class Incidencia {
         }       
     }    
     
+    /**
+     * registra una incidencia con los atributos de esta clase
+     * @return true si la operacion fue correcta
+     */
     public boolean registrarIncidencia(){
         // crear el mapa
         HashMap<String,Object> datos = new HashMap<String,Object>();
@@ -107,7 +165,11 @@ public class Incidencia {
 
         return remoteIncidencia.registrarIncidencia(datos);
     }
-    
+    /**
+     * obtiene los datos del servidor en crudo
+     * @param page pagina de la base de datos a analizar
+     * @param id id del usuario
+     */
     private void getModelRaw(int page,String id){
             // pedir los datos al server
         allRegistros = remoteIncidencia.listarIncidencias(page, id);
@@ -126,7 +188,10 @@ public class Incidencia {
             System.out.println(e.getMessage());
         }
     }
-    
+    /**
+     * Genera los datosy los guarda en un arreglo de objetos
+     * @return retorna los datos en forma de arreglo
+     */
     private Object[][] generarDatos(){
         datos = new Object[idIncidencias.size()][4];
         for (int i = 0; i < idIncidencias.size(); i++) {
@@ -138,6 +203,12 @@ public class Incidencia {
         return datos;
     }
     
+    /**
+     * renueva los datos
+     * @param page pagina a buscar
+     * @param idUsuario id del usuario
+     * @return Matriz con los datos listo para modelo de tablas
+     */
     public Object[][] obtenerDatos(int page,String idUsuario){
 
         idIncidencias.clear();
@@ -148,7 +219,11 @@ public class Incidencia {
         generarDatos();
         return datos;
     }
-    
+    /**
+     * obtiene los datos de una determinada incidencia
+     * @param indx indice dentro del arreglo de datos
+     * @return instancia EJB con los datos de la incidenciaa
+     */
     public IncidenciaEJB obtenerDatosIncidencia(int indx){
         IncidenciaEJB response = null;
         
@@ -159,6 +234,12 @@ public class Incidencia {
         return response;
     }
     
+    /**
+     * Actualiza los datos de la incidencia
+     * @param objetivo incidencia a actualizar
+     * @param page pagina a retornar
+     * @param idUsuario  id del usuario
+     */
     public void actualizarIncidencia(IncidenciaEJB objetivo,int page,String idUsuario){
         try{
             remoteIncidencia.actualizarIncidencia(objetivo);
@@ -169,6 +250,11 @@ public class Incidencia {
         }
     }
     
+    /**
+     * Remueve una incidencia de la base datos
+     * @param id id de la incidencia
+     * @return true si la operacion fue existosa
+     */
     public boolean removerIncidencia(Long id){
         boolean response;
         
@@ -180,6 +266,23 @@ public class Incidencia {
             response = false;
         }
         return response;
+    }
+    
+    /**
+     * Obtiene los datos de un cliente en especifico
+     * @param correo correo del cliente a buscar
+     * @return instancia EJB del cliente 
+     */
+    public ClienteEJB getDataCliente(String correo){
+        ClienteEJB cliente = null;
+        
+        try{
+            cliente = remoteIncidencia.getClienteData(correo);
+        }catch(Exception e){
+            System.err.println("Error al obtener los datos del servidor");
+            System.err.println(e.getMessage());
+        }
+        return cliente;
     }
 
     public Date getFecha() {
@@ -324,8 +427,5 @@ public class Incidencia {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
 
-
-    
 }

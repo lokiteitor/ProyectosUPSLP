@@ -72,7 +72,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="tabPanel" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,57 +117,55 @@
                               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                               <Component id="listaCalendarioPanel" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="listaModificarButton" min="-2" pref="192" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="wListaNombreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="wListaNombreLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="wListaTelefonoLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="listaDireccionField" min="-2" pref="185" max="-2" attributes="0"/>
-                                  <Component id="wListaEdadLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="listaTipoLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="listaImportanciaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="listaImportanciaCombo" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="listaTelefonoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="listaTelefonoField" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="listaNombreField" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="listaDescripcionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="listaEdadLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="edadChooserPanel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="listaNombreLabel" min="-2" pref="185" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="listaFechaLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="wListaTelefonoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="listaDireccionField" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="wListaEdadLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="listaTipoLabel" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="listaQuejaRadio" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="listaSugerenciaRadio" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="listaSeguridadPanel" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="listaImportanciaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="listaImportanciaCombo" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                                              <Component id="listaTelefonoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="listaTelefonoField" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                                              <Component id="listaNombreField" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="listaEdadLabel" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="listaNombreLabel" min="-2" pref="185" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="listaFechaLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="listaSeguridadPanel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="listaModificarButton" min="-2" pref="192" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="edadChooserPanel" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="listaDescripcionLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="jScrollPane4" alignment="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <Component id="jScrollPane4" min="-2" pref="370" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -199,39 +196,38 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane2" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="listaNombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="listaFechaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="listaNombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="listaFechaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="listaNombreField" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="wListaNombreLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="listaCalendarioPanel" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="listaImportanciaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="listaEdadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="listaImportanciaCombo" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="edadChooserPanel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="listaCalendarioPanel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="edadChooserPanel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="listaTelefonoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="listaImportanciaCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="listaDescripcionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <Component id="listaTelefonoLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="listaTelefonoField" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="wListaTelefonoLabel" min="-2" max="-2" attributes="0"/>
@@ -239,7 +235,7 @@
                                       <Component id="listaDireccionLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="listaDireccionField" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="45" max="32767" attributes="0"/>
+                                      <EmptySpace pref="20" max="32767" attributes="0"/>
                                       <Component id="wListaEdadLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="listaTipoLabel" min="-2" max="-2" attributes="0"/>
@@ -259,11 +255,14 @@
                                               <Component id="listaSeguridadPanel" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane4" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jScrollPane4" max="32767" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="listaModificarButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Component id="listaModificarButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -484,7 +483,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="35" max="32767" attributes="0"/>
                           <Component id="listaEliminarButton" min="-2" pref="117" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
@@ -523,7 +522,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="342" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -553,71 +552,69 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
+                              <Component id="enviarButton" min="-2" pref="130" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="descripcionLabel" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="quejaRadio" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="sugerenciarRadio" min="-2" max="-2" attributes="0"/>
-                                              <Component id="direccionField" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="importanciaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="telefonoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="importanciaCombo" pref="130" max="32767" attributes="0"/>
-                                              <Component id="telefonoField" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="nombreLabel" min="-2" max="-2" attributes="0"/>
-                                              <Component id="apellidoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="nombreField" pref="130" max="32767" attributes="0"/>
-                                              <Component id="apellidoField" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="wnombreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="reporteLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="wtelefonoLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="wapellidoLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="enviarButton" min="-2" pref="130" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="nacimientoPanel" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Component id="correoLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="correoField" min="-2" pref="200" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="wcorreoLabe" min="-2" max="-2" attributes="0"/>
-                                          <Component id="fechaLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="wnombreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="correoLabel" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="nombreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="apellidoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="wapellidoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="reporteLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="quejaRadio" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="correoField" min="-2" pref="200" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="usuarioLabel" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="apellidoField" min="-2" pref="130" max="-2" attributes="0"/>
+                                                  <Component id="nombreField" min="-2" pref="130" max="-2" attributes="0"/>
+                                                  <Component id="sugerenciarRadio" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="direccionField" min="-2" pref="130" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="usuarioField" max="32767" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="nacimientoPanel" max="32767" attributes="0"/>
                                   <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="calendarPanel" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="telefonoLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="wtelefonoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="telefonoField" min="-2" pref="134" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="usuarioLabel" max="32767" attributes="0"/>
+                                                  <Component id="importanciaLabel" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="usuarioField" max="32767" attributes="0"/>
+                                                  <Component id="importanciaCombo" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Component id="fechaLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="calendarPanel" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="descripcionLabel" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -628,50 +625,36 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="nombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nombreField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="correoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="correoField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="usuarioLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="usuarioField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="wnombreLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="wcorreoLabe" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nombreField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="telefonoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="telefonoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="importanciaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="importanciaCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <Component id="wnombreLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="apellidoField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="apellidoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="apellidoField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="wapellidoLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="importanciaLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="importanciaCombo" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="wcorreoLabe" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="calendarPanel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="telefonoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="telefonoField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="wtelefonoLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="reporteLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="quejaRadio" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="sugerenciarRadio" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -683,18 +666,30 @@
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="fechaLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="wtelefonoLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Component id="nacimientoPanel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="fechaLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="nacimientoPanel" min="-2" max="-2" attributes="0"/>
+                              <Component id="calendarPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="descripcionLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="180" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="enviarButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="84" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -841,9 +836,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="direccionField">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="direccionFieldFocusLost"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="correoLabel">
               <Properties>
@@ -872,7 +864,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="473" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="617" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">

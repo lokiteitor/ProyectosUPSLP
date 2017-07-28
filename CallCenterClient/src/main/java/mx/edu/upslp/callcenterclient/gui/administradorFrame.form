@@ -131,7 +131,7 @@
                           <Component id="anteriorButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="siguienteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="78" max="32767" attributes="0"/>
+                      <EmptySpace pref="128" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -262,20 +262,28 @@
                                   <Component id="usuariosAccesoField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="usuariosTurnoField" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="usuariosCreacionField" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                          <Component id="usuariosCreacionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="usuariosActualizacionLabel" min="-2" max="-2" attributes="0"/>
-                                          <Component id="usuariosActualizacionField" min="-2" pref="143" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="usuariosCreacionField" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                                  <Component id="usuariosCreacionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="usuariosActualizacionLabel" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="usuariosActualizacionField" min="-2" pref="143" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Component id="seguridadLabel" min="-2" pref="371" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="seguridadPanel" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="seguridadPanel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -299,7 +307,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="usuariosLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -314,14 +322,17 @@
                                   <Component id="usuariosActualizacionField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="usuariosApellidoLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="usuariosApellidoField" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="usuariosFechaLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="usuariosApellidoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="seguridadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <Component id="usuariosApellidoField" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="usuariosFechaLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="usuariosFechaField" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="usuariosNacionalidadLabel" min="-2" max="-2" attributes="0"/>
@@ -336,7 +347,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="usuariosAccesoField" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="seguridadPanel" max="32767" attributes="0"/>
+                                  <Component id="seguridadPanel" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -345,7 +356,7 @@
                           <Component id="usuariosSiguienteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="usuariosAnteriorButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="73" max="32767" attributes="0"/>
+                      <EmptySpace pref="123" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -483,12 +494,11 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="seguridadLabel" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="usuariosPasswordLabel" pref="156" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="usuariosDeleteLabel" min="-2" pref="138" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -499,19 +509,16 @@
                                           <Component id="usuariosDeleteButton" min="-2" pref="138" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="seguridadLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="usuariosPasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="usuariosDeleteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -523,17 +530,12 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="actualizarPasswordButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="134" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="seguridadLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Area de Seguridad"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="usuariosPasswordLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cambiar Contrase&#xf1;a"/>
@@ -567,6 +569,11 @@
             <Component class="javax.swing.JTextField" name="usuariosTurnoField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="seguridadLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Area de Seguridad"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -621,7 +628,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
@@ -637,14 +644,25 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="panelFiltro" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="panelDiaFiltro" max="32767" attributes="0"/>
+                                      <Component id="panelFiltro" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="filtroHoraButton" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="filtroHoraButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="reporteDiaButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -664,7 +682,13 @@
                           <Component id="panelFiltro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="filtroHoraButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="249" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="panelDiaFiltro" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="reporteDiaButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="121" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -722,6 +746,34 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroHoraButtonActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JLabel" name="jLabel3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Reporte por Dia"/>
+                  </Properties>
+                </Component>
+                <Container class="javax.swing.JPanel" name="panelDiaFiltro">
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="108" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                </Container>
+                <Component class="javax.swing.JButton" name="reporteDiaButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Generar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteDiaButtonActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="graficaPanel">
@@ -759,7 +811,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="wcorreoLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="wapellidoLabel" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -773,18 +824,19 @@
                                       <Component id="calendarPanel" max="32767" attributes="0"/>
                                       <Component id="correoField" alignment="1" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="wcorreoLabel" min="-2" max="-2" attributes="0"/>
                                   <Component id="correoLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="wnacionalidadLabel" max="32767" attributes="0"/>
-                                  <Component id="nacionalidadField" max="32767" attributes="0"/>
                                   <Component id="turnoLabel" max="32767" attributes="0"/>
                                   <Component id="turnoCombo" max="32767" attributes="0"/>
                                   <Component id="jLabel5" pref="300" max="32767" attributes="0"/>
                                   <Component id="nacionalidadLabel" max="32767" attributes="0"/>
                                   <Component id="accesoCombo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="enviarButton" min="-2" pref="152" max="-2" attributes="0"/>
+                                  <Component id="nacionalidadField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="enviarButton" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -824,24 +876,24 @@
                           <Component id="fechaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="nacionalidadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nacionalidadField" min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="calendarPanel" min="-2" max="-2" attributes="0"/>
+                          <Component id="nacionalidadField" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="correoLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="wnacionalidadLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="wnacionalidadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="correoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="correoField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="enviarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="wcorreoLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="269" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -932,7 +984,6 @@
             <Component class="javax.swing.JTextField" name="nacionalidadField">
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nacionalidadFieldFocusLost"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nacionalidadFieldActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="wnacionalidadLabel">
@@ -961,11 +1012,6 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Component class="javax.swing.JLabel" name="correoLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Correo"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="correoField">
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="correoFieldFocusLost"/>
@@ -989,6 +1035,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enviarButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="correoLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Correo"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -25,7 +25,7 @@
 package mx.edu.upslp.callcenterclient.validaciones;
 
 /**
- *
+ * valida los datos
  * @author David Delgado Hernandez 150205@upslp.edu.mx Programacion III Miercoles Horario: 2:00 - 4:00
  */
 public class Validador {
@@ -91,6 +91,11 @@ public class Validador {
         return response;
     }
     
+    /**
+     * Valida si la entrada es un email valido
+     * @param objetivo cadena a validar
+     * @return true si la entrada es valida
+     */
     public boolean isEmail(String objetivo){
         boolean response = true;
         if (!objetivo.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$")) {
